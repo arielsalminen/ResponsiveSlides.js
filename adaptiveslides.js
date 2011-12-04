@@ -24,14 +24,16 @@
       }
 
       var slideshow = function () {
-        $this.find('img').each(function (i) {
+        var $slides = $this.find('img');
+
+        $slides.each(function (i) {
           var $el = $(this);
           $el.attr({
             id : settings.namespace + '_slide' + i
           });
         });
 
-        $this.find('img').css({
+        $slides.css({
           top: 0,
           left: 0,
           width: '100%',
@@ -71,25 +73,23 @@
 
         // Auto: false
         } else {
-          var $pagination = $('<ul class="' + settings.namespace + '_tabs" />'),
-            $slides = $this.find('img'),
-            slideNumber = $slides.length;
+          var $pagination = $('<ul class="' + settings.namespace + '_tabs" />');
 
           $this.find('img:gt(0)').hide();
 
-          while (slideNumber--) {
-            var whichSlide = slideNumber + 1;
+          $slides.each(function (i) {
+            var whichSlide = i + 1;
             tabMarkup = [
               '<li>',
-              '<a href="#' + settings.namespace + '_slide' + slideNumber + '"',
-              'class="' + settings.namespace + '_slide' + slideNumber + '">' + whichSlide + '</a>',
+              '<a href="#' + settings.namespace + '_slide' + whichSlide + '"',
+              'class="' + settings.namespace + '_slide' + whichSlide + '">' + whichSlide + '</a>',
               '</li>'
             ].join('');
-            $pagination.prepend(tabMarkup);
-          }
+            $pagination.append(tabMarkup);
+          });
           $this.after($pagination);
 
-          $('.' + settings.namespace + '_slide0').parent().addClass('active');
+          $('.' + settings.namespace + '_slide1').parent().addClass('active');
 
           $('.' + settings.namespace + '_tabs a').each(function (i) {
             var $el = $(this);
