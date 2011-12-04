@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  }
+
+html {
+  background: #222 url("bg.png") repeat;
+  }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  font: 14px/20px Helvetica, Arial, sans-serif;
+  text-shadow: 0 -2px 1px #000;
+  color: #888;
+  text-align: center;
+  _width: 70%;
+  max-width: 800px;
+  margin: 20px auto 0;
+  }
+
+#wrapper {
+  padding: 20px;
+  }
+
+#slides {
+  -webkit-box-shadow: 0 0 20px #000; 
+  -moz-box-shadow: 0 0 20px #000;
+  box-shadow: 0 0 20px #000;
+  margin-bottom: 40px !important;
+  }
+
+#slides2 {
+  margin: 0 auto;
+  }
+
+p {
+  text-align: left;
+  max-width: 500px;
+  margin: 0 auto 20px;
+  }
+
+h1 { 
+  font: 36px/50px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
+  font-weight: 200;
+  }
+
+h2 { 
+  font: 16px/20px "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  margin-bottom: 40px;
+  }
+
+a {
+  text-decoration: none;
+  color: #fff;
+  }
+
+a:hover {
+  border-bottom: 1px solid #666;
+  }
+
+a:active {
+  opacity: .7;
+  }
+
+.anotherslideshow_tabs {
+  font-size: 18px;
+  margin: 0 auto 50px;
+  padding: 10px 0;
+  list-style: none;
+  width: 100%;
+  max-width: 540px;
+  text-align: center;
+  background: rgba(0,0,0,.25);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.3), inset 0 0 5px rgba(0,0,0,1.0);
+  -moz-box-shadow: 0 0 1px rgba(255,255,255,.3), inset 0 0 5px rgba(0,0,0,1.0);
+  box-shadow: 0 0 1px rgba(255,255,255,.3), inset 0 0 5px rgba(0,0,0,1.0);
+  }
+
+.anotherslideshow_tabs li {
+  display: inline;
+  margin-left: 15px;
+  }
+
+.anotherslideshow_tabs li:first-child {
+  margin-left: 0;
+  }
+
+.anotherslideshow_tabs a {
+  color: #666;
+  }
+
+.anotherslideshow_tabs .active a {
+  color: #fff;
+  font-weight: bold;
+  }
+
+#download {
+  -webkit-box-shadow: 0 0 10px #000; 
+  -moz-box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
+  background: #333;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.1);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 60px auto;
+  display: block;
+  max-width: 500px;
+  padding: 20px;
+  }
+
+#download:hover {
+  background: rgba(255,255,255,.15);
+  }
+
+.footer {
+  font-size: 11px;
+  }
