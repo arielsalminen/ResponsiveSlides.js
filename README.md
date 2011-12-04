@@ -1,5 +1,5 @@
 # AdaptiveSlides.js 
-### Adaptive jQuery Slideshow plugin that weights just ~1kb
+### Adaptive jQuery Slideshow plugin that weights just ~1kb (minified and gzipped)
 
  - Licensed under the MIT license.
 
