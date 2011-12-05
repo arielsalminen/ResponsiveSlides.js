@@ -1,6 +1,6 @@
-/*! AdaptiveSlides.js v1.0. (c) 2011 Viljami Salminen. MIT License. http://adaptiveslides.viljamis.com  */
+/*! ResponsiveSlides.js v1.0. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
 (function ($) {
-  $.fn.adaptiveSlides = function (options) {
+  $.fn.responsiveSlides = function (options) {
 
     // Settings
     var settings = {
@@ -8,7 +8,7 @@
       'fade' : 1000,
       'auto' : true,
       'maxwidth' : 'none',
-      'namespace' : 'adaptiveSlides'
+      'namespace' : 'responsiveSlides'
     };
 
     return this.each(function () {
