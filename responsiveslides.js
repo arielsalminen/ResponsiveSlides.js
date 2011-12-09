@@ -18,22 +18,23 @@
         $.extend(settings, options);
       }
 
-      // Don't run if there's only one image
-      if ($this.find('img').length <= 1) {
-        return;
-      }
-
       var slideshow = function () {
-        var $slides = $this.find('img');
+        var $slide = $this.find('img'),
+          $pagination = $('<ul class="' + settings.namespace + '_tabs" />');
 
-        $slides.each(function (i) {
+        // Don't run if there's only one slide
+        if ($this.find($slide).length <= 1) {
+          return;
+        }
+
+        $slide.each(function (i) {
           var $el = $(this);
           $el.attr({
             id : settings.namespace + '_slide' + i
           });
         });
 
-        $slides.css({
+        $slide.css({
           top: 0,
           left: 0,
           width: '100%',
@@ -50,7 +51,7 @@
           position: 'relative'
         });
 
-        // Dirty attempt to fix the height
+        // Dirty fix for the height
         heightFix = [
           '<style>',
           '.' + settings.namespace + '_visible {',
@@ -61,23 +62,20 @@
         ].join('');
         $('head').append(heightFix);
 
+        $this.find($slide + ':gt(0)').hide();
+
         // Auto: true
         if (settings.auto === true) {
-          $this.find('img:gt(0)').hide();
           setInterval(function () {
             $this.find(':first-child').fadeOut(parseFloat(settings.fade))
-              .next('img').fadeIn(parseFloat(settings.fade))
+              .next($slide).fadeIn(parseFloat(settings.fade))
               .addClass(settings.namespace + '_visible').end().appendTo($this)
               .removeClass(settings.namespace + '_visible');
           }, parseFloat(settings.speed));
 
         // Auto: false
         } else {
-          var $pagination = $('<ul class="' + settings.namespace + '_tabs" />');
-
-          $this.find('img:gt(0)').hide();
-
-          $slides.each(function (i) {
+          $slide.each(function (i) {
             var whichSlide = i + 1;
             tabMarkup = [
               '<li>',
