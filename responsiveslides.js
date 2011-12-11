@@ -20,11 +20,11 @@
         var $slide = $this.find('img'),
 
 		  // just for minification:
-		  namespace_prefix = settings.namespace,
+		  namespace = settings.namespace,
 		  maxwidth = parseFloat(settings.maxwidth),
 		  fade = parseFloat(settings.fade),
 		  
-          $pagination = $('<ul class="' + namespace_prefix + '_tabs"/>'),
+          $pagination = $('<ul class="' + namespace + '_tabs"/>'),
           visible = {
             'position': 'relative',
             'float': 'left'
@@ -40,7 +40,7 @@
         }
 
         $slide.each(function (i) {
-		  this.id = namespace_prefix + '_slide' + i;
+		  this.id = namespace + '_slide' + i;
         });
 
         $slide.css({
@@ -51,7 +51,7 @@
           'position': 'absolute'
         });
 
-        $this.find(':first-child').addClass(namespace_prefix + '_visible').css(visible);
+        $this.find(':first-child').addClass(namespace + '_visible').css(visible);
 
         $this.css({
           'max-width': parseFloat(settings.maxwidth),
@@ -69,7 +69,7 @@
               $(this).css(hidden);
             }).next($slide).fadeIn(fade, function () {
               $(this).css(visible);
-            }).addClass(namespace_prefix + '_visible').end().appendTo($this).removeClass(namespace_prefix + '_visible');
+            }).addClass(namespace + '_visible').end().appendTo($this).removeClass(namespace + '_visible');
           }, parseFloat(settings.speed));
 
         // Auto: false
@@ -78,40 +78,40 @@
             var whichSlide = i + 1,
             tabMarkup =
               '<li>' +
-              '<a href="#' + namespace_prefix + '_slide' + whichSlide + '"' +
-              'class="' + namespace_prefix + '_slide' + whichSlide + '">' + whichSlide + '</a>' +
+              '<a href="#' + namespace + '_slide' + whichSlide + '"' +
+              'class="' + namespace + '_slide' + whichSlide + '">' + whichSlide + '</a>' +
               '</li>'
             ;
             $pagination.append(tabMarkup);
           });
           $this.after($pagination);
 
-          $('.' + namespace_prefix + '_slide1').parent().addClass(namespace_prefix + '_active');
-          $('.' + namespace_prefix + '_tabs a').each(function (i) {
+          $('.' + namespace + '_slide1').parent().addClass(namespace + '_active');
+          $('.' + namespace + '_tabs a').each(function (i) {
             var $el = $(this);
 
             $el.click(function (e) {
               e.preventDefault();
 
               // Prevent clicking if animated
-              if ($('.' + namespace_prefix + '_visible:animated').length) {
+              if ($('.' + namespace + '_visible:animated').length) {
                 return false;
               }
 
-              if (!($el.parent().hasClass(namespace_prefix + '_active'))) {
-                $('.' + namespace_prefix + '_tabs li').removeClass(namespace_prefix + '_active');
+              if (!($el.parent().hasClass(namespace + '_active'))) {
+                $('.' + namespace + '_tabs li').removeClass(namespace + '_active');
 
-                $('.' + namespace_prefix + '_visible').stop()
+                $('.' + namespace + '_visible').stop()
                   .fadeOut(fade, function () {
-                    $(this).removeClass(namespace_prefix + '_visible').css(hidden);
+                    $(this).removeClass(namespace + '_visible').css(hidden);
                   }).end();
 
-                $('#' + namespace_prefix + '_slide' + i).stop()
+                $('#' + namespace + '_slide' + i).stop()
                   .fadeIn(fade, function () {
-                    $(this).addClass(namespace_prefix + '_visible').css(visible);
+                    $(this).addClass(namespace + '_visible').css(visible);
                   }).end();
 
-                $el.parent().addClass(namespace_prefix + '_active');
+                $el.parent().addClass(namespace + '_active');
               }
             });
           });
