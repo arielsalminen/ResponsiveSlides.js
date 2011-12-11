@@ -21,10 +21,14 @@
 
 		  // just for minification:
 		  namespace = settings.namespace,
+		  tabsClass = namespace + '_tabs',
+		  visibleClass = namespace + '_visible',
+		  activeClass = namespace + '_active',
+		  slideClassPrefix = namespace + '_slide',
 		  maxwidth = parseFloat(settings.maxwidth),
 		  fade = parseFloat(settings.fade),
 		  
-          $pagination = $('<ul class="' + namespace + '_tabs"/>'),
+          $pagination = $('<ul class="' + tabsClass + '"/>'),
           visible = {
             'position': 'relative',
             'float': 'left'
@@ -40,7 +44,7 @@
         }
 
         $slide.each(function (i) {
-		  this.id = namespace + '_slide' + i;
+		  this.id = slideClassPrefix + i;
         });
 
         $slide.css({
@@ -51,10 +55,10 @@
           'position': 'absolute'
         });
 
-        $this.find(':first-child').addClass(namespace + '_visible').css(visible);
+        $this.find(':first-child').addClass(visibleClass).css(visible);
 
         $this.css({
-          'max-width': parseFloat(settings.maxwidth),
+          'max-width': maxwidth,
           'width': '100%',
           'overflow': 'hidden',
           'position': 'relative'
@@ -63,13 +67,13 @@
         $this.find($slide + ':gt(0)').hide();
 
         // Auto: true
-        if (settings.auto === true) {
+        if (settings.auto) {
           setInterval(function () {
             $this.find(':first-child').fadeOut(fade, function () {
               $(this).css(hidden);
             }).next($slide).fadeIn(fade, function () {
               $(this).css(visible);
-            }).addClass(namespace + '_visible').end().appendTo($this).removeClass(namespace + '_visible');
+            }).addClass(visibleClass).end().appendTo($this).removeClass(visibleClass);
           }, parseFloat(settings.speed));
 
         // Auto: false
@@ -78,40 +82,40 @@
             var whichSlide = i + 1,
             tabMarkup =
               '<li>' +
-              '<a href="#' + namespace + '_slide' + whichSlide + '"' +
-              'class="' + namespace + '_slide' + whichSlide + '">' + whichSlide + '</a>' +
+              '<a href="#' + slideClassPrefix + whichSlide + '"' +
+              'class="' + slideClassPrefix + whichSlide + '">' + whichSlide + '</a>' +
               '</li>'
             ;
             $pagination.append(tabMarkup);
           });
           $this.after($pagination);
 
-          $('.' + namespace + '_slide1').parent().addClass(namespace + '_active');
-          $('.' + namespace + '_tabs a').each(function (i) {
+          $('.' + slideClassPrefix + '1').parent().addClass(activeClass);
+          $('.' + tabsClass + ' a').each(function (i) {
             var $el = $(this);
 
             $el.click(function (e) {
               e.preventDefault();
 
               // Prevent clicking if animated
-              if ($('.' + namespace + '_visible:animated').length) {
-                return false;
+              if ($('.' + visibleClass + ':animated').length) {
+                return;
               }
 
-              if (!($el.parent().hasClass(namespace + '_active'))) {
-                $('.' + namespace + '_tabs li').removeClass(namespace + '_active');
+              if (!($el.parent().hasClass(activeClass))) {
+                $('.' + tabsClass + ' li').removeClass(activeClass);
 
-                $('.' + namespace + '_visible').stop()
+                $('.' + visibleClass).stop()
                   .fadeOut(fade, function () {
-                    $(this).removeClass(namespace + '_visible').css(hidden);
+                    $(this).removeClass(visibleClass).css(hidden);
                   }).end();
 
-                $('#' + namespace + '_slide' + i).stop()
+                $('#' + slideClassPrefix + i).stop()
                   .fadeIn(fade, function () {
-                    $(this).addClass(namespace + '_visible').css(visible);
+                    $(this).addClass(visibleClass).css(visible);
                   }).end();
 
-                $el.parent().addClass(namespace + '_active');
+                $el.parent().addClass(activeClass);
               }
             });
           });
