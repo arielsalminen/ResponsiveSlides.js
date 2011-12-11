@@ -1,7 +1,6 @@
 /*! ResponsiveSlides.js v1.01. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
 (function ($) {
   $.fn.responsiveSlides = function (options) {
-
     // Settings
     var settings = {
       'speed' : 4000,
@@ -13,13 +12,11 @@
 
     return this.each(function () {
       var $this = $(this);
-
       if (options) {
         $.extend(settings, options);
       }
 
       var slideshow = function () {
-
         var $slide = $this.find('img'),
 
 		  // just for minification:
@@ -54,9 +51,7 @@
           'position': 'absolute'
         });
 
-        $this.find(':first-child')
-          .addClass(namespace_prefix + '_visible')
-          .css(visible);
+        $this.find(':first-child').addClass(namespace_prefix + '_visible').css(visible);
 
         $this.css({
           'max-width': parseFloat(settings.maxwidth),
@@ -74,8 +69,7 @@
               $(this).css(hidden);
             }).next($slide).fadeIn(fade, function () {
               $(this).css(visible);
-            }).addClass(namespace_prefix + '_visible').end().appendTo($this)
-              .removeClass(namespace_prefix + '_visible');
+            }).addClass(namespace_prefix + '_visible').end().appendTo($this).removeClass(namespace_prefix + '_visible');
           }, parseFloat(settings.speed));
 
         // Auto: false
@@ -109,22 +103,17 @@
 
                 $('.' + namespace_prefix + '_visible').stop()
                   .fadeOut(fade, function () {
-                    $(this)
-                      .removeClass(namespace_prefix + '_visible')
-                      .css(hidden);
+                    $(this).removeClass(namespace_prefix + '_visible').css(hidden);
                   }).end();
 
                 $('#' + namespace_prefix + '_slide' + i).stop()
                   .fadeIn(fade, function () {
-                    $(this)
-                      .addClass(namespace_prefix + '_visible')
-                      .css(visible);
+                    $(this).addClass(namespace_prefix + '_visible').css(visible);
                   }).end();
 
                 $el.parent().addClass(namespace_prefix + '_active');
               }
             });
-
           });
         }
       };
@@ -148,12 +137,10 @@
       // Call once
       slideshow();
       widthSupport();
-
       // Call on resize
       $(window).resize(function () {
         widthSupport();
       });
-
     });
   };
 })(jQuery);
