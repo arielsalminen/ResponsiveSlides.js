@@ -18,7 +18,17 @@
 
       var slideshow = function () {
         var $slide = $this.find('img'),
-          $pagination = $('<ul class="' + settings.namespace + '_tabs" />'),
+
+		  // just for minification:
+		  namespace = settings.namespace,
+		  tabsClass = namespace + '_tabs',
+		  visibleClass = namespace + '_visible',
+		  activeClass = namespace + '_active',
+		  slideClassPrefix = namespace + '_slide',
+		  maxwidth = parseFloat(settings.maxwidth),
+		  fade = parseFloat(settings.fade),
+		  
+          $pagination = $('<ul class="' + tabsClass + '"/>'),
           visible = {
             'position': 'relative',
             'float': 'left'
@@ -34,10 +44,7 @@
         }
 
         $slide.each(function (i) {
-          var $el = $(this);
-          $el.attr({
-            id : settings.namespace + '_slide' + i
-          });
+		  this.id = slideClassPrefix + i;
         });
 
         $slide.css({
@@ -48,10 +55,10 @@
           'position': 'absolute'
         });
 
-        $this.find(':first-child').addClass(settings.namespace + '_visible').css(visible);
+        $this.find(':first-child').addClass(visibleClass).css(visible);
 
         $this.css({
-          'max-width': parseFloat(settings.maxwidth),
+          'max-width': maxwidth,
           'width': '100%',
           'overflow': 'hidden',
           'position': 'relative'
@@ -60,55 +67,55 @@
         $this.find($slide + ':gt(0)').hide();
 
         // Auto: true
-        if (settings.auto === true) {
+        if (settings.auto) {
           setInterval(function () {
-            $this.find(':first-child').fadeOut(parseFloat(settings.fade), function () {
+            $this.find(':first-child').fadeOut(fade, function () {
               $(this).css(hidden);
-            }).next($slide).fadeIn(parseFloat(settings.fade), function () {
+            }).next($slide).fadeIn(fade, function () {
               $(this).css(visible);
-            }).addClass(settings.namespace + '_visible').end().appendTo($this).removeClass(settings.namespace + '_visible');
+            }).addClass(visibleClass).end().appendTo($this).removeClass(visibleClass);
           }, parseFloat(settings.speed));
 
         // Auto: false
         } else {
           $slide.each(function (i) {
-            var whichSlide = i + 1;
-            tabMarkup = [
-              '<li>',
-              '<a href="#' + settings.namespace + '_slide' + whichSlide + '"',
-              'class="' + settings.namespace + '_slide' + whichSlide + '">' + whichSlide + '</a>',
+            var whichSlide = i + 1,
+            tabMarkup =
+              '<li>' +
+              '<a href="#' + slideClassPrefix + whichSlide + '"' +
+              'class="' + slideClassPrefix + whichSlide + '">' + whichSlide + '</a>' +
               '</li>'
-            ].join('');
+            ;
             $pagination.append(tabMarkup);
           });
           $this.after($pagination);
 
-          $('.' + settings.namespace + '_slide1').parent().addClass(settings.namespace + '_active');
-          $('.' + settings.namespace + '_tabs a').each(function (i) {
+          $('.' + slideClassPrefix + '1').parent().addClass(activeClass);
+          $('.' + tabsClass + ' a').each(function (i) {
             var $el = $(this);
 
             $el.click(function (e) {
               e.preventDefault();
 
               // Prevent clicking if animated
-              if ($('.' + settings.namespace + '_visible:animated').length) {
-                return false;
+              if ($('.' + visibleClass + ':animated').length) {
+                return;
               }
 
-              if (!($el.parent().hasClass(settings.namespace + '_active'))) {
-                $('.' + settings.namespace + '_tabs li').removeClass(settings.namespace + '_active');
+              if (!($el.parent().hasClass(activeClass))) {
+                $('.' + tabsClass + ' li').removeClass(activeClass);
 
-                $('.' + settings.namespace + '_visible').stop()
-                  .fadeOut(parseFloat(settings.fade), function () {
-                    $(this).removeClass(settings.namespace + '_visible').css(hidden);
+                $('.' + visibleClass).stop()
+                  .fadeOut(fade, function () {
+                    $(this).removeClass(visibleClass).css(hidden);
                   }).end();
 
-                $('#' + settings.namespace + '_slide' + i).stop()
-                  .fadeIn(parseFloat(settings.fade), function () {
-                    $(this).addClass(settings.namespace + '_visible').css(visible);
+                $('#' + slideClassPrefix + i).stop()
+                  .fadeIn(fade, function () {
+                    $(this).addClass(visibleClass).css(visible);
                   }).end();
 
-                $el.parent().addClass(settings.namespace + '_active');
+                $el.parent().addClass(activeClass);
               }
             });
           });
@@ -118,14 +125,12 @@
       // Fallback to make IE6 support CSS max-width
       var widthSupport = function () {
         if (options.maxwidth) {
-          if (typeof document.body.style.maxHeight !== 'undefined' && typeof document.body.style.minHeight !== 'undefined') {
-            return false;
-          } else {
+          if (typeof document.body.style.maxHeight === 'undefined' || typeof document.body.style.minHeight === 'undefined') {
             $this.each(function () {
               $this.css('width', '100%');
-              if ($this.width() > parseFloat(settings.maxwidth)) {
-                $this.css('width', parseFloat(settings.maxwidth));
-              } else if ($this.width() < parseFloat(settings.maxwidth)) {
+              if ($this.width() > maxwidth) {
+                $this.css('width', maxwidth);
+              } else if ($this.width() < maxwidth) {
                 $this.css('width', '100%');
               }
             });
