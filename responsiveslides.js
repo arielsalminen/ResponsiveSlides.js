@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.0. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
+/*! ResponsiveSlides.js v1.01. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
 (function ($) {
   $.fn.responsiveSlides = function (options) {
 
@@ -19,8 +19,17 @@
       }
 
       var slideshow = function () {
+
         var $slide = $this.find('img'),
-          $pagination = $('<ul class="' + settings.namespace + '_tabs" />');
+          $pagination = $('<ul class="' + settings.namespace + '_tabs" />'),
+          visible = {
+            'position': 'relative',
+            'float': 'left'
+          },
+          hidden = {
+            'position': 'absolute',
+            'float': 'none'
+          };
 
         // Don't run if there's only one slide
         if ($this.find($slide).length <= 1) {
@@ -35,41 +44,34 @@
         });
 
         $slide.css({
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: 'inherit',
-          position: 'absolute'
+          'top': 0,
+          'left': 0,
+          'width': '100%',
+          'height': 'inherit',
+          'position': 'absolute'
         });
 
-        $this.find(':first-child').addClass(settings.namespace + '_visible');
+        $this.find(':first-child')
+          .addClass(settings.namespace + '_visible')
+          .css(visible);
 
         $this.css({
           'max-width': parseFloat(settings.maxwidth),
-          width: '100%',
-          overflow: 'hidden',
-          position: 'relative'
+          'width': '100%',
+          'overflow': 'hidden',
+          'position': 'relative'
         });
-
-        // Dirty fix for the height
-        heightFix = [
-          '<style>',
-          '.' + settings.namespace + '_visible {',
-          'position: relative !important;',
-          'float: left !important;',
-          '}',
-          '</style>'
-        ].join('');
-        $('head').append(heightFix);
 
         $this.find($slide + ':gt(0)').hide();
 
         // Auto: true
         if (settings.auto === true) {
           setInterval(function () {
-            $this.find(':first-child').fadeOut(parseFloat(settings.fade))
-              .next($slide).fadeIn(parseFloat(settings.fade))
-              .addClass(settings.namespace + '_visible').end().appendTo($this)
+            $this.find(':first-child').fadeOut(parseFloat(settings.fade), function () {
+              $(this).css(hidden);
+            }).next($slide).fadeIn(parseFloat(settings.fade), function () {
+              $(this).css(visible);
+            }).addClass(settings.namespace + '_visible').end().appendTo($this)
               .removeClass(settings.namespace + '_visible');
           }, parseFloat(settings.speed));
 
@@ -87,8 +89,7 @@
           });
           $this.after($pagination);
 
-          $('.' + settings.namespace + '_slide1').parent().addClass('active');
-
+          $('.' + settings.namespace + '_slide1').parent().addClass(settings.namespace + '_active');
           $('.' + settings.namespace + '_tabs a').each(function (i) {
             var $el = $(this);
 
@@ -100,20 +101,24 @@
                 return false;
               }
 
-              if (!($el.parent().hasClass('active'))) {
-                $('.' + settings.namespace + '_tabs li').removeClass('active');
+              if (!($el.parent().hasClass(settings.namespace + '_active'))) {
+                $('.' + settings.namespace + '_tabs li').removeClass(settings.namespace + '_active');
 
                 $('.' + settings.namespace + '_visible').stop()
                   .fadeOut(parseFloat(settings.fade), function () {
-                    $(this).removeClass(settings.namespace + '_visible');
+                    $(this)
+                      .removeClass(settings.namespace + '_visible')
+                      .css(hidden);
                   }).end();
 
                 $('#' + settings.namespace + '_slide' + i).stop()
                   .fadeIn(parseFloat(settings.fade), function () {
-                    $(this).addClass(settings.namespace + '_visible');
+                    $(this)
+                      .addClass(settings.namespace + '_visible')
+                      .css(visible);
                   }).end();
 
-                $el.parent().addClass('active');
+                $el.parent().addClass(settings.namespace + '_active');
               }
             });
 
