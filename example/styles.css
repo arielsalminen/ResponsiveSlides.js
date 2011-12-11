@@ -90,7 +90,7 @@ a:active {
   color: #666;
   }
 
-.anotherslideshow_tabs .active a {
+.anotherslideshow_tabs .anotherslideshow_active a {
   color: #fff;
   font-weight: bold;
   }
