@@ -7,7 +7,7 @@
       'fade' : 1000,
       'auto' : true,
       'maxwidth' : 'none',
-      'nspace' : 'rs'
+      'namespace' : 'rs'
     };
 
     return this.each(function () {
