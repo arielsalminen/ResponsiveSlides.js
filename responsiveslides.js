@@ -1,32 +1,27 @@
-/*! ResponsiveSlides.js v1.01. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
+/*! ResponsiveSlides.js v1.02. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
 (function ($) {
-  $.fn.responsiveSlides = function (options) {
+  $.fn.responsiveSlides = function (opts) {
     // Settings
     var settings = {
       'speed' : 4000,
       'fade' : 1000,
       'auto' : true,
       'maxwidth' : 'none',
-      'namespace' : 'responsiveSlides'
+      'nspace' : 'rs'
     };
 
     return this.each(function () {
       var $this = $(this);
-      if (options) {
-        $.extend(settings, options);
+      if (opts) {
+        $.extend(settings, opts);
       }
 
       var slideshow = function () {
         var $slide = $this.find('img'),
-          $pagination = $('<ul class="' + settings.namespace + '_tabs" />'),
-          visible = {
-            'position': 'relative',
-            'float': 'left'
-          },
-          hidden = {
-            'position': 'absolute',
-            'float': 'none'
-          };
+          $pagination = $('<ul class="' + settings.nspace + '_tabs" />'),
+          fadetime = parseFloat(settings.fade),
+          visible = { 'position': 'relative', 'float': 'left' },
+          hidden = { 'position': 'absolute', 'float': 'none' };
 
         // Don't run if there's only one slide
         if ($this.find($slide).length <= 1) {
@@ -36,7 +31,7 @@
         $slide.each(function (i) {
           var $el = $(this);
           $el.attr({
-            id : settings.namespace + '_slide' + i
+            id : settings.nspace + '_s' + i
           });
         });
 
@@ -48,8 +43,6 @@
           'position': 'absolute'
         });
 
-        $this.find(':first-child').addClass(settings.namespace + '_visible').css(visible);
-
         $this.css({
           'max-width': parseFloat(settings.maxwidth),
           'width': '100%',
@@ -57,16 +50,17 @@
           'position': 'relative'
         });
 
+        $this.find(':first-child').css(visible);
         $this.find($slide + ':gt(0)').hide();
 
         // Auto: true
         if (settings.auto === true) {
           setInterval(function () {
-            $this.find(':first-child').fadeOut(parseFloat(settings.fade), function () {
+            $this.find(':first-child').fadeOut(fadetime, function () {
               $(this).css(hidden);
-            }).next($slide).fadeIn(parseFloat(settings.fade), function () {
+            }).next($slide).fadeIn(fadetime, function () {
               $(this).css(visible);
-            }).addClass(settings.namespace + '_visible').end().appendTo($this).removeClass(settings.namespace + '_visible');
+            }).end().appendTo($this);
           }, parseFloat(settings.speed));
 
         // Auto: false
@@ -75,40 +69,37 @@
             var whichSlide = i + 1;
             tabMarkup = [
               '<li>',
-              '<a href="#' + settings.namespace + '_slide' + whichSlide + '"',
-              'class="' + settings.namespace + '_slide' + whichSlide + '">' + whichSlide + '</a>',
+              '<a href="#' + settings.nspace + '_s' + whichSlide + '"',
+              'class="' + settings.nspace + '_s' + whichSlide + '">' + whichSlide + '</a>',
               '</li>'
             ].join('');
             $pagination.append(tabMarkup);
           });
           $this.after($pagination);
 
-          $('.' + settings.namespace + '_slide1').parent().addClass(settings.namespace + '_active');
-          $('.' + settings.namespace + '_tabs a').each(function (i) {
+          $this.find(':first-child').addClass(settings.nspace + '_on');
+          $('.' + settings.nspace + '_s1').parent().addClass(settings.nspace + '_here');
+
+          $('.' + settings.nspace + '_tabs a').each(function (i) {
             var $el = $(this);
 
             $el.click(function (e) {
               e.preventDefault();
-
               // Prevent clicking if animated
-              if ($('.' + settings.namespace + '_visible:animated').length) {
+              if ($('.' + settings.nspace + '_on:animated').length) {
                 return false;
               }
-
-              if (!($el.parent().hasClass(settings.namespace + '_active'))) {
-                $('.' + settings.namespace + '_tabs li').removeClass(settings.namespace + '_active');
-
-                $('.' + settings.namespace + '_visible').stop()
-                  .fadeOut(parseFloat(settings.fade), function () {
-                    $(this).removeClass(settings.namespace + '_visible').css(hidden);
+              if (!($el.parent().hasClass(settings.nspace + '_here'))) {
+                $('.' + settings.nspace + '_tabs li').removeClass(settings.nspace + '_here');
+                $('.' + settings.nspace + '_on').stop()
+                  .fadeOut(fadetime, function () {
+                    $(this).removeClass(settings.nspace + '_on').css(hidden);
                   }).end();
-
-                $('#' + settings.namespace + '_slide' + i).stop()
-                  .fadeIn(parseFloat(settings.fade), function () {
-                    $(this).addClass(settings.namespace + '_visible').css(visible);
+                $('#' + settings.nspace + '_s' + i).stop()
+                  .fadeIn(fadetime, function () {
+                    $(this).addClass(settings.nspace + '_on').css(visible);
                   }).end();
-
-                $el.parent().addClass(settings.namespace + '_active');
+                $el.parent().addClass(settings.nspace + '_here');
               }
             });
           });
@@ -117,15 +108,14 @@
 
       // Fallback to make IE6 support CSS max-width
       var widthSupport = function () {
-        if (options.maxwidth) {
-          if (typeof document.body.style.maxHeight !== 'undefined' && typeof document.body.style.minHeight !== 'undefined') {
-            return false;
-          } else {
+        var maxwidth = parseFloat(settings.maxwidth);
+        if (opts.maxwidth) {
+          if (typeof document.body.style.maxHeight === 'undefined') {
             $this.each(function () {
               $this.css('width', '100%');
-              if ($this.width() > parseFloat(settings.maxwidth)) {
-                $this.css('width', parseFloat(settings.maxwidth));
-              } else if ($this.width() < parseFloat(settings.maxwidth)) {
+              if ($this.width() > maxwidth) {
+                $this.css('width', maxwidth);
+              } else if ($this.width() < maxwidth) {
                 $this.css('width', '100%');
               }
             });
