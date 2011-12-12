@@ -69,11 +69,11 @@
         // Auto: false
         } else {
           $slide.each(function (i) {
-            var whichSlide = i + 1;
+            var n = i + 1;
             tabMarkup = [
               '<li>',
-              '<a href="#' + slideClassPrefix + whichSlide + '"',
-              'class="' + slideClassPrefix + whichSlide + '">' + whichSlide + '</a>',
+              '<a href="#' + slideClassPrefix + n + '"',
+              'class="' + slideClassPrefix + n + '">' + n + '</a>',
               '</li>'
             ].join('');
             $pagination.append(tabMarkup);
@@ -94,14 +94,12 @@
               }
               if (!($el.parent().hasClass(activeClass))) {
                 $('.' + tabsClass + ' li').removeClass(activeClass);
-                $('.' + visibleClass).stop()
-                  .fadeOut(fadetime, function () {
-                    $(this).removeClass(visibleClass).css(hidden);
-                  }).end();
-                $('#' + slideClassPrefix + i).stop()
-                  .fadeIn(fadetime, function () {
-                    $(this).addClass(visibleClass).css(visible);
-                  }).end();
+                $('.' + visibleClass).stop().fadeOut(fadetime, function () {
+                  $(this).removeClass(visibleClass).css(hidden);
+                }).end();
+                $('#' + slideClassPrefix + i).stop().fadeIn(fadetime, function () {
+                  $(this).addClass(visibleClass).css(visible);
+                }).end();
                 $el.parent().addClass(activeClass);
               }
             });
