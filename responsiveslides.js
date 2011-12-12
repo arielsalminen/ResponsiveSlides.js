@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.02. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
+/*! ResponsiveSlides.js v1.03. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
 (function ($) {
   $.fn.responsiveSlides = function (opts) {
     // Settings
@@ -17,8 +17,14 @@
       }
 
       var slideshow = function () {
+
         var $slide = $this.find('img'),
-          $pagination = $('<ul class="' + settings.namespace + '_tabs" />'),
+          namespace = settings.namespace,
+          activeClass = namespace + '_here',
+          visibleClass = namespace + '_on',
+          slideClassPrefix = namespace + '_s',
+          tabsClass = namespace + '_tabs',
+          $pagination = $('<ul class="' + namespace + '_tabs" />'),
           fadetime = parseFloat(settings.fade),
           visible = { 'position': 'relative', 'float': 'left' },
           hidden = { 'position': 'absolute', 'float': 'none' };
@@ -29,10 +35,7 @@
         }
 
         $slide.each(function (i) {
-          var $el = $(this);
-          $el.attr({
-            id : settings.namespace + '_s' + i
-          });
+          this.id = slideClassPrefix + i;
         });
 
         $slide.css({
@@ -69,37 +72,37 @@
             var whichSlide = i + 1;
             tabMarkup = [
               '<li>',
-              '<a href="#' + settings.namespace + '_s' + whichSlide + '"',
-              'class="' + settings.namespace + '_s' + whichSlide + '">' + whichSlide + '</a>',
+              '<a href="#' + slideClassPrefix + whichSlide + '"',
+              'class="' + slideClassPrefix + whichSlide + '">' + whichSlide + '</a>',
               '</li>'
             ].join('');
             $pagination.append(tabMarkup);
           });
           $this.after($pagination);
 
-          $this.find(':first-child').addClass(settings.namespace + '_on');
-          $('.' + settings.namespace + '_s1').parent().addClass(settings.namespace + '_here');
+          $this.find(':first-child').addClass(visibleClass);
+          $('.' + slideClassPrefix + '1').parent().addClass(activeClass);
 
-          $('.' + settings.namespace + '_tabs a').each(function (i) {
+          $('.' + tabsClass + ' a').each(function (i) {
             var $el = $(this);
 
             $el.click(function (e) {
               e.preventDefault();
               // Prevent clicking if animated
-              if ($('.' + settings.namespace + '_on:animated').length) {
+              if ($('.' + visibleClass + ':animated').length) {
                 return false;
               }
-              if (!($el.parent().hasClass(settings.namespace + '_here'))) {
-                $('.' + settings.namespace + '_tabs li').removeClass(settings.namespace + '_here');
-                $('.' + settings.namespace + '_on').stop()
+              if (!($el.parent().hasClass(activeClass))) {
+                $('.' + tabsClass + ' li').removeClass(activeClass);
+                $('.' + visibleClass).stop()
                   .fadeOut(fadetime, function () {
-                    $(this).removeClass(settings.namespace + '_on').css(hidden);
+                    $(this).removeClass(visibleClass).css(hidden);
                   }).end();
-                $('#' + settings.namespace + '_s' + i).stop()
+                $('#' + slideClassPrefix + i).stop()
                   .fadeIn(fadetime, function () {
-                    $(this).addClass(settings.namespace + '_on').css(visible);
+                    $(this).addClass(visibleClass).css(visible);
                   }).end();
-                $el.parent().addClass(settings.namespace + '_here');
+                $el.parent().addClass(activeClass);
               }
             });
           });
