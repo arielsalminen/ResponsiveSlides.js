@@ -18,7 +18,7 @@
 
       var slideshow = function () {
         var $slide = $this.find('img'),
-          $pagination = $('<ul class="' + settings.nspace + '_tabs" />'),
+          $pagination = $('<ul class="' + settings.namespace + '_tabs" />'),
           fadetime = parseFloat(settings.fade),
           visible = { 'position': 'relative', 'float': 'left' },
           hidden = { 'position': 'absolute', 'float': 'none' };
@@ -31,7 +31,7 @@
         $slide.each(function (i) {
           var $el = $(this);
           $el.attr({
-            id : settings.nspace + '_s' + i
+            id : settings.namespace + '_s' + i
           });
         });
 
@@ -69,37 +69,37 @@
             var whichSlide = i + 1;
             tabMarkup = [
               '<li>',
-              '<a href="#' + settings.nspace + '_s' + whichSlide + '"',
-              'class="' + settings.nspace + '_s' + whichSlide + '">' + whichSlide + '</a>',
+              '<a href="#' + settings.namespace + '_s' + whichSlide + '"',
+              'class="' + settings.namespace + '_s' + whichSlide + '">' + whichSlide + '</a>',
               '</li>'
             ].join('');
             $pagination.append(tabMarkup);
           });
           $this.after($pagination);
 
-          $this.find(':first-child').addClass(settings.nspace + '_on');
-          $('.' + settings.nspace + '_s1').parent().addClass(settings.nspace + '_here');
+          $this.find(':first-child').addClass(settings.namespace + '_on');
+          $('.' + settings.namespace + '_s1').parent().addClass(settings.namespace + '_here');
 
-          $('.' + settings.nspace + '_tabs a').each(function (i) {
+          $('.' + settings.namespace + '_tabs a').each(function (i) {
             var $el = $(this);
 
             $el.click(function (e) {
               e.preventDefault();
               // Prevent clicking if animated
-              if ($('.' + settings.nspace + '_on:animated').length) {
+              if ($('.' + settings.namespace + '_on:animated').length) {
                 return false;
               }
-              if (!($el.parent().hasClass(settings.nspace + '_here'))) {
-                $('.' + settings.nspace + '_tabs li').removeClass(settings.nspace + '_here');
-                $('.' + settings.nspace + '_on').stop()
+              if (!($el.parent().hasClass(settings.namespace + '_here'))) {
+                $('.' + settings.namespace + '_tabs li').removeClass(settings.namespace + '_here');
+                $('.' + settings.namespace + '_on').stop()
                   .fadeOut(fadetime, function () {
-                    $(this).removeClass(settings.nspace + '_on').css(hidden);
+                    $(this).removeClass(settings.namespace + '_on').css(hidden);
                   }).end();
-                $('#' + settings.nspace + '_s' + i).stop()
+                $('#' + settings.namespace + '_s' + i).stop()
                   .fadeIn(fadetime, function () {
-                    $(this).addClass(settings.nspace + '_on').css(visible);
+                    $(this).addClass(settings.namespace + '_on').css(visible);
                   }).end();
-                $el.parent().addClass(settings.nspace + '_here');
+                $el.parent().addClass(settings.namespace + '_here');
               }
             });
           });
