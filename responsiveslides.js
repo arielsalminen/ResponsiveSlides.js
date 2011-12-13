@@ -24,7 +24,7 @@
           visibleClass = namespace + '_on',
           slideClassPrefix = namespace + '_s',
           tabsClass = namespace + '_tabs',
-          $pagination = $('<ul class="' + namespace + '_tabs" />'),
+          $pagination = $('<ul class="' + tabsClass + '" />'),
           fadetime = parseFloat(settings.fade),
           visible = { 'position': 'relative', 'float': 'left' },
           hidden = { 'position': 'absolute', 'float': 'none' };
