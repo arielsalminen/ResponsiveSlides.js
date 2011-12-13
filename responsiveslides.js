@@ -68,19 +68,20 @@
 
         // Auto: false
         } else {
+          tabMarkup = '';
+
           $slide.each(function (i) {
             var n = i + 1;
-            tabMarkup = [
+            tabMarkup += [
               '<li>',
               '<a href="#' + slideClassPrefix + n + '"',
               'class="' + slideClassPrefix + n + '">' + n + '</a>',
               '</li>'
             ].join('');
-            $pagination.append(tabMarkup);
           });
-          $this.after($pagination);
+          $pagination.append(tabMarkup);
 
-          $this.find(':first-child').addClass(visibleClass);
+          $this.after($pagination).find(':first-child').addClass(visibleClass);
           $('.' + slideClassPrefix + '1').parent().addClass(activeClass);
 
           $('.' + tabsClass + ' a').each(function (i) {
