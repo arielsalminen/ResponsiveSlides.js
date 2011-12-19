@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.03. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
+/*! ResponsiveSlides.js v1.04. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
 (function ($) {
   $.fn.responsiveSlides = function (opts) {
     // Settings
@@ -72,12 +72,11 @@
 
           $slide.each(function (i) {
             var n = i + 1;
-            tabMarkup += [
-              '<li>',
-              '<a href="#' + slideClassPrefix + n + '"',
-              'class="' + slideClassPrefix + n + '">' + n + '</a>',
-              '</li>'
-            ].join('');
+            tabMarkup +=
+              '<li>' +
+              '<a href="#' + slideClassPrefix + n + '"' +
+              'class="' + slideClassPrefix + n + '">' + n + '</a>' +
+              '</li>';
           });
           $pagination.append(tabMarkup);
 
@@ -111,7 +110,7 @@
       // Fallback to make IE6 support CSS max-width
       var widthSupport = function () {
         var maxwidth = parseFloat(settings.maxwidth);
-        if (opts.maxwidth) {
+        if (opts && opts.maxwidth) {
           if (typeof document.body.style.maxHeight === 'undefined') {
             $this.each(function () {
               $this.css('width', '100%');
