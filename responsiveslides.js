@@ -1,6 +1,7 @@
 /*! ResponsiveSlides.js v1.04. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
 (function ($) {
   $.fn.responsiveSlides = function (opts) {
+
     // Settings
     var settings = {
       'speed' : 4000,
@@ -11,7 +12,9 @@
     };
 
     return this.each(function () {
+
       var $this = $(this);
+
       if (opts) {
         $.extend(settings, opts);
       }
@@ -19,6 +22,10 @@
       var slideshow = function () {
 
         var $slide = $this.find('img'),
+          hasTouch = 'ontouchstart' in window,
+          startEvent = hasTouch ? 'touchstart' : 'mousedown',
+          endEvent = hasTouch ? 'touchend' : 'mouseup',
+          cancelEvent = hasTouch ? 'touchcancel' : 'mouseup',
           namespace = settings.namespace,
           activeClass = namespace + '_here',
           visibleClass = namespace + '_on',
@@ -68,6 +75,7 @@
 
         // Auto: false
         } else {
+
           tabMarkup = '';
 
           $slide.each(function (i) {
@@ -78,6 +86,7 @@
               'class="' + slideClassPrefix + n + '">' + n + '</a>' +
               '</li>';
           });
+
           $pagination.append(tabMarkup);
 
           $this.after($pagination).find(':first-child').addClass(visibleClass);
@@ -85,9 +94,14 @@
 
           $('.' + tabsClass + ' a').each(function (i) {
             var $el = $(this);
-
-            $el.click(function (e) {
+            
+            $el.bind('click', function (e) {
               e.preventDefault();
+            });
+
+            $el.bind(startEvent, function (e) {
+
+              //e.preventDefault();
               // Prevent clicking if animated
               if ($('.' + visibleClass + ':animated').length) {
                 return false;
@@ -102,15 +116,22 @@
                 }).end();
                 $el.parent().addClass(activeClass);
               }
+
             });
+            
+          
           });
         }
+
       };
 
       // Fallback to make IE6 support CSS max-width
       var widthSupport = function () {
+
         var maxwidth = parseFloat(settings.maxwidth);
+
         if (opts && opts.maxwidth) {
+
           if (typeof document.body.style.maxHeight === 'undefined') {
             $this.each(function () {
               $this.css('width', '100%');
@@ -121,16 +142,20 @@
               }
             });
           }
+
         }
+
       };
 
       // Call once
       slideshow();
       widthSupport();
+
       // Call on resize
       $(window).resize(function () {
         widthSupport();
       });
+
     });
   };
 })(jQuery);
