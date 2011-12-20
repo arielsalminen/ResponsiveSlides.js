@@ -1,5 +1,5 @@
 /*! ResponsiveSlides.js v1.04. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
-(function ($) {
+(function ($, window) {
   $.fn.responsiveSlides = function (opts) {
 
     // Settings
@@ -9,7 +9,8 @@
       'auto' : true,
       'maxwidth' : 'none',
       'namespace' : 'rs'
-    };
+    },
+    parseF = parseFloat; /* for minification */
 
     return this.each(function () {
 
@@ -19,25 +20,22 @@
         $.extend(settings, opts);
       }
 
-      var slideshow = function () {
+      var $slide = $this.find('img'),
+        hasTouch = 'ontouchstart' in window,
+        startEvent = hasTouch ? 'touchstart' : 'mousedown',
+        namespace = settings.namespace,
+        activeClass = namespace + '_here',
+        visibleClass = namespace + '_on',
+        slideClassPrefix = namespace + '_s',
+        tabsClass = namespace + '_tabs',
+        $pagination = $('<ul class="' + tabsClass + '"/>'),
+        fadetime = parseF(settings.fade),
+        visible = { 'position': 'relative', 'float': 'left' },
+        hidden = { 'position': 'absolute', 'float': 'none' },
+        maxW = parseF(settings.maxwidth);
 
-        var $slide = $this.find('img'),
-          hasTouch = 'ontouchstart' in window,
-          startEvent = hasTouch ? 'touchstart' : 'mousedown',
-          namespace = settings.namespace,
-          activeClass = namespace + '_here',
-          visibleClass = namespace + '_on',
-          slideClassPrefix = namespace + '_s',
-          tabsClass = namespace + '_tabs',
-          $pagination = $('<ul class="' + tabsClass + '" />'),
-          fadetime = parseFloat(settings.fade),
-          visible = { 'position': 'relative', 'float': 'left' },
-          hidden = { 'position': 'absolute', 'float': 'none' };
-
-        // Don't run if there's only one slide
-        if ($this.find($slide).length <= 1) {
-          return;
-        }
+      // Only run if there's more than one slide
+      if ($this.find($slide).length > 1) {
 
         $slide.each(function (i) {
           this.id = slideClassPrefix + i;
@@ -52,24 +50,24 @@
         });
 
         $this.css({
-          'max-width': parseFloat(settings.maxwidth),
+          'max-width': maxW,
           'width': '100%',
           'overflow': 'hidden',
           'position': 'relative'
         });
 
-        $this.find(':first-child').css(visible);
-        $this.find($slide + ':gt(0)').hide();
+        $this.find(":first-child").css(visible);
+        $this.find($slide + ':gt(0)').hide(); // <-- this makes no sense, since the selector becomes "[object Object]:gt(0)"
 
         // Auto: true
         if (settings.auto === true) {
           setInterval(function () {
-            $this.find(':first-child').fadeOut(fadetime, function () {
+            $this.find(":first-child").fadeOut(fadetime, function () {
               $(this).css(hidden);
             }).next($slide).fadeIn(fadetime, function () {
               $(this).css(visible);
             }).end().appendTo($this);
-          }, parseFloat(settings.speed));
+          }, parseF(settings.speed));
 
         // Auto: false
         } else {
@@ -87,7 +85,7 @@
 
           $pagination.append(tabMarkup);
 
-          $this.after($pagination).find(':first-child').addClass(visibleClass);
+          $this.after($pagination).find(":first-child").addClass(visibleClass);
           $('.' + slideClassPrefix + '1').parent().addClass(activeClass);
 
           $('.' + tabsClass + ' a').each(function (i) {
@@ -120,40 +118,36 @@
           
           });
         }
-
-      };
+      }
 
       // Fallback to make IE6 support CSS max-width
-      var widthSupport = function () {
+      if (typeof document.body.style.maxHeight === 'undefined') {
+        function widthSupport() {
 
-        var maxwidth = parseFloat(settings.maxwidth);
+          if (opts && opts.maxwidth) {
 
-        if (opts && opts.maxwidth) {
-
-          if (typeof document.body.style.maxHeight === 'undefined') {
             $this.each(function () {
               $this.css('width', '100%');
-              if ($this.width() > maxwidth) {
-                $this.css('width', maxwidth);
-              } else if ($this.width() < maxwidth) {
-                $this.css('width', '100%');
+              if ($this.width() > maxW) {
+                $this.css('width', maxW);
+              } else if ($this.width() < maxW) {
+                $this.css('width', '100%'); // <-- really necessary to do this twice?
               }
             });
           }
 
         }
 
-      };
-
-      // Call once
-      slideshow();
-      widthSupport();
-
-      // Call on resize
-      $(window).resize(function () {
+        // Call once
         widthSupport();
-      });
+
+        // Call on resize
+        $(window).resize(function () {
+          widthSupport();
+        });
+
+      }
 
     });
   };
-})(jQuery);
+})(jQuery, this);
