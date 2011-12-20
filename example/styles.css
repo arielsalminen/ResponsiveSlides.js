@@ -55,10 +55,6 @@ a {
   color: #fff;
   }
 
-a:active {
-  opacity: .7;
-  }
-
 .anotherslideshow_tabs {
   font-size: 18px;
   margin: 0 auto 50px;
