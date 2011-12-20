@@ -55,10 +55,6 @@ a {
   color: #fff;
   }
 
-a:hover {
-  border-bottom: 1px solid #666;
-  }
-
 a:active {
   opacity: .7;
   }
@@ -79,7 +75,6 @@ a:active {
 
 .anotherslideshow_tabs li {
   display: inline;
-  margin-left: 15px;
   }
 
 .anotherslideshow_tabs li:first-child {
@@ -87,11 +82,13 @@ a:active {
   }
 
 .anotherslideshow_tabs a {
+  padding: 8px 20px;
   color: #666;
   }
 
 .anotherslideshow_tabs .anotherslideshow_here a {
   color: #fff;
+  background: rgba(255,255,255,.1);
   font-weight: bold;
   }
 
