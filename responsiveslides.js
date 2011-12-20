@@ -24,8 +24,6 @@
         var $slide = $this.find('img'),
           hasTouch = 'ontouchstart' in window,
           startEvent = hasTouch ? 'touchstart' : 'mousedown',
-          endEvent = hasTouch ? 'touchend' : 'mouseup',
-          cancelEvent = hasTouch ? 'touchcancel' : 'mouseup',
           namespace = settings.namespace,
           activeClass = namespace + '_here',
           visibleClass = namespace + '_on',
@@ -99,13 +97,13 @@
               e.preventDefault();
             });
 
-            $el.bind(startEvent, function (e) {
-
-              //e.preventDefault();
-              // Prevent clicking if animated
+            $el.bind(startEvent, function () {
+              
+              // if currently animated
               if ($('.' + visibleClass + ':animated').length) {
                 return false;
               }
+              
               if (!($el.parent().hasClass(activeClass))) {
                 $('.' + tabsClass + ' li').removeClass(activeClass);
                 $('.' + visibleClass).stop().fadeOut(fadetime, function () {
@@ -116,7 +114,7 @@
                 }).end();
                 $el.parent().addClass(activeClass);
               }
-
+              
             });
             
           
