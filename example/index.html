@@ -11,10 +11,17 @@
     jQuery(function() {
 
       // Slideshow 1
-      $("#slides").responsiveSlides({ maxwidth:800 });
+      $("#slides").responsiveSlides({
+        maxwidth: 800
+      });
 
       // Slideshow 2
-      $("#slides2").responsiveSlides({ fade:300, auto:false, maxwidth:540, namespace: 'anotherslideshow' });
+      $("#slides2").responsiveSlides({
+        fade: 300,
+        auto: false,
+        maxwidth: 540,
+        namespace: 'anotherslideshow'
+      });
 
     });
   </script>
@@ -22,7 +29,7 @@
 <body>
   <div id="wrapper">
     <h1>ResponsiveSlides.js</h1>
-    <h2>Responsive jQuery Slideshow plugin that weights just ~1kb</h2>
+    <h2>Responsive jQuery Slideshow plugin that weights under 1kb</h2>
 
     <!-- Slideshow 1 -->
     <div id="slides">
