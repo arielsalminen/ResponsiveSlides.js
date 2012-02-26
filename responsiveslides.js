@@ -64,7 +64,7 @@
 
           // Auto: false
           } else {
-            t = '';
+            var t = '';
             $slide.each(function (i) {
               var n = i + 1;
               t +=
