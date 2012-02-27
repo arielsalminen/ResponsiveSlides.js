@@ -1,5 +1,5 @@
 # ResponsiveSlides.js 
-### Responsive slideshow plugin that weighs less than 1kb
+### Simple & lightweight responsive slideshow plugin (in 1kb)
 
 
 [ResponsiveSlides.js](http://responsive-slides.viljamis.com/) is a tiny jQuery plugin that creates a responsive slideshow using images inside a single container. It works with wide range of browsers including all IE versions from IE6 and up. It also adds css max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) and that all the images are same size.
