@@ -55,7 +55,7 @@ a {
   color: #fff;
   }
 
-.anotherslideshow_tabs {
+.rslides2_tabs {
   font-size: 18px;
   margin: 0 auto 50px;
   padding: 10px 0;
@@ -69,21 +69,21 @@ a {
   box-shadow: 0 0 1px rgba(255,255,255,.3), inset 0 0 5px rgba(0,0,0,1.0);
   }
 
-.anotherslideshow_tabs li {
+.rslides2_tabs li {
   display: inline;
   }
 
-.anotherslideshow_tabs li:first-child {
+.rslides2_tabs li:first-child {
   margin-left: 0;
   }
 
-.anotherslideshow_tabs a {
+.rslides2_tabs a {
   -webkit-tap-highlight-color: rgba(0,0,0,.01);
   padding: 8px 20px;
   color: #666;
   }
 
-.anotherslideshow_tabs .anotherslideshow_here a {
+.rslides2_tabs .rslides2_here a {
   color: #fff;
   background: rgba(255,255,255,.1);
   font-weight: bold;
