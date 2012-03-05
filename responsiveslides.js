@@ -1,16 +1,16 @@
-/*! ResponsiveSlides.js v1.04. (c) 2011-2012 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
-(function ($) {
+/*! ResponsiveSlides.js v1.05. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
+(function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
     // Settings
     var settings = {
       'speed' : 4000,
       'fade' : 1000,
       'auto' : true,
-      'maxwidth' : 'none',
-      'namespace' : 'rs'
+      'maxwidth' : 'none'
     };
 
     return this.each(function () {
+      i++;
       var $this = $(this);
       if (options) {
         $.extend(settings, options);
@@ -18,7 +18,7 @@
 
       var slideshow = function () {
         var $slide = $this.find('img'),
-          namespace = settings.namespace,
+          namespace = 'rslides' + i,
           activeClass = namespace + '_here',
           visibleClass = namespace + '_on',
           slideClassPrefix = namespace + '_s',
@@ -129,4 +129,4 @@
       });
     });
   };
-})(jQuery);
+})(jQuery, this, 0);
