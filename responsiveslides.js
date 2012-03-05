@@ -29,6 +29,14 @@
         if ($this.find($slide).length > 1) {
 
           $slide.each(function (i) {
+            // linked slide
+            var link = this.getAttribute('data-link');
+            if (link) {
+              $(this).css({'cursor':'pointer'}).click(function(){
+                location.href=link;
+              });
+            };
+
             this.id = slideClassPrefix + i;
           });
 
