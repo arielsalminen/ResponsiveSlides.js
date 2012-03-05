@@ -2,19 +2,16 @@
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
     // Settings
-    var settings = {
+    var settings = $.extend({
       'speed' : 4000,
       'fade' : 1000,
       'auto' : true,
       'maxwidth' : 'none'
-    };
+    }, options);
 
     return this.each(function () {
       i++;
       var $this = $(this);
-      if (options) {
-        $.extend(settings, options);
-      }
 
       var slideshow = function () {
         var $slide = $this.find('img'),
