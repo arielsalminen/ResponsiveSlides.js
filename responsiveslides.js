@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.05. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com  */
+/*! ResponsiveSlides.js v1.05. (c) 2011-2012 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com */
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
     // Settings
@@ -15,13 +15,15 @@
 
       var slideshow = function () {
         var $slide = $this.find('img'),
-          namespace = 'rslides' + i,
-          activeClass = namespace + '_here',
-          visibleClass = namespace + '_on',
-          slideClassPrefix = namespace + '_s',
-          tabsClass = namespace + '_tabs',
-          $pagination = $('<ul class="' + tabsClass + '" />'),
+          namespace = 'rslides',
+          namespace_i = namespace + i,
+          namespace_i_class = namespace + ' ' + namespace_i,
+          active_class = namespace + '_here',
+          visible_class = namespace_i + '_on',
+          slide_class_prefix = namespace_i + '_s',
+          tabs_class = namespace_i + '_tabs',
           fadetime = parseFloat(settings.fade),
+          $pagination = $('<ul class="' + namespace + '_tabs ' + tabs_class + '" />'),
           visible = { 'position': 'relative', 'float': 'left' },
           hidden = { 'position': 'absolute', 'float': 'none' };
 
@@ -29,7 +31,7 @@
         if ($this.find($slide).length > 1) {
 
           $slide.each(function (i) {
-            this.id = slideClassPrefix + i;
+            this.id = slide_class_prefix + i;
           });
 
           $slide.css({
@@ -46,6 +48,7 @@
             'overflow': 'hidden',
             'position': 'relative'
           })
+            .addClass(namespace_i_class)
             .find(':first-child').css(visible).end()
             .find($slide + ':gt(0)').hide();
 
@@ -66,32 +69,34 @@
               var n = i + 1;
               t +=
                 '<li>' +
-                '<a href="#' + slideClassPrefix + n + '"' +
-                'class="' + slideClassPrefix + n + '">' + n + '</a>' +
+                '<a href="#"' +
+                'class="' + slide_class_prefix + n + '">' + n + '</a>' +
                 '</li>';
             });
             $pagination.append(t);
 
-            $this.after($pagination).find(':first-child').addClass(visibleClass);
-            $('.' + slideClassPrefix + '1').parent().addClass(activeClass);
+            $this.after($pagination).find(':first-child').addClass(visible_class);
+            $('.' + slide_class_prefix + '1').parent().addClass(active_class);
 
-            $('.' + tabsClass + ' a').each(function (i) {
+            $('.' + tabs_class + ' a').each(function (i) {
               var $el = $(this);
               $el.click(function (e) {
                 e.preventDefault();
+
                 // Prevent clicking if animated
-                if ($('.' + visibleClass + ':animated').length) {
+                if ($('.' + visible_class + ':animated').length) {
                   return false;
                 }
-                if (!($el.parent().hasClass(activeClass))) {
-                  $('.' + tabsClass + ' li').removeClass(activeClass);
-                  $('.' + visibleClass).stop().fadeOut(fadetime, function () {
-                    $(this).removeClass(visibleClass).css(hidden);
+
+                if (!($el.parent().hasClass(active_class))) {
+                  $('.' + tabs_class + ' li').removeClass(active_class);
+                  $('.' + visible_class).stop().fadeOut(fadetime, function () {
+                    $(this).removeClass(visible_class).css(hidden);
                   }).end();
-                  $('#' + slideClassPrefix + i).stop().fadeIn(fadetime, function () {
-                    $(this).addClass(visibleClass).css(visible);
+                  $('#' + slide_class_prefix + i).stop().fadeIn(fadetime, function () {
+                    $(this).addClass(visible_class).css(visible);
                   }).end();
-                  $el.parent().addClass(activeClass);
+                  $el.parent().addClass(active_class);
                 }
               });
             });
