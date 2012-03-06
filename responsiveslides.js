@@ -69,8 +69,7 @@
               var n = i + 1;
               t +=
                 '<li>' +
-                '<a href="#"' +
-                'class="' + slide_class_prefix + n + '">' + n + '</a>' +
+                '<a href="#" class="' + slide_class_prefix + n + '">' + n + '</a>' +
                 '</li>';
             });
             $pagination.append(t);
