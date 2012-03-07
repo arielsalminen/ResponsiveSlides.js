@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.05. (c) 2011-2012 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com */
+/*! ResponsiveSlides.js v1.06. (c) 2011-2012 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com */
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
     // Settings
@@ -15,6 +15,8 @@
 
       var slideshow = function () {
         var $slide = $this.find('img'),
+          hasTouch = 'ontouchstart' in window,
+          startEvent = hasTouch ? 'touchstart' : 'mousedown',
           namespace = 'rslides',
           namespace_i = namespace + i,
           namespace_i_class = namespace + ' ' + namespace_i,
@@ -78,9 +80,14 @@
             $('.' + slide_class_prefix + '1').parent().addClass(active_class);
 
             $('.' + tabs_class + ' a').each(function (i) {
+
               var $el = $(this);
-              $el.click(function (e) {
+
+              $el.bind('click', function (e) {
                 e.preventDefault();
+              });
+
+              $el.bind(startEvent, function () {
 
                 // Prevent clicking if animated
                 if ($('.' + visible_class + ':animated').length) {
