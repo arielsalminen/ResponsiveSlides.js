@@ -1,157 +1,163 @@
-/*! ResponsiveSlides.js v1.07. (c) 2011 Viljami Salminen. MIT License. http://responsive-slides.viljamis.com */
-(function($, window, i) {
+/*! ResponsiveSlides.js v1.10. Authors & copyright (c) 2011-2012 Viljami Salminen & Bastian Gutschke. MIT License. http://responsive-slides.viljamis.com */
+(function ($, window, i) {
 
-	$.fn.responsiveSlides = function( options ) {
+  $.fn.responsiveSlides = function (options) {
 
-		// Merge default settings with optional arguments
-		var settings = $.extend({
-			"auto": true,
-			"fade": 1000,
-			"maxwidth": "none",
-			"speed": 4000
-		}, options);
+    // Merge default settings with optional arguments
+    var settings = $.extend({
+      "auto": true,
+      "fade": 1000,
+      "maxwidth": "none",
+      "speed": 4000
+    }, options);
 
-		return this.each( function () {
+    return this.each(function () {
 
-			// increment i, which is used for namespacing
-			i++;
+      // Index, which is used for namespacing
+      i++;
 
-			// save handle for the slideshow
-			var $this = $( this );
+      var $this = $(this);
 
-			var $slide = $this.children(),
-				$img = $( "img", this ),
+      var $slide = $this.children(),
+        $img = $("img", this),
+        index = 0,
+        length = $slide.size(),
+        namespace = "rslides" + i,
+        activeClass = namespace + "_here",
+        visibleClass = namespace + '_on',
+        slideClassPrefix = namespace + "_s",
+        tabsClass = namespace + "_tabs",
+        $pagination = $("<ul class=\"" + tabsClass + "\" />"),
+        visible = {"float": "left", "position": "relative"},
+        hidden = {"float": "none", "position": "absolute"};
 
-				namespace = "rslides" + i,
+      // Fading animation
+      var slideTo = function (idx) {
 
-				activeClass = namespace + "_here",
-				slideClassPrefix = namespace + "_s",
+        $slide
+          .stop()
+          .fadeOut(settings.fade, function () {
+            $(this)
+              .removeClass(visibleClass)
+              .css(hidden);
+          })
+          .eq(idx)
+          .fadeIn(settings.fade, function () {
+            $(this)
+              .addClass(visibleClass)
+              .css(visible);
+            index = idx;
+          });
+      };
 
-				tabsClass = namespace + "_tabs",
-				$pagination = $( "<ul class=\"" + tabsClass + "\" />" ),
+      // Only run if there's more than one slide
+      if ($slide.size() > 1) {
 
-				visible = {"float": "left", "position": "relative"},
-				hidden = {"float": "none", "position": "absolute"},
+        // Add ID's to each slide
+        $slide.each(function (i) {
+          this.id = slideClassPrefix + i;
+        });
 
-				// start index and number of slides
-				index = 0,
-				length = $slide.size();
-				
-			// animations
-			var slideTo = function( idx ) {
+        // Add max-width
+        $this.css({
+          "max-width": settings.maxwidth
+        });
 
-				$slide
-					.stop()
-					.fadeOut( settings.fade, function() {
-						$( this ).css( hidden );
-					})
-					.eq( idx )
-					.fadeIn( settings.fade, function() {
-						$( this ).css( visible );
-						index = idx;
-					});
-			};
+        // Hide all slides, then show first one
+        $slide
+          .hide()
+          .eq(0)
+          .css(visible)
+          .show();
 
-			// Only run if there's more than one slide
-			if ( $slide.size() > 1 ) {
+        // Auto: true
+        if (settings.auto === true) {
 
-				// add ids to each slide
-				$slide.each( function ( i ) {
-					this.id = slideClassPrefix + i;
-				});
+          // Rotate slides automatically
+          setInterval(function () {
+            var idx = index + 1 < length ? index + 1 : 0;
+            slideTo(idx);
+          }, settings.speed);
 
-				// add css to the slideshow
-				$this.css({
-					"max-width": settings.maxwidth
-				});
+        }
 
-				// hide all slides, then show first one
-				$slide
-					.hide()
-					.eq( 0 )
-					.css( visible )
-					.show();
+        // Auto: false
+        else {
 
-				// Auto: true
-				if ( settings.auto === true ) {
+          // Build pagination
+          var tabMarkup = []
+          $slide.each(function (i) {
+            var n = i + 1;
 
-					// rotate slides automatically
-					setInterval( function () {
-						var idx = index + 1 < length ? index + 1 : 0;
-						slideTo( idx );
-					}, settings.speed );
+            tabMarkup.push("<li>");
+            tabMarkup.push("<a href=\"#" + slideClassPrefix + n + "\" ");
+            tabMarkup.push("class=\"" + slideClassPrefix + n + "\">" + n + "</a>");
+            tabMarkup.push("</li>");
+          });
+          $pagination.append(tabMarkup.join(""));
 
-				}
-				// Auto: false
-				else {
+          var $tabs = $pagination.find("a");
 
-					// build pagination
-					var tabMarkup = [];
-					$slide.each( function( i ) {
-						var n = i + 1;
+          // Click/touch event handler
+          $tabs.on("ontouchstart" in window ? "touchstart" : "click", function (e) {
+              e.preventDefault();
 
-						tabMarkup.push( "<li>" );
-						tabMarkup.push( "<a href=\"#" + slideClassPrefix + n + "\" " );
-						tabMarkup.push( "class=\"" + slideClassPrefix + n + "\">" + n + "</a>" );
-						tabMarkup.push( "</li>" );
-					});
-					$pagination.append( tabMarkup.join("") );
+              // Prevent click/touch if animated
+              if ($('.' + visibleClass + ':animated').length) {
+                return false;
+              }
 
-					var $tabs = $pagination.find( "a" );
+              // Get index of clicked tab
+              var idx = $tabs.index(this);
 
-					// add click/touch event handler and set first tab active
-					$tabs.on( "ontouchstart" in window ? "touchstart" : "click", function( e ) {
-							e.preventDefault();
+              // Break if element is already active
+              if (index === idx) {
+                return;
+              }
 
-							// get index of clicked tab
-							var idx = $tabs.index( this );
+              // Remove active state from old tab and set new one
+              $tabs
+                .closest("li")
+                .removeClass(activeClass)
+                .eq(idx)
+                .addClass(activeClass);
 
-							// break here if element is already active
-							if( index === idx ) {
-								return;
-							}
+              // Do the animation
+              slideTo(idx);
+            })
+            .eq(0)
+            .closest("li")
+            .addClass(activeClass);
 
-							// remove active state from old tab and set new one
-							$tabs
-								.closest( "li" )
-								.removeClass( activeClass )
-								.eq( idx )
-								.addClass( activeClass );
+          // Inject pagination
+          $this.after($pagination);
+        }
+      }
 
-							// do the animation
-							slideTo( idx );
-						})
-						.eq( 0 )
-						.closest( "li" )
-						.addClass( activeClass );
+      // Add fallback if CSS max-width isn't supported and maxwidth is set
+      if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
 
-					// inject pagination
-					$this.after( $pagination );
-				}
-			}
+        var widthSupport = function () {
 
-			
-			// only add fallback if maxwidth isn't supported and maxwidth is set
-			if ( typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth ) {
-				
-				// Fallback to make IE6 support CSS max-width
-				var widthSupport = function() {
-				
-					$this.css( "width", "100%" );
-					
-					if ( $this.width() > settings.maxwidth ) {
-						$this.css( "width", settings.maxwidth );
-					}
-				};
-				widthSupport();
-				// bind on window resize
-				$( window ).on( "resize", function () {
-					widthSupport();
-				});
+          $this.css("width", "100%");
 
-			}
+          if ($this.width() > settings.maxwidth) {
+            $this.css("width", settings.maxwidth);
+          }
+        };
 
-		});
-	};
+        // Init fallback
+        widthSupport();
+
+        // + Bind on window resize
+        $(window).on("resize", function () {
+          widthSupport();
+        });
+
+      }
+
+    });
+
+  };
 
 })(jQuery, this, 0);
