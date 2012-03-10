@@ -13,6 +13,13 @@ Usage Instructions and demo
 For instructions and demo go to [http://responsive-slides.viljamis.com](http://responsive-slides.viljamis.com/)
 
 
+Known bugs
+======
+
+*   Firefox 2: if you have more than one auto fading slideshows on the same page page it explodes. with one auto fading slideshow per page everything works though.
+*   The slideshow prevents the clicking of pagination while it's fading to the next slide so you shouldn't (at least right now) use long fade times + pagination together, as it might be confusing for the user if nothing happens when trying to change the slide.
+
+
 License
 ======
 
