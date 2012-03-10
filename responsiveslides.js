@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.10. Authors & copyright (c) 2011-2012 Viljami Salminen & Bastian Gutschke. MIT License. http://responsive-slides.viljamis.com */
+/*! ResponsiveSlides.js v1.10. (c) 2011-2012 Viljami Salminen & Bastian Gutschke. MIT License. http://responsive-slides.viljamis.com */
 (function ($, window, i) {
 
   $.fn.responsiveSlides = function (options) {
@@ -6,7 +6,7 @@
     // Merge default settings with optional arguments
     var settings = $.extend({
       "auto": true,
-      "fade": 1000,
+      "fade": 300,
       "maxwidth": "none",
       "speed": 4000
     }, options);
@@ -26,6 +26,7 @@
         activeClass = namespace + "_here",
         visibleClass = namespace + '_on',
         slideClassPrefix = namespace + "_s",
+        fadetime = parseFloat(settings.fade),
         tabsClass = namespace + "_tabs",
         $pagination = $("<ul class=\"" + tabsClass + "\" />"),
         visible = {"float": "left", "position": "relative"},
@@ -36,13 +37,13 @@
 
         $slide
           .stop()
-          .fadeOut(settings.fade, function () {
+          .fadeOut(fadetime, function () {
             $(this)
               .removeClass(visibleClass)
               .css(hidden);
           })
           .eq(idx)
-          .fadeIn(settings.fade, function () {
+          .fadeIn(fadetime, function () {
             $(this)
               .addClass(visibleClass)
               .css(visible);
@@ -77,7 +78,7 @@
           setInterval(function () {
             var idx = index + 1 < length ? index + 1 : 0;
             slideTo(idx);
-          }, settings.speed);
+          }, parseFloat(settings.speed));
 
         }
 
@@ -102,7 +103,9 @@
           $tabs.on("ontouchstart" in window ? "touchstart" : "click", function (e) {
               e.preventDefault();
 
-              // Prevent click/touch if animated
+              // Prevent click/touch if currently animated,
+              // otherwise if someone is using very long fade
+              // This'll break when changing slide at the same time
               if ($('.' + visibleClass + ':animated').length) {
                 return false;
               }
