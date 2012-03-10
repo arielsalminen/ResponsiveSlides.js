@@ -5,22 +5,19 @@
   <title>ResponsiveSlides.js &middot; Responsive jQuery Slideshow</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <link rel="stylesheet" href="../responsiveslides.css" />
+  <link rel="stylesheet" href="example.css" />
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="../responsiveslides.min.js"></script>
+  <script src="../responsiveslides.js"></script>
   <script>
   jQuery(function() {
     // Slideshow 1
     $("#slides1").responsiveSlides({
-      auto: true,
-      pagination: true,
-      fade: 500,
-      maxwidth: 800,
-      speed: 4000
+      maxwidth: 800
     });
 
     // Slideshow 4
     $("#slides2").responsiveSlides({
-      auto: false,
+      auto: true,
       pagination: true,
       fade: 300,
       maxwidth: 540
@@ -42,9 +39,9 @@
 
     <!-- Slideshow 2 -->
     <ul id="slides2">
-      <li><a href=""><img src="1.jpg" alt="" /></a></li>
-      <li><a href=""><img src="2.jpg" alt="" /></a></li>
-      <li><a href=""><img src="3.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="1.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="2.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="3.jpg" alt="" /></a></li>
     </ul>
 
     <a href="http://responsive-slides.viljamis.com/" id="download">See the documentation</a>
