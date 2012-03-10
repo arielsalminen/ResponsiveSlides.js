@@ -22,7 +22,6 @@
 
       var index = 0,
         $slide = $this.children(),
-        $img = $("img", this),
         length = $slide.size(),
         namespace = "rslides",
         namespaceIndex = namespace + i,
