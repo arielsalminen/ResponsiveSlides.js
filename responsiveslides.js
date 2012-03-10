@@ -1,11 +1,11 @@
 /*! ResponsiveSlides.js v1.10. (c) 2011-2012 Viljami Salminen & Bastian Gutschke. MIT License. http://responsive-slides.viljamis.com */
 (function ($, window, i) {
-
   $.fn.responsiveSlides = function (options) {
 
     // Default settings
     var settings = $.extend({
       "auto": true,
+      "pagination": false,
       "fade": 1000,
       "maxwidth": "none",
       "speed": 4000
@@ -17,6 +17,8 @@
       i++;
 
       var $this = $(this);
+
+      var startCycle, rotate;
 
       var index = 0,
         $slide = $this.children(),
@@ -74,79 +76,100 @@
           .css(visible)
           .show();
 
-        // Auto: true
-        if (settings.auto === true) {
-
-          // Rotate slides automatically
-          setInterval(function () {
-            var idx = index + 1 < length ? index + 1 : 0;
-            slideTo(idx);
-          }, parseFloat(settings.speed));
-
-        }
-
-        // Auto: false
-        else {
-
-          // Build pagination
-          var tabMarkup = []
+        // Build pagination
+        if (settings.pagination === true) {
+          var tabMarkup = [];
           $slide.each(function (i) {
             var n = i + 1;
 
             tabMarkup.push("<li>");
-            tabMarkup.push("<a href=\"#" + slideClassPrefix + n + "\" ");
-            tabMarkup.push("class=\"" + slideClassPrefix + n + "\">" + n + "</a>");
+            tabMarkup.push("<a href=\"#\" class=\"" + slideClassPrefix + n + "\">" + n + "</a>");
             tabMarkup.push("</li>");
           });
           $pagination.append(tabMarkup.join(""));
 
           var $tabs = $pagination.find("a");
 
-          // Click/touch event handler
-          $tabs.on("ontouchstart" in window ? "touchstart" : "click", function (e) {
-              e.preventDefault();
-
-              // Get index of clicked tab
-              var idx = $tabs.index(this);
-
-              // Break if element is already active
-              if (index === idx) {
-                return;
-              }
-
-              // Prevent click/touch if currently animated,
-              // otherwise if someone is using very long fade
-              // This'll break when changing a slide at the same time
-              if ($("." + visibleClass + ":animated").length) {
-                return false;
-              }
-
-              // Remove active state from old tab and set new one
-              $tabs
-                .closest("li")
-                .removeClass(activeClass)
-                .eq(idx)
-                .addClass(activeClass);
-
-              // Do the animation
-              slideTo(idx);
-            })
-            .eq(0)
-            .closest("li")
-            .addClass(activeClass);
-
           // Inject pagination
           $this.after($pagination);
         }
+
+        // Auto rotation
+        if (settings.auto === true) {
+
+          // Rotate slides automatically
+          startCycle = function () {
+            rotate = setInterval(function () {
+              var idx = index + 1 < length ? index + 1 : 0;
+
+              // Only remove active state from old tab and set
+              // to new one if we have pagination set to "true"
+              if (settings.pagination === true) {
+                $tabs
+                  .closest("li")
+                  .removeClass(activeClass)
+                  .eq(idx)
+                  .addClass(activeClass);
+              }
+
+              slideTo(idx);
+            }, parseFloat(settings.speed));
+          };
+
+          // Init rotation
+          startCycle();
+        }
+
+        // Click/touch event handler
+        if (settings.pagination === true) {
+          $tabs.on("ontouchstart" in window ? "touchstart" : "click", function (e) {
+            e.preventDefault();
+
+            // Stop auto rotation
+            clearInterval(rotate);
+
+            // ...Restart it
+            if (settings.auto === true) {
+              startCycle();
+            }
+
+            // Get index of clicked tab
+            var idx = $tabs.index(this);
+
+            // Break if element is already active
+            if (index === idx) {
+              return;
+            }
+
+            // Prevent click/touch if currently animated,
+            // otherwise if someone is using very long fade
+            // This'll break when changing a slide at the same time
+            if ($("." + visibleClass + ":animated").length) {
+              return false;
+            }
+
+            // Remove active state from old tab and set new one
+            $tabs
+              .closest("li")
+              .removeClass(activeClass)
+              .eq(idx)
+              .addClass(activeClass);
+
+            // Do the animation
+            slideTo(idx);
+          })
+            .eq(0)
+            .closest("li")
+            .addClass(activeClass);
+        }
+
       }
 
       // Add fallback if CSS max-width isn't supported and maxwidth is set
       if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
 
         var widthSupport = function () {
-
           $this.css("width", "100%");
-
           if ($this.width() > settings.maxwidth) {
             $this.css("width", settings.maxwidth);
           }
@@ -165,5 +188,4 @@
     });
 
   };
-
 })(jQuery, this, 0);
