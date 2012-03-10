@@ -3,32 +3,34 @@
 
   $.fn.responsiveSlides = function (options) {
 
-    // Merge default settings with optional arguments
+    // Default settings
     var settings = $.extend({
       "auto": true,
-      "fade": 300,
+      "fade": 1000,
       "maxwidth": "none",
       "speed": 4000
     }, options);
 
     return this.each(function () {
 
-      // Index, which is used for namespacing
+      // Index which is used for namespacing
       i++;
 
       var $this = $(this);
 
-      var $slide = $this.children(),
+      var index = 0,
+        $slide = $this.children(),
         $img = $("img", this),
-        index = 0,
         length = $slide.size(),
-        namespace = "rslides" + i,
+        namespace = "rslides",
+        namespaceIndex = namespace + i,
+        namespaceIndexClass = namespace + " " + namespaceIndex,
         activeClass = namespace + "_here",
-        visibleClass = namespace + '_on',
-        slideClassPrefix = namespace + "_s",
+        visibleClass = namespaceIndex + "_on",
+        slideClassPrefix = namespaceIndex + "_s",
+        tabsClass = namespaceIndex + "_tabs",
         fadetime = parseFloat(settings.fade),
-        tabsClass = namespace + "_tabs",
-        $pagination = $("<ul class=\"" + tabsClass + "\" />"),
+        $pagination = $("<ul class=\"" + namespace + "_tabs " + tabsClass + "\" />"),
         visible = {"float": "left", "position": "relative"},
         hidden = {"float": "none", "position": "absolute"};
 
@@ -59,15 +61,16 @@
           this.id = slideClassPrefix + i;
         });
 
-        // Add max-width
-        $this.css({
-          "max-width": settings.maxwidth
-        });
+        // Add max-width and classes
+        $this
+          .css("max-width", settings.maxwidth)
+          .addClass(namespaceIndexClass);
 
         // Hide all slides, then show first one
         $slide
           .hide()
           .eq(0)
+          .addClass(visibleClass)
           .css(visible)
           .show();
 
@@ -103,19 +106,19 @@
           $tabs.on("ontouchstart" in window ? "touchstart" : "click", function (e) {
               e.preventDefault();
 
-              // Prevent click/touch if currently animated,
-              // otherwise if someone is using very long fade
-              // This'll break when changing slide at the same time
-              if ($('.' + visibleClass + ':animated').length) {
-                return false;
-              }
-
               // Get index of clicked tab
               var idx = $tabs.index(this);
 
               // Break if element is already active
               if (index === idx) {
                 return;
+              }
+
+              // Prevent click/touch if currently animated,
+              // otherwise if someone is using very long fade
+              // This'll break when changing a slide at the same time
+              if ($("." + visibleClass + ":animated").length) {
+                return false;
               }
 
               // Remove active state from old tab and set new one
