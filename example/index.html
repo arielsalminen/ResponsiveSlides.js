@@ -1,51 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>ResponsiveSlides.js &middot; Responsive jQuery Slideshow</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <link rel="stylesheet" href="styles.css?v1.03" />
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="../responsiveslides.min.js"></script>
-  <script>
-    jQuery(function() {
+	<meta charset="utf-8" />
+	<title>ResponsiveSlides.js &middot; Responsive jQuery Slideshow</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<link rel="stylesheet" href="styles.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="../responsiveslides.js"></script>
+	<script>
+	jQuery(function() {
+		// Slideshow 1
+		$("#slides1").responsiveSlides({
+			maxwidth: 800
+		});
 
-      // Slideshow 1
-      $("#slides").responsiveSlides({
-        maxwidth: 800
-      });
+		// Slideshow 2
+		$("#slides2").responsiveSlides({
+			maxwidth: 800
+		});
 
-      // Slideshow 2
-      $("#slides2").responsiveSlides({
-        fade: 300,
-        auto: false,
-        maxwidth: 540
-      });
+		// Slideshow 3
+		$("#slides3").responsiveSlides({
+			auto: false,
+			fade: 300,
+			maxwidth: 540
+		});
 
-    });
-  </script>
+		// Slideshow 4
+		$("#slides4").responsiveSlides({
+			auto: false,
+			fade: 300,
+			maxwidth: 540
+		});
+	});
+	</script>
 </head>
 <body>
-  <div id="wrapper">
-    <h1>ResponsiveSlides.js</h1>
-    <h2>Responsive jQuery Slideshow plugin that weights under 1kb</h2>
+	<div id="wrapper">
+		<h1>ResponsiveSlides.js</h1>
+		<h2>Responsive jQuery Slideshow plugin that weights under 1kb</h2>
 
-    <!-- Slideshow 1 -->
-    <div id="slides">
-      <img src="1.jpg" alt="" />
-      <img src="2.jpg" alt="" />
-      <img src="3.jpg" alt="" />
-    </div>
+		<!-- Slideshow 1 -->
+		<ul id="slides1" class="slides">
+			<li><img src="1.jpg" alt="" /></li>
+			<li><img src="2.jpg" alt="" /></li>
+			<li><img src="3.jpg" alt="" /></li>
+		</ul>
 
-    <!-- Slideshow 2 -->
-    <div id="slides2">
-      <img src="1.jpg" alt="" />
-      <img src="2.jpg" alt="" />
-      <img src="3.jpg" alt="" />
-    </div>
+		<!-- Slideshow 2 -->
+		<ul id="slides2" class="slides">
+			<li><a href=""><img src="1.jpg" alt="" /></a></li>
+			<li><a href=""><img src="2.jpg" alt="" /></a></li>
+			<li><a href=""><img src="3.jpg" alt="" /></a></li>
+		</ul>
 
-    <a href="http://responsive-slides.viljamis.com/" id="download">See the documentation</a>
-    <p class="footer">ResponsiveSlides.js is created by <a href="http://viljamis.com">@viljamis</a>. It's released under the MIT license. If you have any questions or feedback you can use the <a href="https://github.com/viljami/ResponsiveSlides.js">GitHub project page</a>.</p>
-  </div>
+		<!-- Slideshow 3 -->
+		<ul id="slides3" class="slides pagination">
+			<li><img src="1.jpg" alt="" /></li>
+			<li><img src="2.jpg" alt="" /></li>
+			<li><img src="3.jpg" alt="" /></li>
+		</ul>
+
+		<!-- Slideshow 4 -->
+		<ul id="slides4" class="slides pagination">
+			<li><a href=""><img src="1.jpg" alt="" /></a></li>
+			<li><a href=""><img src="2.jpg" alt="" /></a></li>
+			<li><a href=""><img src="3.jpg" alt="" /></a></li>
+		</ul>
+		
+		<p class="test">
+		mopmop
+		</p>
+
+		<a href="http://responsive-slides.viljamis.com/" id="download">See the documentation</a>
+		<p class="footer">ResponsiveSlides.js is created by <a href="http://viljamis.com">@viljamis</a>. It's released under the MIT license. If you have any questions or feedback you can use the <a href="https://github.com/viljami/ResponsiveSlides.js">GitHub project page</a>.</p>
+	</div>
 </body>
 </html>
