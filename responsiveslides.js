@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.10. (c) 2011-2012 Viljami Salminen & Bastian Gutschke. MIT License. http://responsive-slides.viljamis.com */
+/*! http://responsive-slides.viljamis.com v1.1 by @viljamis */
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
 
