@@ -18,26 +18,31 @@
 
       var $this = $(this);
 
-      var startCycle, rotate;
-
       var index = 0,
         $slide = $this.children(),
         length = $slide.size(),
+        fadetime = parseFloat(settings.fade),
+
+        // Namespacing
         namespace = "rslides",
         namespaceIndex = namespace + i,
+
+        // Classes
         namespaceIndexClass = namespace + " " + namespaceIndex,
         activeClass = namespace + "_here",
         visibleClass = namespaceIndex + "_on",
         slideClassPrefix = namespaceIndex + "_s",
         tabsClass = namespaceIndex + "_tabs",
-        fadetime = parseFloat(settings.fade),
+
+        // Pagination
         $pagination = $("<ul class=\"" + namespace + "_tabs " + tabsClass + "\" />"),
+
+        // Styles for visible and hidden slides
         visible = {"float": "left", "position": "relative"},
         hidden = {"float": "none", "position": "absolute"};
 
       // Fading animation
       var slideTo = function (idx) {
-
         $slide
           .stop()
           .fadeOut(fadetime, function () {
@@ -67,7 +72,9 @@
           .css("max-width", settings.maxwidth)
           .addClass(namespaceIndexClass);
 
-        // Hide all slides, then show first one
+        // Hide all slides, then show first one + add visible
+        // class for that one. Later we are using that same
+        // class to check if it's currently :animated
         $slide
           .hide()
           .eq(0)
@@ -95,6 +102,8 @@
 
         // Auto rotation
         if (settings.auto === true) {
+
+          var startCycle, rotate;
 
           // Rotate slides automatically
           startCycle = function () {
@@ -124,11 +133,10 @@
           $tabs.on("ontouchstart" in window ? "touchstart" : "click", function (e) {
             e.preventDefault();
 
-            // Stop auto rotation
-            clearInterval(rotate);
-
-            // ...Restart it
             if (settings.auto === true) {
+              // Stop auto rotation
+              clearInterval(rotate);
+              // ...Restart it
               startCycle();
             }
 
@@ -164,7 +172,7 @@
 
       }
 
-      // Add fallback if CSS max-width isn't supported and maxwidth is set
+      // Add fallback if max-width isn't supported and settings "maxwidth" is set
       if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
 
         var widthSupport = function () {
