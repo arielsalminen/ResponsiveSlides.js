@@ -1,4 +1,4 @@
-/*! http://responsive-slides.viljamis.com v1.1 by @viljamis */
+/*! http://responsive-slides.viljamis.com v1.10 by @viljamis */
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
 
