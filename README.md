@@ -34,7 +34,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
-v1.10 (2012-04-12) - Refactoring, New markup style, CSS is now separated from the plugin, you can have links around images + New option called "pagination", which enables to choose both "pagination" and "auto" at the same time. Shout outs for the help to [@bgutschke](https://github.com/bgutschke)
+v1.10 (2012-03-12) - Refactoring, New markup style, CSS is now separated from the plugin, you can have links around images + New option called "pagination", which enables to choose both "pagination" and "auto" at the same time. Shout outs for the help to [@bgutschke](https://github.com/bgutschke)
 
 v1.06 (2012-03-06) - Using touch events instead of click on touch screen.
 
