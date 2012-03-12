@@ -12,11 +12,9 @@ Biggest difference to other responsive slideshow plugins is the file size (805 b
 Usage Instructions and demo
 ======
 
-For instructions and demo go to [http://responsive-slides.viljamis.com](http://responsive-slides.viljamis.com/)
+For instructions and demo go to [http://responsive-slides.viljamis.com](http://responsive-slides.viljamis.com/), or [download this repository as a zip file](https://github.com/viljamis/ResponsiveSlides.js/zipball/master) and and open "index.html" from the "example" folder.
 
-...or [download this repository as a zip file](https://github.com/viljamis/ResponsiveSlides.js/zipball/master) and and open "index.html" from the "example" folder.
-
-Currently only jQuery 1.7+ is supported.
+Currently only jQuery 1.7 and up is supported.
 
 
 
