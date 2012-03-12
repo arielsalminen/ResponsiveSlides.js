@@ -125,6 +125,6 @@ a {
 
 @media screen and (max-width: 600px) {
   h1 {
-    font: 30px/50px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 24px/50px "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
