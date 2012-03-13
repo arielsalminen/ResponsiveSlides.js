@@ -4,11 +4,11 @@
 
     // Default settings
     var settings = $.extend({
-      "auto": true,
-      "pagination": false,
-      "fade": 1000,
-      "maxwidth": "none",
-      "speed": 4000
+      "auto": true, // Boolean: Animate automatically
+      "pagination": false, // Boolean: Use pagination
+      "fade": 1000, // Integer: Crossfade time, in milliseconds
+      "maxwidth": "none", // Integer: Max-width of the Slideshow, in pixels
+      "speed": 4000 // Integer: How long image shows before fading to next, in milliseconds
     }, options);
 
     return this.each(function () {
