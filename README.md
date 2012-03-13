@@ -12,7 +12,9 @@ Biggest difference to other responsive slideshow plugins is the file size (805 b
 Usage Instructions and demo
 ======
 
-For instructions and demo go to [http://responsive-slides.viljamis.com](http://responsive-slides.viljamis.com/)
+For instructions and demo go to [http://responsive-slides.viljamis.com](http://responsive-slides.viljamis.com/), or [download this repository as a zip file](https://github.com/viljamis/ResponsiveSlides.js/zipball/master) and and open "index.html" from the "example" folder.
+
+Currently only jQuery 1.7 and up is supported.
 
 
 
@@ -34,7 +36,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
-v1.10 (2012-04-12) - Refactoring, New markup style, CSS is now separated from the plugin, you can have links around images + New option called "pagination", which enables to choose both "pagination" and "auto" at the same time. Shout outs for the help to [@bgutschke](https://github.com/bgutschke)
+v1.10 (2012-03-12) - Refactoring, New markup style, CSS is now separated from the plugin, you can have links around images + New option called "pagination", which enables to choose both "pagination" and "auto" at the same time. Shout outs for the help to [@bgutschke](https://github.com/bgutschke)
 
 v1.06 (2012-03-06) - Using touch events instead of click on touch screen.
 
