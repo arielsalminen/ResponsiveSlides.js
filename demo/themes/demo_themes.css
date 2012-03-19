@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: #fff;
+}
+
+body {
+  color: #333;
+  font: 14px/24px sans-serif;
+  margin: 0 auto;
+  max-width: 700px;
+  padding: 30px;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  }
+
+h1 {
+  font: 600 24px/32px sans-serif;
+}
+
+.rslides {
+  margin: 50px auto 0;
+}
+
+
+/* PAGINATION STYLE 2
+--------------------------------------------- */
+
+.rslides_tabs {
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+  }
+
+.rslides_tabs li {
+  display: inline;
+  float: none;
+  margin-right: 5px;
+  }
+
+.rslides_tabs a {
+  text-indent: -9999px;
+  overflow: hidden;
+  width: auto;
+  -webkit-radius: 15px;
+  -moz-radius: 15px;
+  border-radius: 15px;
+  background: rgba(0,0,0, .2);
+  display: inline-block;
+  -webkit-box-shadow: inset 0 0 2px 0 rgba(0,0,0,.3);
+  -moz-box-shadow: inset 0 0 2px 0 rgba(0,0,0,.3);
+  box-shadow: inset 0 0 2px 0 rgba(0,0,0,.3);
+  width: 9px;
+  height: 9px;
+  }
+
+.rslides_tabs .rslides_here a {
+  background: rgba(0,0,0, .8);
+  }

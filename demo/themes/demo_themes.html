@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Alternative pagination styles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <link rel="stylesheet" href="../../responsiveslides.css" />
+  <link rel="stylesheet" href="demo_themes.css" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="../../responsiveslides.js"></script>
+  <script>
+  jQuery(function() {
+    // Slideshow 1
+    $("#slides1").responsiveSlides({
+      auto: false,
+      pagination: true,
+      nav: true,
+      fade: 300,
+      maxwidth: 800
+    });
+
+    // Slideshow 4
+    $("#slides2").responsiveSlides({
+      auto: false,
+      pagination: false,
+      nav: true,
+      fade: 300,
+      maxwidth: 800
+    });
+  });
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+    <h1>Alternative pagination styles</h1>
+
+    <!-- Slideshow 1 -->
+    <ul id="slides1">
+      <li><img src="../1.jpg" alt="" /></li>
+      <li><img src="../2.jpg" alt="" /></li>
+      <li><img src="../3.jpg" alt="" /></li>
+    </ul>
+
+    <!-- Slideshow 2 -->
+    <ul id="slides2">
+      <li><a href="#"><img src="../1.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="../2.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="../3.jpg" alt="" /></a></li>
+    </ul>
+
+  </div>
+</body>
+</html>
