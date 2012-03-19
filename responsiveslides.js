@@ -5,7 +5,8 @@
     // Default settings
     var settings = $.extend({
       "auto": true, // Boolean: Animate automatically
-      "pagination": false, // Boolean: Use pagination
+      "pagination": false, // Boolean: Show pagination
+      "nav": false, // Boolean: Show navigation
       "fade": 1000, // Integer: Crossfade time, in milliseconds
       "maxwidth": "none", // Integer: Max-width of the Slideshow, in pixels
       "speed": 4000 // Integer: How long image shows before fading to next, in milliseconds
@@ -22,6 +23,10 @@
         $slide = $this.children(),
         length = $slide.size(),
         fadetime = parseFloat(settings.fade),
+        
+        // Touch support
+        hasTouch = 'ontouchstart' in window,
+        startEvent = hasTouch ? 'touchstart' : 'mousedown',
 
         // Namespacing
         namespace = "rslides",
@@ -100,6 +105,15 @@
           $this.after($pagination);
         }
 
+        // Select active tab
+        var selectTab = function (idx) {
+          $tabs
+            .closest("li")
+            .removeClass(activeClass)
+            .eq(idx)
+            .addClass(activeClass);
+        };
+
         // Auto rotation
         if (settings.auto === true) {
 
@@ -113,11 +127,7 @@
               // Only remove active state from old tab and set
               // to new one if we have pagination set to "true"
               if (settings.pagination === true) {
-                $tabs
-                  .closest("li")
-                  .removeClass(activeClass)
-                  .eq(idx)
-                  .addClass(activeClass);
+                selectTab(idx);
               }
 
               slideTo(idx);
@@ -128,17 +138,21 @@
           startCycle();
         }
 
+        var restartCycle = function () {
+          if (settings.auto === true) {
+            // Stop auto rotation
+            clearInterval(rotate);
+            // ...Restart it
+            startCycle();
+          }
+        };
+
         // Click/touch event handler
         if (settings.pagination === true) {
-          $tabs.on("ontouchstart" in window ? "touchstart" : "click", function (e) {
-            e.preventDefault();
 
-            if (settings.auto === true) {
-              // Stop auto rotation
-              clearInterval(rotate);
-              // ...Restart it
-              startCycle();
-            }
+          // On touch start
+          $tabs.bind(startEvent, function () {
+            restartCycle();
 
             // Get index of clicked tab
             var idx = $tabs.index(this);
@@ -156,11 +170,7 @@
             }
 
             // Remove active state from old tab and set new one
-            $tabs
-              .closest("li")
-              .removeClass(activeClass)
-              .eq(idx)
-              .addClass(activeClass);
+            selectTab(idx);
 
             // Do the animation
             slideTo(idx);
@@ -168,8 +178,56 @@
             .eq(0)
             .closest("li")
             .addClass(activeClass);
+
+          // On click
+          $tabs.bind("click", function (e) { e.preventDefault(); });
+
         }
 
+      }
+
+      // Prev and Next
+      if (settings.nav === true) {
+
+        // Build markup
+        var navMarkup = 
+          "<a href='#' class='" + namespaceIndex + "_nav_prev'>Prev</a>" +
+          "<a href='#' class='" + namespaceIndex + "_nav_next'>Next</a>";
+
+        // Inject markup
+        $this.after(navMarkup);
+
+        // Buttons
+        var $prev = $("." + namespaceIndex + "_nav_prev"),
+          $next = $("." + namespaceIndex + "_nav_next");
+
+        // Previous slide
+        $prev.bind(startEvent, function (e) {
+          var idx = $slide.index($("." + visibleClass)),
+            idxTo = idx - 1;
+          if ($("." + visibleClass + ":animated").length) {
+            return false;
+          }
+          restartCycle();
+          slideTo(idxTo);
+          selectTab(idxTo);
+        });
+
+        // Next slide
+        $next.bind(startEvent, function (e) {
+          var idx = $slide.index($("." + visibleClass)),
+            idxTo = idx + 1 < length ? index + 1 : 0;
+          if ($("." + visibleClass + ":animated").length) {
+            return false;
+          }
+          restartCycle();
+          slideTo(idxTo);
+          selectTab(idxTo);
+        });
+
+        // On click
+        $prev.bind("click", function (e) { e.preventDefault(); });
+        $next.bind("click", function (e) { e.preventDefault(); });
       }
 
       // Add fallback if max-width isn't supported and settings "maxwidth" is set
