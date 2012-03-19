@@ -23,10 +23,6 @@
         $slide = $this.children(),
         length = $slide.size(),
         fadetime = parseFloat(settings.fade),
-        
-        // Touch support
-        hasTouch = 'ontouchstart' in window,
-        startEvent = hasTouch ? 'touchstart' : 'mousedown',
 
         // Namespacing
         namespace = "rslides",
@@ -151,7 +147,8 @@
         if (settings.pagination === true) {
 
           // On touch start
-          $tabs.bind(startEvent, function () {
+          $tabs.bind("click", function (e) {
+            e.preventDefault();
             restartCycle();
 
             // Get index of clicked tab
@@ -179,9 +176,6 @@
             .closest("li")
             .addClass(activeClass);
 
-          // On click
-          $tabs.bind("click", function (e) { e.preventDefault(); });
-
         }
 
       }
@@ -202,7 +196,8 @@
           $next = $("." + namespaceIndex + "_nav_next");
 
         // Previous slide
-        $prev.bind(startEvent, function (e) {
+        $prev.bind("click", function (e) {
+          e.preventDefault();
           var idx = $slide.index($("." + visibleClass)),
             idxTo = idx - 1;
           if ($("." + visibleClass + ":animated").length) {
@@ -214,7 +209,8 @@
         });
 
         // Next slide
-        $next.bind(startEvent, function (e) {
+        $next.bind("click", function (e) {
+          e.preventDefault();
           var idx = $slide.index($("." + visibleClass)),
             idxTo = idx + 1 < length ? index + 1 : 0;
           if ($("." + visibleClass + ":animated").length) {
@@ -224,10 +220,6 @@
           slideTo(idxTo);
           selectTab(idxTo);
         });
-
-        // On click
-        $prev.bind("click", function (e) { e.preventDefault(); });
-        $next.bind("click", function (e) { e.preventDefault(); });
       }
 
       // Add fallback if max-width isn't supported and settings "maxwidth" is set
