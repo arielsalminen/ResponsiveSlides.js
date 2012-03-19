@@ -22,7 +22,7 @@
     // Slideshow 4
     $("#slides2").responsiveSlides({
       auto: false,
-      pagination: false,
+      pagination: true,
       nav: true,
       fade: 300,
       maxwidth: 800
@@ -35,18 +35,22 @@
     <h1>Alternative pagination styles</h1>
 
     <!-- Slideshow 1 -->
-    <ul id="slides1">
-      <li><img src="../1.jpg" alt="" /></li>
-      <li><img src="../2.jpg" alt="" /></li>
-      <li><img src="../3.jpg" alt="" /></li>
-    </ul>
+    <div class="container">
+      <ul id="slides1">
+        <li><img src="../1.jpg" alt="" /></li>
+        <li><img src="../2.jpg" alt="" /></li>
+        <li><img src="../3.jpg" alt="" /></li>
+      </ul>
+    </div>
 
     <!-- Slideshow 2 -->
-    <ul id="slides2">
-      <li><a href="#"><img src="../1.jpg" alt="" /></a></li>
-      <li><a href="#"><img src="../2.jpg" alt="" /></a></li>
-      <li><a href="#"><img src="../3.jpg" alt="" /></a></li>
-    </ul>
+    <div class="container">
+      <ul id="slides2">
+        <li><img src="../1.jpg" alt="" /></li>
+        <li><img src="../2.jpg" alt="" /></li>
+        <li><img src="../3.jpg" alt="" /></li>
+      </ul>
+    </div>
 
   </div>
 </body>

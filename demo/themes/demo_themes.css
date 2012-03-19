@@ -19,12 +19,55 @@ body {
 
 h1 {
   font: 600 24px/32px sans-serif;
-}
+  }
 
 .rslides {
   margin: 50px auto 0;
-}
+  }
 
+.container {
+  position: relative;
+  }
+
+.rslides1_nav_prev,
+.rslides1_nav_next {
+  position: absolute;
+  -webkit-tap-highlight-color: rgba(0,0,0,.01);
+  top: 50%;
+  left: 0;
+  background: rgba(0,0,0, .8);
+  text-decoration: none;
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  margin-top: -30px;
+  color: #fff;
+  }
+
+.rslides1_nav_next {
+  left: auto;
+  right: 0;
+  }
+
+.rslides2_nav_prev,
+.rslides2_nav_next {
+  position: absolute;
+  -webkit-tap-highlight-color: rgba(0,0,0,.01);
+  top: 0;
+  left: 0;
+  background: transparent;
+  text-decoration: none;
+  width: 40%;
+  text-indent: -9999px;
+  overflow: hidden;
+  height: 100%;
+  color: #fff;
+  }
+
+.rslides2_nav_next {
+  left: auto;
+  right: 0;
+  }
 
 /* PAGINATION STYLE 2
 --------------------------------------------- */
