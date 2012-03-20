@@ -1,4 +1,4 @@
-/*! http://responsive-slides.viljamis.com v1.10 by @viljamis */
+/*! http://responsive-slides.viljamis.com v1.20 by @viljamis */
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
 
@@ -73,9 +73,7 @@
           .css("max-width", settings.maxwidth)
           .addClass(namespaceIndexClass);
 
-        // Hide all slides, then show first one + add visible
-        // class for that one. Later we are using that same
-        // class to check if it's currently :animated
+        // Hide all slides, then show first one + add visible class
         $slide
           .hide()
           .eq(0)
@@ -120,8 +118,7 @@
             rotate = setInterval(function () {
               var idx = index + 1 < length ? index + 1 : 0;
 
-              // Only remove active state from old tab and set
-              // to new one if we have pagination set to "true"
+              // Remove active state and set new if pagination = "true"
               if (settings.pagination === true) {
                 selectTab(idx);
               }
@@ -159,9 +156,7 @@
               return;
             }
 
-            // Prevent click/touch if currently animated,
-            // otherwise if someone is using very long fade
-            // This'll break when changing a slide at the same time
+            // Prevent click/touch if currently animated
             if ($("." + visibleClass + ":animated").length) {
               return false;
             }
@@ -184,16 +179,16 @@
       if (settings.nav === true) {
 
         // Build markup
-        var navMarkup = 
-          "<a href='#' class='" + namespaceIndex + "_nav_prev'>Prev</a>" +
-          "<a href='#' class='" + namespaceIndex + "_nav_next'>Next</a>";
+        var navMarkup =
+          "<a href=\"#\" class=\"" + namespaceIndex + "_nav prev\">&laquo;</a>" +
+          "<a href=\"#\" class=\"" + namespaceIndex + "_nav next\">&raquo;</a>";
 
         // Inject markup
         $this.after(navMarkup);
 
         // Buttons
-        var $prev = $("." + namespaceIndex + "_nav_prev"),
-          $next = $("." + namespaceIndex + "_nav_next");
+        var $prev = $("." + namespaceIndex + "_nav.prev"),
+          $next = $("." + namespaceIndex + "_nav.next");
 
         // Previous slide
         $prev.bind("click", function (e) {
