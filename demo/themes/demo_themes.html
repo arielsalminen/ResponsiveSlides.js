@@ -19,10 +19,19 @@
       maxwidth: 800
     });
 
-    // Slideshow 4
+    // Slideshow 2
     $("#slides2").responsiveSlides({
       auto: false,
       pagination: true,
+      nav: true,
+      fade: 300,
+      maxwidth: 800
+    });
+    
+    // Slideshow 3
+    $("#slides3").responsiveSlides({
+      auto: false,
+      pagination: false,
       nav: true,
       fade: 300,
       maxwidth: 800
@@ -46,6 +55,15 @@
     <!-- Slideshow 2 -->
     <div class="container">
       <ul id="slides2">
+        <li><img src="../1.jpg" alt="" /></li>
+        <li><img src="../2.jpg" alt="" /></li>
+        <li><img src="../3.jpg" alt="" /></li>
+      </ul>
+    </div>
+    
+    <!-- Slideshow 3 -->
+    <div class="container">
+      <ul id="slides3">
         <li><img src="../1.jpg" alt="" /></li>
         <li><img src="../2.jpg" alt="" /></li>
         <li><img src="../3.jpg" alt="" /></li>

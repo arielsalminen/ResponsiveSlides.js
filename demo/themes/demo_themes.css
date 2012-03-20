@@ -1,11 +1,11 @@
 * {
   margin: 0;
   padding: 0;
-}
+  }
 
 html {
   background: #fff;
-}
+  }
 
 body {
   color: #333;
@@ -39,19 +39,25 @@ h1 {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   top: 50%;
   left: 0;
-  background: #000;
-  background: rgba(0,0,0, .8);
+  text-indent: -9999px;
+  overflow: hidden;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent; 
+  border-right: 20px solid rgba(255,255,255, .9);
   text-decoration: none;
-  padding: 0 16px;
-  height: 40px;
+  padding: 0 5px;
+  height: 0;
+  width: 0;
   font: 900 20px/38px sans-serif;
-  margin-top: -40px;
+  margin-top: -30px;
   color: #fff;
   }
 
 .rslides1_nav.next {
   left: auto;
   right: 0;
+  border-right: 0;
+  border-left: 20px solid rgba(255,255,255, .8);
   }
 
 .rslides2_nav {
@@ -64,7 +70,7 @@ h1 {
   width: 48%;
   text-indent: -9999px;
   overflow: hidden;
-  height: 100%;
+  height: 91%;
   color: #fff;
   }
 
@@ -73,13 +79,45 @@ h1 {
   right: 0;
   }
 
-.rslides1_nav:focus,
-.rslides2_nav:focus {
-  outline: none;
+.rslides3_nav {
+  position: absolute;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  margin:auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(255,255,255, .85);
+  text-decoration: none;
+  width: 30px;
+  color: transparent;
   }
 
-/* PAGINATION STYLE 2
---------------------------------------------- */
+.rslides3_nav:after {
+  content: "\00AB";
+  position: absolute;
+  top: 50%;
+  font: 900 20px/20px sans-serif;
+  margin-top: -10px;
+  left: 10px;
+  text-indent: 0;
+  color: #000;
+  }
+
+.rslides3_nav.next {
+  left: auto;
+  right: 0;
+  }
+
+.rslides3_nav.next:after {
+  content: "\00BB";
+  right: 10px;
+  }
+
+.rslides1_nav:focus,
+.rslides2_nav:focus,
+.rslides3_nav:focus {
+  outline: none;
+  }
 
 .rslides_tabs {
   margin-top: 10px;
@@ -113,4 +151,19 @@ h1 {
 .rslides_tabs .rslides_here a {
   background: #222;
   background: rgba(0,0,0, .8);
+  }
+
+@media screen and (max-width: 600px) {
+
+  .rslides1_nav {
+    border-top-width: 13px;
+    border-bottom-width: 13px; 
+    border-right-width: 13px;
+    }
+
+  .rslides1_nav.next {
+    border-right: 0;
+    border-left-width: 13px;
+    }
+
   }
