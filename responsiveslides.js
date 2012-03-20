@@ -144,7 +144,7 @@
         if (settings.pagination === true) {
 
           // On touch start
-          $tabs.bind("click", function (e) {
+          $tabs.on("click", function (e) {
             e.preventDefault();
             restartCycle();
 
@@ -178,20 +178,20 @@
       // Prev and Next
       if (settings.nav === true) {
 
-        // Build markup
+        // Build navigation
         var navMarkup =
           "<a href=\"#\" class=\"" + namespaceIndex + "_nav prev\">&laquo;</a>" +
           "<a href=\"#\" class=\"" + namespaceIndex + "_nav next\">&raquo;</a>";
 
-        // Inject markup
+        // Inject navigation
         $this.after(navMarkup);
 
-        // Buttons
+        // Prev and next buttons
         var $prev = $("." + namespaceIndex + "_nav.prev"),
           $next = $("." + namespaceIndex + "_nav.next");
 
-        // Previous slide
-        $prev.bind("click", function (e) {
+        // Prev slide
+        $prev.on("click", function (e) {
           e.preventDefault();
           var idx = $slide.index($("." + visibleClass)),
             idxTo = idx - 1;
@@ -204,7 +204,7 @@
         });
 
         // Next slide
-        $next.bind("click", function (e) {
+        $next.on("click", function (e) {
           e.preventDefault();
           var idx = $slide.index($("." + visibleClass)),
             idxTo = idx + 1 < length ? index + 1 : 0;
