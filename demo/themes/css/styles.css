@@ -13,21 +13,27 @@ body {
   margin: 0 auto;
   max-width: 700px;
   _width: 700px;
-  padding: 50px 30px;
+  padding: 0 30px;
   text-align: center;
   -webkit-font-smoothing: antialiased;
   }
 
+#wrapper {
+  float: left;
+  width: 100%;
+  margin-bottom: 50px;
+  }
+
 h1 {
   font: 600 24px/32px sans-serif;
-  margin-bottom: 50px;
+  margin: 50px 0;
   }
 
 .rslides {
   margin: 0 auto;
   }
 
-.container {
+.rslides_container {
   margin-bottom: 50px;
   position: relative;
   float: left;
@@ -39,25 +45,24 @@ h1 {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   top: 50%;
   left: 0;
+  opacity: 0.7;
   text-indent: -9999px;
   overflow: hidden;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent; 
-  border-right: 20px solid rgba(255,255,255, .9);
   text-decoration: none;
-  padding: 0 5px;
-  height: 0;
-  width: 0;
-  font: 900 20px/38px sans-serif;
-  margin-top: -30px;
-  color: #fff;
+  height: 61px;
+  width: 38px;
+  background: transparent url(../img/arrows.gif) no-repeat left top;
+  margin-top: -45px;
+  }
+
+.rslides1_nav:active {
+  opacity: 1.0;
   }
 
 .rslides1_nav.next {
   left: auto;
+  background-position: right top;
   right: 0;
-  border-right: 0;
-  border-left: 20px solid rgba(255,255,255, .8);
   }
 
 .rslides2_nav {
@@ -82,35 +87,24 @@ h1 {
 .rslides3_nav {
   position: absolute;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  margin:auto;
+  opacity: 0.6;
+  text-indent: -9999px;
+  overflow: hidden;
   top: 0;
   bottom: 0;
   left: 0;
-  background: rgba(255,255,255, .85);
-  text-decoration: none;
-  width: 30px;
-  color: transparent;
+  background: #000 url(../img/arrows.gif) no-repeat left 50%;
+  width: 38px;
   }
 
-.rslides3_nav:after {
-  content: "\00AB";
-  position: absolute;
-  top: 50%;
-  font: 900 20px/20px sans-serif;
-  margin-top: -10px;
-  left: 10px;
-  text-indent: 0;
-  color: #000;
+.rslides3_nav:active {
+  opacity: 1.0;
   }
 
 .rslides3_nav.next {
   left: auto;
+  background-position: right 50%;
   right: 0;
-  }
-
-.rslides3_nav.next:after {
-  content: "\00BB";
-  right: 10px;
   }
 
 .rslides1_nav:focus,
@@ -155,15 +149,15 @@ h1 {
 
 @media screen and (max-width: 600px) {
 
-  .rslides1_nav {
-    border-top-width: 13px;
-    border-bottom-width: 13px; 
-    border-right-width: 13px;
+  .rslides1_nav,
+  .rslides3_nav {
+    background-position: -6px 50%;
+    width: 26px;
     }
-
-  .rslides1_nav.next {
-    border-right: 0;
-    border-left-width: 13px;
+  
+  .rslides1_nav.next,
+  .rslides3_nav.next {
+    background-position: -44px 50%;
     }
 
   }
