@@ -37,11 +37,9 @@ Changelog
 ======
 
 
-v1.20 (2012-03-XX) - New option called 'nav', which enables next and previous buttons. Can be used with 'pagination' and 'auto' options. Adds also new themes folder with alternative styles for pagination and navigation.
+v1.20 (2012-03-21) - New option called 'nav', which enables next and previous buttons. Can be used with 'pagination' and 'auto' options. Adds also new themes folder with three different ways to use the new next and previous buttons.
 
 v1.10 (2012-03-12) - Refactoring, New markup style, CSS is now separated from the plugin, you can have links around images + New option called "pagination", which enables to choose both "pagination" and "auto" at the same time. Shout outs for the help to [@bgutschke](https://github.com/bgutschke)
-
-v1.06 (2012-03-06) - Using touch events instead of click on touch screen.
 
 v1.05 (2012-03-05) - No more need to change the namespace if you have more than one slideshow on the same page.
 
