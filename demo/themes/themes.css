@@ -25,8 +25,14 @@ body {
   }
 
 h1 {
-  font: 600 24px/32px sans-serif;
+  font: 600 28px/36px sans-serif;
   margin: 50px 0;
+  }
+
+h3 {
+  font: 600 18px/24px sans-serif;
+  color: #999;
+  margin: 0 0 20px;
   }
 
 .rslides {
@@ -51,7 +57,7 @@ h1 {
   text-decoration: none;
   height: 61px;
   width: 38px;
-  background: transparent url(../img/arrows.gif) no-repeat left top;
+  background: transparent url("themes.gif") no-repeat left top;
   margin-top: -45px;
   }
 
@@ -94,7 +100,7 @@ h1 {
   top: 0;
   bottom: 0;
   left: 0;
-  background: #000 url(../img/arrows.gif) no-repeat left 50%;
+  background: #000 url("themes.gif") no-repeat left 50%;
   width: 38px;
   }
 
