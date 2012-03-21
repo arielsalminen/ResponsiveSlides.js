@@ -159,18 +159,3 @@ a {
   background: #222;
   background: rgba(0,0,0, .8);
   }
-
-@media screen and (max-width: 600px) {
-
-  .rslides1_nav,
-  .rslides3_nav {
-    background-position: -6px 50%;
-    width: 26px;
-    }
-
-  .rslides1_nav.next,
-  .rslides3_nav.next {
-    background-position: -44px 50%;
-    }
-
-  }
