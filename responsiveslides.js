@@ -200,7 +200,9 @@
           }
           restartCycle();
           slideTo(idxTo);
-          selectTab(idxTo);
+          if (settings.pagination === true) {
+            selectTab(idxTo);
+          }
         });
 
         // Next slide
@@ -213,7 +215,9 @@
           }
           restartCycle();
           slideTo(idxTo);
-          selectTab(idxTo);
+          if (settings.pagination === true) {
+            selectTab(idxTo);
+          }
         });
       }
 
