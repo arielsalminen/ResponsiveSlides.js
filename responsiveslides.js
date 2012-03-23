@@ -7,6 +7,8 @@
       "auto": true, // Boolean: Animate automatically
       "pagination": false, // Boolean: Show pagination
       "nav": false, // Boolean: Show navigation
+      "prevText": "Previous", // String: Text for the "previous" button
+      "nextText": "Next", // String: Text for the "next" button
       "fade": 1000, // Integer: Crossfade time, in milliseconds
       "maxwidth": "none", // Integer: Max-width of the Slideshow, in pixels
       "speed": 4000 // Integer: How long image shows before fading to next, in milliseconds
@@ -180,8 +182,8 @@
 
         // Build navigation
         var navMarkup =
-          "<a href=\"#\" class=\"" + namespaceIndex + "_nav prev\">&laquo;</a>" +
-          "<a href=\"#\" class=\"" + namespaceIndex + "_nav next\">&raquo;</a>";
+          "<a href=\"#\" class=\"" + namespaceIndex + "_nav prev\">" + settings.prevText + "</a>" +
+          "<a href=\"#\" class=\"" + namespaceIndex + "_nav next\">" + settings.nextText + "</a>";
 
         // Inject navigation
         $this.after(navMarkup);
