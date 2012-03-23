@@ -1,4 +1,4 @@
-# ResponsiveSlides.js v1.2
+# ResponsiveSlides.js v1.21
 ### Simple & lightweight responsive slideshow plugin (in 1kb)
 
 
@@ -36,6 +36,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
+v1.21 (2012-03-23) - Added two new options: 'nextText' and 'prevText'.
 
 v1.20 (2012-03-21) - New option called 'nav', which enables next and previous buttons. Can be used with 'pagination' and 'auto' options. Adds also new [themes folder](http://viljamis.com/responsive-slides/themes/) with three different ways to use the new next and previous buttons.
 
