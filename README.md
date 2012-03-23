@@ -1,11 +1,11 @@
-# Responsive Slides v1.2
+# ResponsiveSlides.js v1.2
 ### Simple & lightweight responsive slideshow plugin (in 1kb)
 
 
 
-[Responsive Slides](http://responsive-slides.viljamis.com/) is a tiny jQuery plugin that creates a responsive slideshow using images inside &lt;ul>. It works with wide range of browsers including all IE versions from IE6 and up. It also adds css max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) and that all the images are same size.
+[ResponsiveSlides.js](http://responsive-slides.viljamis.com/) is a tiny jQuery plugin that creates a responsive slideshow using images inside &lt;ul>. It works with wide range of browsers including all IE versions from IE6 and up. It also adds css max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) and that all the images are same size.
 
-Biggest difference to other responsive slideshow plugins is the file size (907 bytes minified and gzipped) + that this one doesn't try to do everything. Responsive Slides has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
+Biggest difference to other responsive slideshow plugins is the file size (907 bytes minified and gzipped) + that this one doesn't try to do everything. ResponsiveSlides.js has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
 
 
 
@@ -43,7 +43,7 @@ v1.10 (2012-03-12) - Refactoring, New markup style, CSS is now separated from th
 
 v1.05 (2012-03-05) - No more need to change the namespace if you have more than one slideshow on the same page.
 
-v1.04 (2011-12-19) - Fixes problems when Responsive Slides is used with other plugins
+v1.04 (2011-12-19) - Fixes problems when ResponsiveSlides.js is used with other plugins
 
 v1.03 (2011-12-12) - Code refactoring, smaller size, better performance
 
