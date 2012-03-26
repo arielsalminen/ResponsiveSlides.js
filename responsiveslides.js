@@ -182,8 +182,12 @@
 
         // Build navigation
         var navMarkup =
-          "<a href=\"#\" title=\"" + settings.prevText + "\" class=\"" + namespaceIndex + "_nav prev\">" + settings.prevText + "</a>" +
-          "<a href=\"#\" title=\"" + settings.nextText + "\" class=\"" + namespaceIndex + "_nav next\">" + settings.nextText + "</a>";
+          "<a href=\"#\" title=\"" + settings.prevText + "\" class=\"" + namespaceIndex + "_nav prev\">" +
+            settings.prevText +
+          "</a>" +
+          "<a href=\"#\" title=\"" + settings.nextText + "\" class=\"" + namespaceIndex + "_nav next\">" +
+            settings.nextText +
+          "</a>";
 
         // Inject navigation
         $this.after(navMarkup);
