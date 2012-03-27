@@ -36,7 +36,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
-v1.22 (2012-03-27) - Adds callback events which are similar as in [@Wilto](https://github.com/Wilto)'s [Dynamic Carousel](https://github.com/Wilto/Dynamic-Carousel/). The possibility to change the 'namespace' is also back.
+v1.22 (2012-03-27) - Adds callback events which are similar as in [@Wilto](https://github.com/Wilto)'s [Dynamic Carousel](https://github.com/Wilto/Dynamic-Carousel/). The possibility to change the 'namespace' is also back + next/prev buttons have now classes which make more sense.
 
 v1.21 (2012-03-23) - Added two new options: 'nextText' and 'prevText'.
 
