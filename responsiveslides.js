@@ -1,4 +1,4 @@
-/*! http://responsive-slides.viljamis.com v1.21 by @viljamis */
+/*! http://responsive-slides.viljamis.com v1.22 by @viljamis */
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
 
@@ -11,7 +11,8 @@
       "nextText": "Next", // String: Text for the "next" button
       "fade": 1000, // Integer: Crossfade time, in milliseconds
       "maxwidth": "none", // Integer: Max-width of the Slideshow, in pixels
-      "speed": 4000 // Integer: How long image shows before fading to next, in milliseconds
+      "speed": 4000, // Integer: How long image shows before fading to next, in milliseconds
+      "namespace": "rslides" // String: change the default namespace
     }, options);
 
     return this.each(function () {
@@ -27,7 +28,7 @@
         fadetime = parseFloat(settings.fade),
 
         // Namespacing
-        namespace = "rslides",
+        namespace = settings.namespace,
         namespaceIndex = namespace + i,
 
         // Classes
@@ -46,6 +47,7 @@
 
       // Fading animation
       var slideTo = function (idx) {
+        $this.trigger(namespace + "-before");
         $slide
           .stop()
           .fadeOut(fadetime, function () {
@@ -57,7 +59,8 @@
           .fadeIn(fadetime, function () {
             $(this)
               .addClass(visibleClass)
-              .css(visible);
+              .css(visible)
+              .trigger(namespace + "-after");
             index = idx;
           });
       };
@@ -182,10 +185,10 @@
 
         // Build navigation
         var navMarkup =
-          "<a href=\"#\" title=\"" + settings.prevText + "\" class=\"" + namespaceIndex + "_nav prev\">" +
+          "<a href=\"#\" title=\"" + settings.prevText + "\" class=\"" + namespace + "_nav " + namespaceIndex + "_nav prev\">" +
             settings.prevText +
           "</a>" +
-          "<a href=\"#\" title=\"" + settings.nextText + "\" class=\"" + namespaceIndex + "_nav next\">" +
+          "<a href=\"#\" title=\"" + settings.nextText + "\" class=\"" + namespace + "_nav " + namespaceIndex + "_nav next\">" +
             settings.nextText +
           "</a>";
 
