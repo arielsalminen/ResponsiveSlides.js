@@ -4,6 +4,7 @@
 
     // Default settings
     var settings = $.extend({
+      "namespace": "", // String: Custom namespace
       "auto": true, // Boolean: Animate automatically
       "pagination": false, // Boolean: Show pagination
       "nav": false, // Boolean: Show navigation
@@ -24,21 +25,25 @@
       var index = 0,
         $slide = $this.children(),
         length = $slide.size(),
-        fadetime = parseFloat(settings.fade),
+        fadetime = parseFloat(settings.fade);
 
-        // Namespacing
-        namespace = "rslides",
-        namespaceIndex = namespace + i,
-
-        // Classes
-        namespaceIndexClass = namespace + " " + namespaceIndex,
+      // Namespacing
+      if(settings.namespace === "") {
+        var namespace = "rslides",
+          namespaceIndex = namespace + i;
+      } else {
+        var namespace = settings.namespace,
+          namespaceIndex = namespace;
+      }
+      // Classes
+      var namespaceIndexClass = namespace + " " + namespaceIndex,
         activeClass = namespace + "_here",
         visibleClass = namespaceIndex + "_on",
         slideClassPrefix = namespaceIndex + "_s",
-        tabsClass = namespaceIndex + "_tabs",
+        tabsClass = namespaceIndex + "_tabs";
 
-        // Pagination
-        $pagination = $("<ul class=\"" + namespace + "_tabs " + tabsClass + "\" />"),
+      // Pagination
+      var $pagination = $("<ul class=\"" + namespace + "_tabs " + tabsClass + "\" />"),
 
         // Styles for visible and hidden slides
         visible = {"float": "left", "position": "relative"},
