@@ -125,12 +125,6 @@ a {
   font-size: 11px;
   }
 
-@media screen and (max-width: 600px) {
-  h1 {
-    font: 24px/50px "Helvetica Neue", Helvetica, Arial, sans-serif;
-    }
-  }
-
 /* Callback example */
 
 h3 {
@@ -168,17 +162,38 @@ h3 {
 
 .callbacks img {
   display: block;
+  position: relative;
+  z-index: 1;
   height: auto;
   width: 100%;
   border: 0;
   }
 
+.callbacks .caption {
+  display: block;
+  position: absolute;
+  z-index: 2;
+  font-size: 20px;
+  text-shadow: none;
+  background: red;
+  color: #fff;
+  background: #000;
+  background: rgba(0,0,0, .8);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 20px;
+  margin: 0;
+  max-width: none;
+  }
+
 .callbacks_nav {
   position: absolute;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  top: 56%;
+  top: 52%;
   left: 0;
   opacity: 0.7;
+  z-index: 3;
   text-indent: -9999px;
   overflow: hidden;
   text-decoration: none;
@@ -196,4 +211,13 @@ h3 {
   left: auto;
   background-position: right top;
   right: 0;
+  }
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font: 24px/50px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+  .callbacks_nav {
+    top: 47%;
+    }
   }

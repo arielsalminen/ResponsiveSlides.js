@@ -13,7 +13,8 @@
 
       // Slideshow 1
       $("#slides1").responsiveSlides({
-        maxwidth: 800
+        maxwidth: 800,
+        fade: 800,
       });
 
       // Slideshow 2
@@ -29,7 +30,7 @@
         auto: false,
         pagination: false,
         nav: true,
-        fade: 400,
+        fade: 500,
         namespace: "callbacks"
       }).bind({
         // Before callback
@@ -67,11 +68,22 @@
     <!-- Slideshow 2 -->
     <div class="callbacks_container">
       <ul id="slides3">
-        <li><img src="1.jpg" alt="" /></li>
-        <li><img src="2.jpg" alt="" /></li>
-        <li><img src="3.jpg" alt="" /></li>
+        <li>
+          <img src="1.jpg" alt="" />
+          <p class="caption">This is a caption</p>
+        </li>
+        <li>
+          <img src="2.jpg" alt="" />
+          <p class="caption">This is another caption</p>
+        </li>
+        <li>
+          <img src="3.jpg" alt="" />
+          <p class="caption">The third caption</p>
+        </li>
       </ul>
     </div>
+
+    <!-- This is here just to demonstrate the callbacks -->
     <ul class="events">
       <li><h3>Example 3 callback events</h3></li>
     </ul>
