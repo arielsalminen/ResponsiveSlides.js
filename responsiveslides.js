@@ -12,7 +12,8 @@
       "prev": "Previous",       // String: Text for the "previous" button
       "next": "Next",           // String: Text for the "next" button
       "maxwidth": "none",       // Integer: Max-width of the slideshow, in pixels
-      "namespace": "rslides"    // String: change the default namespace
+      "controls": "",           // Selector: Where all controls should be appended to, default is after the <ul>
+      "namespace": "rslides"    // String: change the default namespace used
     }, options);
 
     return this.each(function () {
@@ -44,11 +45,7 @@
 
         // Styles for visible and hidden slides
         visible = {"float": "left", "position": "relative"},
-        hidden = {"float": "none", "position": "absolute"},
-
-        // Only for minification
-        settingsPager = settings.pager,
-        settingsMaxwidth = settings.maxwidth;
+        hidden = {"float": "none", "position": "absolute"};
 
       // Fading animation
       var slideTo = function (idx) {
@@ -80,7 +77,7 @@
 
         // Add max-width and classes
         $this
-          .css("max-width", settingsMaxwidth)
+          .css("max-width", settings.maxwidth)
           .addClass(namespaceIdxClass);
 
         // Hide all slides, then show first one + add visible class
@@ -92,7 +89,7 @@
           .show();
 
         // Pager
-        if (settingsPager === true) {
+        if (settings.pager === true) {
           var tabMarkup = [];
           $slide.each(function (i) {
             var n = i + 1;
@@ -106,7 +103,11 @@
           var $tabs = $pager.find("a");
 
           // Inject pager
-          $this.after($pager);
+          if (options.controls) {
+            $(settings.controls).append($pager);
+          } else {
+            $this.after($pager);
+          }
 
           // Select pager item
           var selectTab = function (idx) {
@@ -127,7 +128,7 @@
               var idx = index + 1 < length ? index + 1 : 0;
 
               // Remove active state and set new if pager = "true"
-              if (settingsPager === true) {
+              if (settings.pager === true) {
                 selectTab(idx);
               }
 
@@ -157,7 +158,7 @@
         };
 
         // Pager click event handler
-        if (settingsPager === true) {
+        if (settings.pager === true) {
           $tabs.on("click", function (event) {
             event.preventDefault();
             preventClick();
@@ -189,7 +190,13 @@
         var navMarkup =
           "<a href='#' class='" + navClass + " prev'>" + settings.prev + "</a>" +
           "<a href='#' class='" + navClass + " next'>" + settings.next + "</a>";
-        $this.after(navMarkup);
+
+        // Inject navigation
+        if (options.controls) {
+          $(settings.controls).append(navMarkup);
+        } else {
+          $this.after(navMarkup);
+        }
 
         var $trigger = $("." + namespaceIdx + "_nav"),
           $prev = $("." + namespaceIdx + "_nav.prev"),
@@ -207,7 +214,7 @@
 
           // Go to slide
           slideTo($(this) === $prev ? prevIdx : nextIdx);
-          if (settingsPager === true) {
+          if (settings.pager === true) {
             selectTab($(this) === $prev ? prevIdx : nextIdx);
           }
 
@@ -219,8 +226,8 @@
       if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
         var widthSupport = function () {
           $this.css("width", "100%");
-          if ($this.width() > settingsMaxwidth) {
-            $this.css("width", settingsMaxwidth);
+          if ($this.width() > settings.maxwidth) {
+            $this.css("width", settings.maxwidth);
           }
         };
 
