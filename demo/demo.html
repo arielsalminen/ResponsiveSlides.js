@@ -7,30 +7,30 @@
   <link rel="stylesheet" href="../responsiveslides.css" />
   <link rel="stylesheet" href="demo.css" />
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="../responsiveslides.min.js"></script>
+  <script src="../responsiveslides.js"></script>
   <script>
     $(function () {
 
       // Slideshow 1
       $("#slides1").responsiveSlides({
         maxwidth: 800,
-        fade: 800,
+        speed: 800
       });
 
       // Slideshow 2
       $("#slides2").responsiveSlides({
         auto: false,
-        pagination: true,
-        fade: 300,
+        pager: true,
+        speed: 300,
         maxwidth: 540
       });
 
       // Slideshow 3
       $("#slides3").responsiveSlides({
         auto: false,
-        pagination: false,
+        pager: false,
         nav: true,
-        fade: 500,
+        speed: 500,
         namespace: "callbacks"
       }).bind({
         // Before callback
