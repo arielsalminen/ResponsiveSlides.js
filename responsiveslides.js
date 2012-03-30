@@ -1,23 +1,23 @@
-/*! http://responsive-slides.viljamis.com v1.22 by @viljamis */
+/*! http://responsive-slides.viljamis.com v1.23 by @viljamis */
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
 
     // Default settings
     var settings = $.extend({
-      "auto": true, // Boolean: Animate automatically
-      "pagination": false, // Boolean: Show pagination
-      "nav": false, // Boolean: Show navigation
-      "prevText": "Previous", // String: Text for the "previous" button
-      "nextText": "Next", // String: Text for the "next" button
-      "fade": 1000, // Integer: Crossfade time, in milliseconds
-      "maxwidth": "none", // Integer: Max-width of the Slideshow, in pixels
-      "speed": 4000, // Integer: How long image shows before fading to next, in milliseconds
-      "namespace": "rslides" // String: change the default namespace
+      "auto": true,             // Boolean: Animate automatically, true or false
+      "speed": 1000,            // Integer: Speed of the transition, in milliseconds
+      "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
+      "pager": false,           // Boolean: Show pager, true or false
+      "nav": false,             // Boolean: Show navigation, true or false
+      "prev": "Previous",       // String: Text for the "previous" button
+      "next": "Next",           // String: Text for the "next" button
+      "maxwidth": "none",       // Integer: Max-width of the slideshow, in pixels
+      "namespace": "rslides"    // String: change the default namespace
     }, options);
 
     return this.each(function () {
 
-      // Index which is used for namespacing
+      // Index for namespacing
       i++;
 
       var $this = $(this);
@@ -25,25 +25,30 @@
       var index = 0,
         $slide = $this.children(),
         length = $slide.size(),
-        fadetime = parseFloat(settings.fade),
+        fadetime = parseFloat(settings.speed),
 
         // Namespacing
         namespace = settings.namespace,
-        namespaceIndex = namespace + i,
+        namespaceIdx = namespace + i,
 
         // Classes
-        namespaceIndexClass = namespace + " " + namespaceIndex,
+        namespaceIdxClass = namespace + " " + namespaceIdx,
+        navClass = namespace + "_nav " + namespaceIdx + "_nav",
         activeClass = namespace + "_here",
-        visibleClass = namespaceIndex + "_on",
-        slideClassPrefix = namespaceIndex + "_s",
-        tabsClass = namespaceIndex + "_tabs",
+        visibleClass = namespaceIdx + "_on",
+        slideClassPrefix = namespaceIdx + "_s",
+        tabsClass = namespaceIdx + "_tabs",
 
-        // Pagination
-        $pagination = $("<ul class=\"" + namespace + "_tabs " + tabsClass + "\" />"),
+        // Pager
+        $pager = $("<ul class='" + namespace + "_tabs " + tabsClass + "' />"),
 
         // Styles for visible and hidden slides
         visible = {"float": "left", "position": "relative"},
-        hidden = {"float": "none", "position": "absolute"};
+        hidden = {"float": "none", "position": "absolute"},
+
+        // Only for minification
+        settingsPager = settings.pager,
+        settingsMaxwidth = settings.maxwidth;
 
       // Fading animation
       var slideTo = function (idx) {
@@ -75,8 +80,8 @@
 
         // Add max-width and classes
         $this
-          .css("max-width", settings.maxwidth)
-          .addClass(namespaceIndexClass);
+          .css("max-width", settingsMaxwidth)
+          .addClass(namespaceIdxClass);
 
         // Hide all slides, then show first one + add visible class
         $slide
@@ -86,71 +91,76 @@
           .css(visible)
           .show();
 
-        // Build pagination
-        if (settings.pagination === true) {
+        // Pager
+        if (settingsPager === true) {
           var tabMarkup = [];
           $slide.each(function (i) {
             var n = i + 1;
-
-            tabMarkup.push("<li>");
-            tabMarkup.push("<a href=\"#\" class=\"" + slideClassPrefix + n + "\">" + n + "</a>");
-            tabMarkup.push("</li>");
+            tabMarkup +=
+              "<li>" +
+              "<a href='#' class='" + slideClassPrefix + n + "'>" + n + "</a>" +
+              "</li>";
           });
-          $pagination.append(tabMarkup.join(""));
+          $pager.append(tabMarkup);
 
-          var $tabs = $pagination.find("a");
+          var $tabs = $pager.find("a");
 
-          // Inject pagination
-          $this.after($pagination);
+          // Inject pager
+          $this.after($pager);
+
+          // Select pager item
+          var selectTab = function (idx) {
+            $tabs
+              .closest("li")
+              .removeClass(activeClass)
+              .eq(idx)
+              .addClass(activeClass);
+          };
         }
 
-        // Select active tab
-        var selectTab = function (idx) {
-          $tabs
-            .closest("li")
-            .removeClass(activeClass)
-            .eq(idx)
-            .addClass(activeClass);
-        };
-
-        // Auto rotation
+        // Auto cycle
         if (settings.auto === true) {
-
           var startCycle, rotate;
 
-          // Rotate slides automatically
           startCycle = function () {
             rotate = setInterval(function () {
               var idx = index + 1 < length ? index + 1 : 0;
 
-              // Remove active state and set new if pagination = "true"
-              if (settings.pagination === true) {
+              // Remove active state and set new if pager = "true"
+              if (settingsPager === true) {
                 selectTab(idx);
               }
 
               slideTo(idx);
-            }, parseFloat(settings.speed));
+            }, parseFloat(settings.timeout));
           };
 
-          // Init rotation
+          // Init cycle
           startCycle();
         }
 
+        // Restarting cycle
         var restartCycle = function () {
           if (settings.auto === true) {
-            // Stop auto rotation
+            // Stop
             clearInterval(rotate);
-            // ...Restart it
+            // Restart
             startCycle();
           }
         };
 
-        // Click/touch event handler
-        if (settings.pagination === true) {
+        // Prevent clicking if currently animated
+        var preventClick = function (event) {
+          if ($("." + visibleClass + ":animated").length) {
+            event.preventDefault();
+          }
+        };
 
-          // On touch start
-          $tabs.on("click", function (e) {
-            e.preventDefault();
+        // Pager click event handler
+        if (settingsPager === true) {
+          $tabs.on("click", function (event) {
+            event.preventDefault();
+            preventClick();
             restartCycle();
 
             // Get index of clicked tab
@@ -159,11 +169,6 @@
             // Break if element is already active
             if (index === idx) {
               return;
-            }
-
-            // Prevent click/touch if currently animated
-            if ($("." + visibleClass + ":animated").length) {
-              return false;
             }
 
             // Remove active state from old tab and set new one
@@ -175,79 +180,55 @@
             .eq(0)
             .closest("li")
             .addClass(activeClass);
-
         }
 
       }
 
-      // Prev and Next
+      // Navigation
       if (settings.nav === true) {
-
-        // Build navigation
         var navMarkup =
-          "<a href=\"#\" title=\"" + settings.prevText + "\" class=\"" + namespace + "_nav " + namespaceIndex + "_nav prev\">" +
-            settings.prevText +
-          "</a>" +
-          "<a href=\"#\" title=\"" + settings.nextText + "\" class=\"" + namespace + "_nav " + namespaceIndex + "_nav next\">" +
-            settings.nextText +
-          "</a>";
-
-        // Inject navigation
+          "<a href='#' class='" + navClass + " prev'>" + settings.prev + "</a>" +
+          "<a href='#' class='" + navClass + " next'>" + settings.next + "</a>";
         $this.after(navMarkup);
 
-        // Prev and next buttons
-        var $prev = $("." + namespaceIndex + "_nav.prev"),
-          $next = $("." + namespaceIndex + "_nav.next");
+        var $trigger = $("." + namespaceIdx + "_nav"),
+          $prev = $("." + namespaceIdx + "_nav.prev"),
+          $next = $("." + namespaceIdx + "_nav.next");
 
-        // Prev slide
-        $prev.on("click", function (e) {
-          e.preventDefault();
-          var idx = $slide.index($("." + visibleClass)),
-            idxTo = idx - 1;
-          if ($("." + visibleClass + ":animated").length) {
-            return false;
-          }
-          restartCycle();
-          slideTo(idxTo);
-          if (settings.pagination === true) {
-            selectTab(idxTo);
-          }
-        });
+        // Click event handler
+        $trigger.on("click", function (event) {
+          event.preventDefault();
+          preventClick();
 
-        // Next slide
-        $next.on("click", function (e) {
-          e.preventDefault();
+          // Determine where to slide
           var idx = $slide.index($("." + visibleClass)),
-            idxTo = idx + 1 < length ? index + 1 : 0;
-          if ($("." + visibleClass + ":animated").length) {
-            return false;
+            prevIdx = idx - 1,
+            nextIdx = idx + 1 < length ? index + 1 : 0;
+
+          // Go to slide
+          slideTo($(this) === $prev ? prevIdx : nextIdx);
+          if (settingsPager === true) {
+            selectTab($(this) === $prev ? prevIdx : nextIdx);
           }
+
           restartCycle();
-          slideTo(idxTo);
-          if (settings.pagination === true) {
-            selectTab(idxTo);
-          }
         });
       }
 
-      // Add fallback if max-width isn't supported and settings "maxwidth" is set
+      // Max-width fallback
       if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
-
         var widthSupport = function () {
           $this.css("width", "100%");
-          if ($this.width() > settings.maxwidth) {
-            $this.css("width", settings.maxwidth);
+          if ($this.width() > settingsMaxwidth) {
+            $this.css("width", settingsMaxwidth);
           }
         };
 
         // Init fallback
         widthSupport();
-
-        // + Bind on window resize
         $(window).on("resize", function () {
           widthSupport();
         });
-
       }
 
     });
