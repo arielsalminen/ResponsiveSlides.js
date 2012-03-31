@@ -50,7 +50,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
-v1.23 (2012-03-31) - Adds new option called "controls", which allows to choose where the controls should be appended to. Includes also code optimization, better option names and better jQuery support (jQuery 1.4 and up is now supported).
+v1.23 (2012-03-31) - Adds new option called "controls", which allows to choose where the controls should be appended to. Includes also code optimization, bug fixes, better option names and better jQuery support (jQuery 1.4 and up is now supported).
 
 v1.22 (2012-03-27) - Adds callback events which are similar as in [@Wilto](https://github.com/Wilto)'s [Dynamic Carousel](https://github.com/Wilto/Dynamic-Carousel/). The possibility to change the 'namespace' is also back + next/prev buttons have now classes which make more sense.
 
