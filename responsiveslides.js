@@ -41,7 +41,7 @@
       "nav": false,             // Boolean: Show navigation, true or false
       "prevText": "Previous",   // String: Text for the "previous" button
       "nextText": "Next",       // String: Text for the "next" button
-      "maxwidth": "none",       // Integer: Max-width of the slideshow, in pixels
+      "maxwidth": "",           // Integer: Max-width of the slideshow, in pixels
       "controls": "",           // Selector: Where controls should be appended to, default is after the <ul>
       "namespace": "rslides"    // String: change the default namespace used
     }, options);
@@ -71,7 +71,6 @@
         namespaceIdx = namespace + i,
 
         // Classes
-        namespaceIdxClass = namespace + " " + namespaceIdx,
         navClass = namespace + "_nav " + namespaceIdx + "_nav",
         activeClass = namespace + "_here",
         visibleClass = namespaceIdx + "_on",
@@ -113,9 +112,10 @@
         });
 
         // Add max-width and classes
-        $this
-          .css("max-width", settings.maxwidth)
-          .addClass(namespaceIdxClass);
+        $this.addClass(namespace + " " + namespaceIdx);
+        if (options && options.maxwidth) {
+          $this.css("max-width", settings.maxwidth);
+        }
 
         // Hide all slides, then show first one
         $slide
