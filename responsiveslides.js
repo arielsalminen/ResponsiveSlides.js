@@ -1,4 +1,34 @@
-/*! http://responsive-slides.viljamis.com v1.23 by @viljamis */
+/*! ResponsiveSlides.js v1.23
+ * http://responsive-slides.viljamis.com
+ *
+ * Copyright (c) 2011-2012 @viljamis
+ * Available under the MIT license
+ */
+
+/* ResponsiveSlides.js is a tiny jQuery plugin that creates a responsive
+ * slideshow using images inside <ul>. It works with wide range of browsers
+ * including all IE versions from IE6 and up. It also adds css max-width
+ * support for IE6 and other browsers that don't natively support it. Only
+ * dependency is jQuery (1.4 and up) and that all the images are same size.
+ *
+ * Features:
+ * - Fully responsive
+ * - Under 1kb minified and gzipped
+ * - Simple markup using unordered lists
+ * - Settings for transition and timeout durations
+ * - Multiple slideshows supported
+ * - Automatic and manual fade
+ * - Works in all major desktop and mobile browsers
+ * - Captions and other html-elements supported inside slides
+ * - Separate pagination and next/prev controls
+ * - Possibility to choose where the controls append to
+ * - Images can be wrapped inside links
+ * - Optional 'before' and 'after' callbacks
+ *
+ */
+
+/*jslint browser: true, sloppy: true, vars: true, plusplus: true, maxerr: 50, indent: 2 */
+
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
 
@@ -9,8 +39,8 @@
       "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
       "pager": false,           // Boolean: Show pager, true or false
       "nav": false,             // Boolean: Show navigation, true or false
-      "prev": "Previous",       // String: Text for the "previous" button
-      "next": "Next",           // String: Text for the "next" button
+      "prevText": "Previous",   // String: Text for the "previous" button
+      "nextText": "Next",       // String: Text for the "next" button
       "maxwidth": "none",       // Integer: Max-width of the slideshow, in pixels
       "controls": "",           // Selector: Where controls should be appended to, default is after the <ul>
       "namespace": "rslides"    // String: change the default namespace used
@@ -186,8 +216,8 @@
       // Navigation
       if (settings.nav === true) {
         var navMarkup =
-          "<a href='#' class='" + navClass + " prev'>" + settings.prev + "</a>" +
-          "<a href='#' class='" + navClass + " next'>" + settings.next + "</a>";
+          "<a href='#' class='" + navClass + " prev'>" + settings.prevText + "</a>" +
+          "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
 
         // Inject navigation
         if (options.controls) {
