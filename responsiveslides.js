@@ -114,7 +114,7 @@
         // Add max-width and classes
         $this.addClass(namespace + " " + namespaceIdx);
         if (options && options.maxwidth) {
-          $this.css("max-width", settings.maxwidth);
+          $this.css("max-width", parseFloat(settings.maxwidth));
         }
 
         // Hide all slides, then show first one
