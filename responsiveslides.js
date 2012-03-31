@@ -65,6 +65,7 @@
         $slide = $this.children(),
         length = $slide.size(),
         fadetime = parseFloat(settings.speed),
+        maxw = parseFloat(settings.maxwidth),
 
         // Namespacing
         namespace = settings.namespace,
@@ -114,7 +115,7 @@
         // Add max-width and classes
         $this.addClass(namespace + " " + namespaceIdx);
         if (options && options.maxwidth) {
-          $this.css("max-width", parseFloat(settings.maxwidth));
+          $this.css("max-width", maxw);
         }
 
         // Hide all slides, then show first one
@@ -257,8 +258,8 @@
       if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
         var widthSupport = function () {
           $this.css("width", "100%");
-          if ($this.width() > parseFloat(settings.maxwidth)) {
-            $this.css("width", parseFloat(settings.maxwidth));
+          if ($this.width() > maxw) {
+            $this.css("width", maxw);
           }
         };
 
