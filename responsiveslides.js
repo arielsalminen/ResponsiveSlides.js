@@ -12,7 +12,7 @@
       "prev": "Previous",       // String: Text for the "previous" button
       "next": "Next",           // String: Text for the "next" button
       "maxwidth": "none",       // Integer: Max-width of the slideshow, in pixels
-      "controls": "",           // Selector: Where all controls should be appended to, default is after the <ul>
+      "controls": "",           // Selector: Where controls should be appended to, default is after the <ul>
       "namespace": "rslides"    // String: change the default namespace used
     }, options);
 
@@ -21,9 +21,17 @@
       // Index for namespacing
       i++;
 
-      var $this = $(this);
+      var $this = $(this),
 
-      var index = 0,
+        // Local variables
+        selectTab,
+        startCycle,
+        restartCycle,
+        rotate,
+        $tabs,
+
+        // Helpers
+        index = 0,
         $slide = $this.children(),
         length = $slide.size(),
         fadetime = parseFloat(settings.speed),
@@ -38,34 +46,33 @@
         activeClass = namespace + "_here",
         visibleClass = namespaceIdx + "_on",
         slideClassPrefix = namespaceIdx + "_s",
-        tabsClass = namespaceIdx + "_tabs",
 
         // Pager
-        $pager = $("<ul class='" + namespace + "_tabs " + tabsClass + "' />"),
+        $pager = $("<ul class='" + namespace + "_tabs " + namespaceIdx + "_tabs' />"),
 
         // Styles for visible and hidden slides
         visible = {"float": "left", "position": "relative"},
-        hidden = {"float": "none", "position": "absolute"};
+        hidden = {"float": "none", "position": "absolute"},
 
-      // Fading animation
-      var slideTo = function (idx) {
-        $this.trigger(namespace + "-before");
-        $slide
-          .stop()
-          .fadeOut(fadetime, function () {
-            $(this)
-              .removeClass(visibleClass)
-              .css(hidden);
-          })
-          .eq(idx)
-          .fadeIn(fadetime, function () {
-            $(this)
-              .addClass(visibleClass)
-              .css(visible)
-              .trigger(namespace + "-after");
-            index = idx;
-          });
-      };
+        // Fading animation
+        slideTo = function (idx) {
+          $this.trigger(namespace + "-before");
+          $slide
+            .stop()
+            .fadeOut(fadetime, function () {
+              $(this)
+                .removeClass(visibleClass)
+                .css(hidden);
+            })
+            .eq(idx)
+            .fadeIn(fadetime, function () {
+              $(this)
+                .addClass(visibleClass)
+                .css(visible)
+                .trigger(namespace + "-after");
+              index = idx;
+            });
+        };
 
       // Only run if there's more than one slide
       if ($slide.size() > 1) {
@@ -80,7 +87,7 @@
           .css("max-width", settings.maxwidth)
           .addClass(namespaceIdxClass);
 
-        // Hide all slides, then show first one + add visible class
+        // Hide all slides, then show first one
         $slide
           .hide()
           .eq(0)
@@ -100,7 +107,7 @@
           });
           $pager.append(tabMarkup);
 
-          var $tabs = $pager.find("a");
+          $tabs = $pager.find("a");
 
           // Inject pager
           if (options.controls) {
@@ -110,7 +117,7 @@
           }
 
           // Select pager item
-          var selectTab = function (idx) {
+          selectTab = function (idx) {
             $tabs
               .closest("li")
               .removeClass(activeClass)
@@ -121,7 +128,6 @@
 
         // Auto cycle
         if (settings.auto === true) {
-          var startCycle, rotate;
 
           startCycle = function () {
             rotate = setInterval(function () {
@@ -141,7 +147,7 @@
         }
 
         // Restarting cycle
-        var restartCycle = function () {
+        restartCycle = function () {
           if (settings.auto === true) {
             // Stop
             clearInterval(rotate);
@@ -150,25 +156,17 @@
           }
         };
 
-        // Prevent clicking if currently animated
-        var preventClick = function (event) {
-          if ($("." + visibleClass + ":animated").length) {
-            event.preventDefault();
-          }
-        };
-
         // Pager click event handler
         if (settings.pager === true) {
-          $tabs.on("click", function (event) {
-            event.preventDefault();
-            preventClick();
+          $tabs.bind("click", function (e) {
+            e.preventDefault();
             restartCycle();
 
             // Get index of clicked tab
             var idx = $tabs.index(this);
 
-            // Break if element is already active
-            if (index === idx) {
+            // Break if element is already active or currently animated
+            if (index === idx || $("." + visibleClass + ":animated").length) {
               return;
             }
 
@@ -199,13 +197,16 @@
         }
 
         var $trigger = $("." + namespaceIdx + "_nav"),
-          $prev = $("." + namespaceIdx + "_nav.prev"),
-          $next = $("." + namespaceIdx + "_nav.next");
+          $prev = $("." + namespaceIdx + "_nav.prev");
 
         // Click event handler
-        $trigger.on("click", function (event) {
-          event.preventDefault();
-          preventClick();
+        $trigger.bind("click", function (e) {
+          e.preventDefault();
+
+          // Prevent clicking if currently animated
+          if ($("." + visibleClass + ":animated").length) {
+            return;
+          }
 
           // Determine where to slide
           var idx = $slide.index($("." + visibleClass)),
@@ -226,14 +227,14 @@
       if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
         var widthSupport = function () {
           $this.css("width", "100%");
-          if ($this.width() > settings.maxwidth) {
-            $this.css("width", settings.maxwidth);
+          if ($this.width() > parseFloat(settings.maxwidth)) {
+            $this.css("width", parseFloat(settings.maxwidth));
           }
         };
 
         // Init fallback
         widthSupport();
-        $(window).on("resize", function () {
+        $(window).bind("resize", function () {
           widthSupport();
         });
       }
