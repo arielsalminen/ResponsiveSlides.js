@@ -3,9 +3,23 @@
 
 
 
-[ResponsiveSlides.js](http://responsive-slides.viljamis.com/) is a tiny jQuery plugin that creates a responsive slideshow using images inside &lt;ul>. It works with wide range of browsers including all IE versions from IE6 and up. It also adds css max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) and that all the images are same size.
+[ResponsiveSlides.js](http://responsive-slides.viljamis.com/) is a tiny jQuery plugin that creates a responsive slideshow using images inside &lt;ul>. It works with wide range of browsers including all IE versions from IE6 and up. It also adds css max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) (1.4 and up supported) and that all the images are same size.
 
 Biggest difference to other responsive slideshow plugins is the file size (985 bytes minified and gzipped) + that this one doesn't try to do everything. ResponsiveSlides.js has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
+
+#### Features:
+ * Fully responsive
+ * Under 1kb minified and gzipped
+ * Simple markup using unordered lists
+ * Settings for transition and timeout durations
+ * Multiple slideshows supported
+ * Automatic and manual fade
+ * Works in all major desktop and mobile browsers
+ * Captions and other html-elements supported inside slides
+ * Separate pagination and next/prev controls
+ * Possibility to choose where the controls append to
+ * Images can be wrapped inside links
+ * Optional 'before' and 'after' callbacks
 
 
 
@@ -36,7 +50,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
-v1.23 (2012-04-XX) - Adds new option called "controls", which allows to choose where controls should be appended to. Includes also code optimization, better option names and better jQuery support (jQuery 1.4 and up is now supported).
+v1.23 (2012-03-31) - Adds new option called "controls", which allows to choose where the controls should be appended to. Includes also code optimization, better option names and better jQuery support (jQuery 1.4 and up is now supported).
 
 v1.22 (2012-03-27) - Adds callback events which are similar as in [@Wilto](https://github.com/Wilto)'s [Dynamic Carousel](https://github.com/Wilto/Dynamic-Carousel/). The possibility to change the 'namespace' is also back + next/prev buttons have now classes which make more sense.
 
