@@ -245,9 +245,9 @@
             nextIdx = idx + 1 < length ? index + 1 : 0;
 
           // Go to slide
-          slideTo($(this) === $prev ? prevIdx : nextIdx);
+          slideTo($(this)[0] === $prev[0] ? prevIdx : nextIdx);
           if (settings.pager === true) {
-            selectTab($(this) === $prev ? prevIdx : nextIdx);
+            selectTab($(this)[0] === $prev[0] ? prevIdx : nextIdx);
           }
 
           restartCycle();
