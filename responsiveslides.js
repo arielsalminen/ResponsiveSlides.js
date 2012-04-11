@@ -1,5 +1,5 @@
 /*! ResponsiveSlides.js v1.23
- * http://responsive-slides.viljamis.com
+ * http://responsiveslides.com
  *
  * Copyright (c) 2011-2012 @viljamis
  * Available under the MIT license
