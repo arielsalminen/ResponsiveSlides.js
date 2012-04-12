@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.23
+/*! ResponsiveSlides.js v1.24
  * http://responsiveslides.com
  *
  * Copyright (c) 2011-2012 @viljamis
@@ -104,27 +104,27 @@
             });
         };
 
+      // Add ID's to each slide
+      $slide.each(function (i) {
+        this.id = slideClassPrefix + i;
+      });
+
+      // Add max-width and classes
+      $this.addClass(namespace + " " + namespaceIdx);
+      if (options && options.maxwidth) {
+        $this.css("max-width", maxw);
+      }
+
+      // Hide all slides, then show first one
+      $slide
+        .hide()
+        .eq(0)
+        .addClass(visibleClass)
+        .css(visible)
+        .show();
+
       // Only run if there's more than one slide
       if ($slide.size() > 1) {
-
-        // Add ID's to each slide
-        $slide.each(function (i) {
-          this.id = slideClassPrefix + i;
-        });
-
-        // Add max-width and classes
-        $this.addClass(namespace + " " + namespaceIdx);
-        if (options && options.maxwidth) {
-          $this.css("max-width", maxw);
-        }
-
-        // Hide all slides, then show first one
-        $slide
-          .hide()
-          .eq(0)
-          .addClass(visibleClass)
-          .css(visible)
-          .show();
 
         // Pager
         if (settings.pager === true) {
@@ -212,46 +212,46 @@
             .addClass(activeClass);
         }
 
-      }
+        // Navigation
+        if (settings.nav === true) {
+          var navMarkup =
+            "<a href='#' class='" + navClass + " prev'>" + settings.prevText + "</a>" +
+            "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
 
-      // Navigation
-      if (settings.nav === true) {
-        var navMarkup =
-          "<a href='#' class='" + navClass + " prev'>" + settings.prevText + "</a>" +
-          "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
+          // Inject navigation
+          if (options.controls) {
+            $(settings.controls).append(navMarkup);
+          } else {
+            $this.after(navMarkup);
+          }
 
-        // Inject navigation
-        if (options.controls) {
-          $(settings.controls).append(navMarkup);
-        } else {
-          $this.after(navMarkup);
+          var $trigger = $("." + namespaceIdx + "_nav"),
+            $prev = $("." + namespaceIdx + "_nav.prev");
+
+          // Click event handler
+          $trigger.bind("click", function (e) {
+            e.preventDefault();
+
+            // Prevent clicking if currently animated
+            if ($("." + visibleClass + ":animated").length) {
+              return;
+            }
+
+            // Determine where to slide
+            var idx = $slide.index($("." + visibleClass)),
+              prevIdx = idx - 1,
+              nextIdx = idx + 1 < length ? index + 1 : 0;
+
+            // Go to slide
+            slideTo($(this)[0] === $prev[0] ? prevIdx : nextIdx);
+            if (settings.pager === true) {
+              selectTab($(this)[0] === $prev[0] ? prevIdx : nextIdx);
+            }
+
+            restartCycle();
+          });
         }
 
-        var $trigger = $("." + namespaceIdx + "_nav"),
-          $prev = $("." + namespaceIdx + "_nav.prev");
-
-        // Click event handler
-        $trigger.bind("click", function (e) {
-          e.preventDefault();
-
-          // Prevent clicking if currently animated
-          if ($("." + visibleClass + ":animated").length) {
-            return;
-          }
-
-          // Determine where to slide
-          var idx = $slide.index($("." + visibleClass)),
-            prevIdx = idx - 1,
-            nextIdx = idx + 1 < length ? index + 1 : 0;
-
-          // Go to slide
-          slideTo($(this)[0] === $prev[0] ? prevIdx : nextIdx);
-          if (settings.pager === true) {
-            selectTab($(this)[0] === $prev[0] ? prevIdx : nextIdx);
-          }
-
-          restartCycle();
-        });
       }
 
       // Max-width fallback
