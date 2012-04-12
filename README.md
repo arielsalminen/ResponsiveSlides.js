@@ -1,4 +1,4 @@
-# ResponsiveSlides.js v1.23
+# ResponsiveSlides.js v1.24
 ### Simple & lightweight responsive slideshow plugin (in 1kb)
 
 
@@ -49,6 +49,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Changelog
 ======
+
+v1.24 (2012-04-12) - Changes the way the slideshow works if there's only one slide. Now all classes and max-width for the container are added, but we don't anymore show the next/prev buttons anymore if there's only one slide as they don't make much sense in that case. This version also fixes a bug which made the 'previous' button always go to the next slide.
 
 v1.23 (2012-03-31) - Adds new option called "controls", which allows to choose where the controls should be appended to. Includes also code optimization, bug fixes, better option names and better jQuery support (jQuery 1.4 and up is now supported).
 
