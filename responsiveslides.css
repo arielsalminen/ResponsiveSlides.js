@@ -17,7 +17,7 @@
   top: 0;
   }
 
-.no-js .rslides li:first-child {
+.rslides li:first-child {
   position: relative;
   display: block;
   float: left;
