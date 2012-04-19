@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.24
+/*! ResponsiveSlides.js v1.25
  * http://responsiveslides.com
  *
  * Copyright (c) 2011-2012 @viljamis
