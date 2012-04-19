@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8" />
   <title>ResponsiveSlides.js &middot; Alternative themes</title>
@@ -11,8 +11,12 @@
   <script>
     $(function () {
 
+      // If you aren't using Modernizr you might want to add no-js class
+      // to html and use that to support cases when JavaScript isn't available
+      $("html").removeClass("no-js");
+
       // Slideshow 1
-      $("#slides1").responsiveSlides({
+      $(".rslides1").responsiveSlides({
         auto: false,
         pager: true,
         nav: true,
@@ -21,7 +25,7 @@
       });
 
       // Slideshow 2
-      $("#slides2").responsiveSlides({
+      $(".rslides2").responsiveSlides({
         auto: false,
         pager: true,
         nav: true,
@@ -30,7 +34,7 @@
       });
 
       // Slideshow 3
-      $("#slides3").responsiveSlides({
+      $(".rslides3").responsiveSlides({
         auto: false,
         pager: false,
         nav: true,
@@ -47,7 +51,7 @@
 
     <h3>Vertically centered on both sides</h3>
     <div class="rslides_container">
-      <ul id="slides1" class="rslides">
+      <ul class="rslides rslides1">
         <li><img src="../1.jpg" alt="" /></li>
         <li><img src="../2.jpg" alt="" /></li>
         <li><img src="../3.jpg" alt="" /></li>
@@ -56,7 +60,7 @@
 
     <h3>Transparent buttons over the left and right side</h3>
     <div class="rslides_container">
-      <ul id="slides2" class="rslides">
+      <ul class="rslides rslides2">
         <li><img src="../1.jpg" alt="" /></li>
         <li><img src="../2.jpg" alt="" /></li>
         <li><img src="../3.jpg" alt="" /></li>
@@ -65,7 +69,7 @@
 
     <h3>100% height with vertically centered icons</h3>
     <div class="rslides_container">
-      <ul id="slides3" class="rslides">
+      <ul class="rslides rslides3">
         <li><img src="../1.jpg" alt="" /></li>
         <li><img src="../2.jpg" alt="" /></li>
         <li><img src="../3.jpg" alt="" /></li>

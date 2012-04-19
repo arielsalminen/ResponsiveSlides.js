@@ -40,13 +40,10 @@ p,h3,h4,pre {
   }
 
 .rslides {
-  box-shadow: 0 0 20px #000;
-  -moz-box-shadow: 0 0 20px #000;
-  -webkit-box-shadow: 0 0 20px #000;
   margin: 0 auto 40px;
   }
 
-#slides2 {
+.rslides2 {
   box-shadow: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
@@ -106,9 +103,6 @@ a {
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  box-shadow: 0 0 10px #000;
-  -moz-box-shadow: 0 0 10px #000;
-  -webkit-box-shadow: 0 0 10px #000;
   display: block;
   font-size: 20px;
   font-weight: bold;

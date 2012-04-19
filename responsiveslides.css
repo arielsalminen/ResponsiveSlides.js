@@ -1,4 +1,4 @@
-/*! http://responsiveslides.com v1.24 by @viljamis */
+/*! http://responsiveslides.com v1.25 by @viljamis */
 
 .rslides {
   position: relative;
@@ -11,9 +11,16 @@
 
 .rslides li {
   position: absolute;
+  display: none;
   width: 100%;
   left: 0;
   top: 0;
+  }
+
+.no-js .rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
   }
 
 .rslides img {
