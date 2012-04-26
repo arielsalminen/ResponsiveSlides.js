@@ -1,11 +1,11 @@
 # ResponsiveSlides.js v1.3
-### Simple & lightweight responsive slideshow plugin (in 1kb)
+### Simple & lightweight responsive slider plugin (in 1kb)
 
 
 
-[ResponsiveSlides.js](http://responsiveslides.com/) is a tiny jQuery plugin that creates a responsive slideshow using images inside &lt;ul>. It works with wide range of browsers including all IE versions from IE6 and up. It also adds css max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) (1.4 and up supported) and that all the images are same size.
+[ResponsiveSlides.js](http://responsiveslides.com/) is a tiny jQuery plugin that creates a responsive slider using list items inside &lt;ul>. It works with wide range of browsers including all IE versions from IE6 and up. It also adds CSS max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) (1.4 and up supported) and that all the images are same size.
 
-Biggest difference to other responsive slideshow plugins is the file size (1kb minified and gzipped) + that this one doesn't try to do everything. ResponsiveSlides.js has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
+Biggest difference to other responsive slider plugins is the file size (1kb minified and gzipped) + that this one doesn't try to do everything. ResponsiveSlides.js has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
 
 #### Features:
  * Fully responsive
