@@ -1,16 +1,16 @@
-# ResponsiveSlides.js v1.25
+# ResponsiveSlides.js v1.3
 ### Simple & lightweight responsive slideshow plugin (in 1kb)
 
 
 
 [ResponsiveSlides.js](http://responsiveslides.com/) is a tiny jQuery plugin that creates a responsive slideshow using images inside &lt;ul>. It works with wide range of browsers including all IE versions from IE6 and up. It also adds css max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) (1.4 and up supported) and that all the images are same size.
 
-Biggest difference to other responsive slideshow plugins is the file size (985 bytes minified and gzipped) + that this one doesn't try to do everything. ResponsiveSlides.js has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
+Biggest difference to other responsive slideshow plugins is the file size (1kb minified and gzipped) + that this one doesn't try to do everything. ResponsiveSlides.js has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
 
 #### Features:
  * Fully responsive
- * Under 1kb minified and gzipped
- * Simple markup using unordered lists
+ * 1kb minified and gzipped
+ * Simple markup using unordered list
  * Settings for transition and timeout durations
  * Multiple slideshows supported
  * Automatic and manual fade
@@ -18,6 +18,8 @@ Biggest difference to other responsive slideshow plugins is the file size (985 b
  * Captions and other html-elements supported inside slides
  * Separate pagination and next/prev controls
  * Possibility to choose where the controls append to
+ * Possibility to randomize the order of the slides
+ * Can be paused while hovering slideshow and/or controls
  * Images can be wrapped inside links
  * Optional 'before' and 'after' callbacks
 
@@ -49,6 +51,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Changelog
 ======
+
+v1.3 (2012-04-26) - Three new options: "random", "pause", "pauseControls" + small bug fixes.
 
 v1.25 (2012-04-19) - No more flashing of unstyled slideshow before JS has loaded. Adds also better support for cases when JavaScript isn't available.
 
