@@ -1,33 +1,11 @@
-/*! ResponsiveSlides.js v1.25
+/*! ResponsiveSlides.js v1.3
  * http://responsiveslides.com
  *
  * Copyright (c) 2011-2012 @viljamis
  * Available under the MIT license
  */
 
-/* ResponsiveSlides.js is a tiny jQuery plugin that creates a responsive
- * slideshow using images inside <ul>. It works with wide range of browsers
- * including all IE versions from IE6 and up. It also adds css max-width
- * support for IE6 and other browsers that don't natively support it. Only
- * dependency is jQuery (1.4 and up) and that all the images are same size.
- *
- * Features:
- * - Fully responsive
- * - Under 1kb minified and gzipped
- * - Simple markup using unordered lists
- * - Settings for transition and timeout durations
- * - Multiple slideshows supported
- * - Automatic and manual fade
- * - Works in all major desktop and mobile browsers
- * - Captions and other html-elements supported inside slides
- * - Separate pagination and next/prev controls
- * - Possibility to choose where the controls append to
- * - Images can be wrapped inside links
- * - Optional 'before' and 'after' callbacks
- *
- */
-
-/*jslint browser: true, sloppy: true, vars: true, plusplus: true, maxerr: 50, indent: 2 */
+/*jslint browser: true, sloppy: true, vars: true, plusplus: true, indent: 2 */
 
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
@@ -39,6 +17,9 @@
       "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
       "pager": false,           // Boolean: Show pager, true or false
       "nav": false,             // Boolean: Show navigation, true or false
+      "random": false,          // Boolean: Randomize the order of the slides, true or false
+      "pause": false,           // Boolean: Pause on hover, true or false
+      "pauseControls": false,   // Boolean: Pause when hovering controls, true or false
       "prevText": "Previous",   // String: Text for the "previous" button
       "nextText": "Next",       // String: Text for the "next" button
       "maxwidth": "",           // Integer: Max-width of the slideshow, in pixels
@@ -104,6 +85,16 @@
             });
         };
 
+      // Random order
+      if (settings.random) {
+        $slide.sort(function () {
+          return (Math.round(Math.random()) - 0.5);
+        });
+        $this
+          .empty()
+          .append($slide);
+      }
+
       // Add ID's to each slide
       $slide.each(function (i) {
         this.id = slideClassPrefix + i;
@@ -126,8 +117,13 @@
       // Only run if there's more than one slide
       if ($slide.size() > 1) {
 
+        // Make sure the timeout is at least 100ms longer than the fade
+        if (settings.timeout < settings.speed + 100) {
+          return;
+        }
+
         // Pager
-        if (settings.pager === true) {
+        if (settings.pager) {
           var tabMarkup = [];
           $slide.each(function (i) {
             var n = i + 1;
@@ -158,14 +154,14 @@
         }
 
         // Auto cycle
-        if (settings.auto === true) {
+        if (settings.auto) {
 
           startCycle = function () {
             rotate = setInterval(function () {
               var idx = index + 1 < length ? index + 1 : 0;
 
-              // Remove active state and set new if pager = "true"
-              if (settings.pager === true) {
+              // Remove active state and set new if pager is set
+              if (settings.pager) {
                 selectTab(idx);
               }
 
@@ -179,7 +175,7 @@
 
         // Restarting cycle
         restartCycle = function () {
-          if (settings.auto === true) {
+          if (settings.auto) {
             // Stop
             clearInterval(rotate);
             // Restart
@@ -187,11 +183,23 @@
           }
         };
 
+        // Pause on hover
+        if (settings.pause) {
+          $this.hover(function () {
+            clearInterval(rotate);
+          }, function () {
+            restartCycle();
+          });
+        }
+
         // Pager click event handler
-        if (settings.pager === true) {
+        if (settings.pager) {
           $tabs.bind("click", function (e) {
             e.preventDefault();
-            restartCycle();
+
+            if (!settings.pauseControls) {
+              restartCycle();
+            }
 
             // Get index of clicked tab
             var idx = $tabs.index(this);
@@ -210,10 +218,19 @@
             .eq(0)
             .closest("li")
             .addClass(activeClass);
+
+          // Pause when hovering pager
+          if (settings.pauseControls) {
+            $tabs.hover(function () {
+              clearInterval(rotate);
+            }, function () {
+              restartCycle();
+            });
+          }
         }
 
         // Navigation
-        if (settings.nav === true) {
+        if (settings.nav) {
           var navMarkup =
             "<a href='#' class='" + navClass + " prev'>" + settings.prevText + "</a>" +
             "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
@@ -244,18 +261,29 @@
 
             // Go to slide
             slideTo($(this)[0] === $prev[0] ? prevIdx : nextIdx);
-            if (settings.pager === true) {
+            if (settings.pager) {
               selectTab($(this)[0] === $prev[0] ? prevIdx : nextIdx);
             }
 
-            restartCycle();
+            if (!settings.pauseControls) {
+              restartCycle();
+            }
           });
+
+          // Pause when hovering navigation
+          if (settings.pauseControls) {
+            $trigger.hover(function () {
+              clearInterval(rotate);
+            }, function () {
+              restartCycle();
+            });
+          }
         }
 
       }
 
       // Max-width fallback
-      if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
+      if (typeof document.body.style.maxWidth === "undefined" && options.maxwidth) {
         var widthSupport = function () {
           $this.css("width", "100%");
           if ($this.width() > maxw) {
