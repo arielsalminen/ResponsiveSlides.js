@@ -45,7 +45,8 @@
         index = 0,
         $slide = $this.children(),
         length = $slide.size(),
-        fadetime = parseFloat(settings.speed),
+        fadeTime = parseFloat(settings.speed),
+        waitTime = parseFloat(settings.timeout),
         maxw = parseFloat(settings.maxwidth),
 
         // Namespacing
@@ -70,13 +71,13 @@
           $this.trigger(namespace + "-before");
           $slide
             .stop()
-            .fadeOut(fadetime, function () {
+            .fadeOut(fadeTime, function () {
               $(this)
                 .removeClass(visibleClass)
                 .css(hidden);
             })
             .eq(idx)
-            .fadeIn(fadetime, function () {
+            .fadeIn(fadeTime, function () {
               $(this)
                 .addClass(visibleClass)
                 .css(visible)
@@ -118,7 +119,7 @@
       if ($slide.size() > 1) {
 
         // Make sure the timeout is at least 100ms longer than the fade
-        if (settings.timeout < settings.speed + 100) {
+        if (waitTime < fadeTime + 100) {
           return;
         }
 
@@ -166,7 +167,7 @@
               }
 
               slideTo(idx);
-            }, parseFloat(settings.timeout));
+            }, waitTime);
           };
 
           // Init cycle
