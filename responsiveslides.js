@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.3
+/*! ResponsiveSlides.js v1.31
  * http://responsiveslides.com
  * http://viljamis.com
  *
@@ -25,7 +25,9 @@
       "nextText": "Next",       // String: Text for the "next" button
       "maxwidth": "",           // Integer: Max-width of the slideshow, in pixels
       "controls": "",           // Selector: Where controls should be appended to, default is after the <ul>
-      "namespace": "rslides"    // String: change the default namespace used
+      "namespace": "rslides",   // String: change the default namespace used
+      before: function () {},   // Function: Before callback
+      after: function () {}     // Function: After callback
     }, options);
 
     return this.each(function () {
@@ -69,7 +71,7 @@
 
         // Fading animation
         slideTo = function (idx) {
-          $this.trigger(namespace + "-before");
+          settings.before();
           $slide
             .stop()
             .fadeOut(fadeTime, function () {
@@ -81,8 +83,8 @@
             .fadeIn(fadeTime, function () {
               $(this)
                 .addClass(visibleClass)
-                .css(visible)
-                .trigger(namespace + "-after");
+                .css(visible);
+              settings.after();
               index = idx;
             });
         };
@@ -255,6 +257,15 @@
             if ($("." + visibleClass + ":animated").length) {
               return;
             }
+
+            //  Adds active class during slide animation
+            //  $(this)
+            //    .addClass(namespace + "_active")
+            //    .delay(fadeTime)
+            //    .queue(function (next) {
+            //      $(this).removeClass(namespace + "_active");
+            //      next();
+            //  });
 
             // Determine where to slide
             var idx = $slide.index($("." + visibleClass)),
