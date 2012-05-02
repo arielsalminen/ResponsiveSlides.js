@@ -6,39 +6,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="../responsiveslides.css" />
   <link rel="stylesheet" href="demo.css" />
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script src="../responsiveslides.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="../new_structure2.js"></script>
   <script>
     $(function () {
 
-      // Slideshow 1
-      $(".rslides1").responsiveSlides({
-        maxwidth: 800,
-        speed: 800
-      });
-
-      // Slideshow 2
-      $(".rslides2").responsiveSlides({
+      $(".demo2").responsiveSlides({
         auto: false,
         pager: true,
-        speed: 300,
-        maxwidth: 540
-      });
-
-      // Slideshow 3
-      $(".rslides3").responsiveSlides({
-        auto: false,
-        pager: false,
         nav: true,
-        speed: 500,
-        namespace: "callbacks"
-      }).bind({
-        // Before callback
-        "callbacks-before": function () {
+        speed: 800,
+        pauseControls: true,
+        before: function () {
           $('.events').append("<li>before event fired.</li>");
         },
-        // After callback
-        "callbacks-after": function () {
+        after: function () {
           $('.events').append("<li>after event fired.</li>");
         }
       });
@@ -48,26 +30,11 @@
 </head>
 <body>
   <div id="wrapper">
-    <h1>ResponsiveSlides.js</h1>
-    <h2>Simple &amp; lightweight responsive slideshow plugin (in 1kb)</h2>
-
-    <!-- Slideshow 1 -->
-    <ul class="rslides rslides1">
-      <li><img src="1.jpg" alt="" /></li>
-      <li><img src="2.jpg" alt="" /></li>
-      <li><img src="3.jpg" alt="" /></li>
-    </ul>
-
-    <!-- Slideshow 2 -->
-    <ul class="rslides rslides2">
-      <li><a href="#"><img src="1.jpg" alt="" /></a></li>
-      <li><a href="#"><img src="2.jpg" alt="" /></a></li>
-      <li><a href="#"><img src="3.jpg" alt="" /></a></li>
-    </ul>
+    <h1>Do not use this, not a working version yet!</h1>
 
     <!-- Slideshow 2 -->
     <div class="callbacks_container">
-      <ul class="rslides rslides3">
+      <ul class="demo demo2">
         <li>
           <img src="1.jpg" alt="" />
           <p class="caption">This is a caption</p>
