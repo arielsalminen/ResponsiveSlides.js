@@ -31,14 +31,11 @@
         pager: false,
         nav: true,
         speed: 500,
-        namespace: "callbacks"
-      }).bind({
-        // Before callback
-        "callbacks-before": function () {
+        namespace: "callbacks",
+        before: function () {
           $('.events').append("<li>before event fired.</li>");
         },
-        // After callback
-        "callbacks-after": function () {
+        after: function () {
           $('.events').append("<li>after event fired.</li>");
         }
       });
