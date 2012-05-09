@@ -52,6 +52,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
+v1.32 (2012-05-09) - Fixes a bug which caused the slideshow to break in Chrome when changing between active and inactive browser tabs.
+
 v1.31 (2012-05-02) - Easier to use callbacks (+ optional "active" class for the next/prev buttons when animating slides. If you need this functionality, open the unminified version and search for "Adds active class during slide animation" and remove comments around it).
 
 v1.3 (2012-04-26) - Three new options: "random", "pause", "pauseControls" + small bug fixes.
