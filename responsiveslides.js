@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.31
+/*! ResponsiveSlides.js v1.32
  * http://responsiveslides.com
  * http://viljamis.com
  *
@@ -162,6 +162,10 @@
 
           startCycle = function () {
             rotate = setInterval(function () {
+
+              // Clear the event queue
+              $slide.stop(true, true);
+
               var idx = index + 1 < length ? index + 1 : 0;
 
               // Remove active state and set new if pager is set
