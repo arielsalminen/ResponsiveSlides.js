@@ -12,30 +12,33 @@
     $(function () {
 
       // Slideshow 1
-      $(".rslides1").responsiveSlides({
+      $("#slider1").responsiveSlides({
         auto: false,
         pager: true,
         nav: true,
         speed: 500,
-        maxwidth: 800
+        maxwidth: 800,
+        namespace: "centered-btns"
       });
 
       // Slideshow 2
-      $(".rslides2").responsiveSlides({
+      $("#slider2").responsiveSlides({
         auto: false,
         pager: true,
         nav: true,
         speed: 500,
-        maxwidth: 800
+        maxwidth: 800,
+        namespace: "transparent-btns"
       });
 
       // Slideshow 3
-      $(".rslides3").responsiveSlides({
+      $("#slider3").responsiveSlides({
         auto: false,
         pager: false,
         nav: true,
         speed: 500,
-        maxwidth: 800
+        maxwidth: 800,
+        namespace: "large-btns"
       });
 
     });
@@ -47,7 +50,7 @@
 
     <h3>Vertically centered on both sides</h3>
     <div class="rslides_container">
-      <ul class="rslides rslides1">
+      <ul class="rslides" id="slider1">
         <li><img src="../1.jpg" alt="" /></li>
         <li><img src="../2.jpg" alt="" /></li>
         <li><img src="../3.jpg" alt="" /></li>
@@ -56,7 +59,7 @@
 
     <h3>Transparent buttons over the left and right side</h3>
     <div class="rslides_container">
-      <ul class="rslides rslides2">
+      <ul class="rslides" id="slider2">
         <li><img src="../1.jpg" alt="" /></li>
         <li><img src="../2.jpg" alt="" /></li>
         <li><img src="../3.jpg" alt="" /></li>
@@ -65,7 +68,7 @@
 
     <h3>100% height with vertically centered icons</h3>
     <div class="rslides_container">
-      <ul class="rslides rslides3">
+      <ul class="rslides" id="slider3">
         <li><img src="../1.jpg" alt="" /></li>
         <li><img src="../2.jpg" alt="" /></li>
         <li><img src="../3.jpg" alt="" /></li>
