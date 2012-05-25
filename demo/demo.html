@@ -12,13 +12,13 @@
     $(function () {
 
       // Slideshow 1
-      $(".rslides1").responsiveSlides({
+      $("#slider1").responsiveSlides({
         maxwidth: 800,
         speed: 800
       });
 
       // Slideshow 2
-      $(".rslides2").responsiveSlides({
+      $("#slider2").responsiveSlides({
         auto: false,
         pager: true,
         speed: 300,
@@ -26,7 +26,7 @@
       });
 
       // Slideshow 3
-      $(".rslides3").responsiveSlides({
+      $("#slider3").responsiveSlides({
         auto: false,
         pager: false,
         nav: true,
@@ -49,14 +49,14 @@
     <h2>Simple &amp; lightweight responsive slideshow plugin (in 1kb)</h2>
 
     <!-- Slideshow 1 -->
-    <ul class="rslides rslides1">
+    <ul class="rslides" id="slider1">
       <li><img src="1.jpg" alt="" /></li>
       <li><img src="2.jpg" alt="" /></li>
       <li><img src="3.jpg" alt="" /></li>
     </ul>
 
     <!-- Slideshow 2 -->
-    <ul class="rslides rslides2">
+    <ul class="rslides" id="slider2">
       <li><a href="#"><img src="1.jpg" alt="" /></a></li>
       <li><a href="#"><img src="2.jpg" alt="" /></a></li>
       <li><a href="#"><img src="3.jpg" alt="" /></a></li>
@@ -64,7 +64,7 @@
 
     <!-- Slideshow 2 -->
     <div class="callbacks_container">
-      <ul class="rslides rslides3">
+      <ul class="rslides" id="slider3">
         <li>
           <img src="1.jpg" alt="" />
           <p class="caption">This is a caption</p>
