@@ -74,14 +74,14 @@
           settings.before();
           if (typeof Modernizr == "object" && Modernizr.csstransitions) {
             $slide
-          		.removeClass(visibleClass)
-          		.eq(idx)
-          		.addClass(visibleClass)
-          		.delay(fadeTime)
-          		.each(function () {
-	          		settings.after();
-	          		index = idx;
-          		});
+              .removeClass(visibleClass)
+              .eq(idx)
+              .addClass(visibleClass)
+              .delay(fadeTime)
+              .each(function () {
+	        settings.after();
+	        index = idx;
+              });
           } else {
             $slide
               .stop()
