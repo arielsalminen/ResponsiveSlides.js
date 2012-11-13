@@ -81,3 +81,9 @@ v1.03 (2011-12-12) - Code refactoring, smaller size, better performance
 v1.01 (2011-12-11) - Better usage of styles and the namespace
 
 v1.00 (2011-12-04) - Release
+
+
+Want to do a pull request?
+======
+
+Great! New ideas are more than welcome, but please check the [Pull Request Guidelines](https://github.com/viljamis/ResponsiveSlides.js/wiki/Pull-Request-Guidelines) first before doing so.
