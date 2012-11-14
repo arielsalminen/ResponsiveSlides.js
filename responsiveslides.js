@@ -18,6 +18,7 @@
       "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
       "pager": false,           // Boolean: Show pager, true or false
       "nav": false,             // Boolean: Show navigation, true or false
+      "navLoop": true,          // Boolean: block loop when reach first or last slide, only if nav=true/auto=false, true or false
       "random": false,          // Boolean: Randomize the order of the slides, true or false
       "pause": false,           // Boolean: Pause on hover, true or false
       "pauseControls": false,   // Boolean: Pause when hovering controls, true or false
@@ -69,9 +70,36 @@
         visible = {"float": "left", "position": "relative"},
         hidden = {"float": "none", "position": "absolute"},
 
+        // disable nav
+        disableNavArrows = function(idx){
+          if(settings.nav && !settings.navLoop && !settings.auto){
+            var lastSlide = $slide.length - 1;
+            var next = $("." + namespaceIdx + "_nav.next"),
+                prev = $("." + namespaceIdx + "_nav.prev"),
+                lastOrFirst = (idx === lastSlide || idx === 0);
+
+            if(idx === 0){
+              prev.fadeOut();
+              next.fadeIn();
+            }
+            if(idx === lastSlide){
+              prev.fadeIn();
+              next.fadeOut();
+            }
+
+            if(!lastOrFirst){
+                prev.fadeIn();
+                next.fadeIn();
+            }
+          }
+        }
+
         // Fading animation
         slideTo = function (idx) {
           settings.before();
+
+          disableNavArrows(idx);
+
           $slide
             .stop()
             .fadeOut(fadeTime, function () {
@@ -249,6 +277,8 @@
           } else {
             $this.after(navMarkup);
           }
+
+          disableNavArrows(0);
 
           var $trigger = $("." + namespaceIdx + "_nav"),
             $prev = $("." + namespaceIdx + "_nav.prev");
