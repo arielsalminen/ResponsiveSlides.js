@@ -213,7 +213,7 @@
             var idx = $tabs.index(this);
 
             // Break if element is already active or currently animated
-            if (index === idx || $("." + visibleClass + ":animated").length) {
+            if (index === idx || $("." + visibleClass).queue('fx').length) {
               return;
             }
 
@@ -258,7 +258,7 @@
             e.preventDefault();
 
             // Prevent clicking if currently animated
-            if ($("." + visibleClass + ":animated").length) {
+            if ($("." + visibleClass).queue('fx').length) {
               return;
             }
 
