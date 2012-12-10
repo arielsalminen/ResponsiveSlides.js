@@ -72,21 +72,33 @@
         // Fading animation
         slideTo = function (idx) {
           settings.before();
-          $slide
-            .stop()
-            .fadeOut(fadeTime, function () {
-              $(this)
-                .removeClass(visibleClass)
-                .css(hidden);
-            })
-            .eq(idx)
-            .fadeIn(fadeTime, function () {
-              $(this)
-                .addClass(visibleClass)
-                .css(visible);
-              settings.after();
-              index = idx;
-            });
+          if (typeof Modernizr == "object" && Modernizr.csstransitions) {
+            $slide
+              .removeClass(visibleClass)
+              .eq(idx)
+              .addClass(visibleClass)
+              .delay(fadeTime)
+              .each(function () {
+	        settings.after();
+	        index = idx;
+              });
+          } else {
+            $slide
+              .stop()
+              .fadeOut(fadeTime, function () {
+                $(this)
+                  .removeClass(visibleClass)
+                  .css(hidden);
+              })
+              .eq(idx)
+              .fadeIn(fadeTime, function () {
+                $(this)
+                  .addClass(visibleClass)
+                  .css(visible);
+                settings.after();
+                index = idx;
+              });
+          }
         };
 
       // Random order
@@ -117,6 +129,11 @@
         .addClass(visibleClass)
         .css(visible)
         .show();
+
+      // Necessary when using css transitions
+      if (typeof Modernizr == "object" && Modernizr.csstransitions) {
+        $slide.css({"display": "block"});
+      }
 
       // Only run if there's more than one slide
       if ($slide.size() > 1) {
