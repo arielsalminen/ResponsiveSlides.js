@@ -51,6 +51,7 @@ a {
   }
 
 .centered-btns_nav {
+  z-index: 3;
   position: absolute;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   top: 50%;
@@ -76,6 +77,7 @@ a {
   }
 
 .transparent-btns_nav {
+  z-index: 3;
   position: absolute;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   top: 0;
@@ -96,6 +98,7 @@ a {
   }
 
 .large-btns_nav {
+  z-index: 3;
   position: absolute;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   opacity: 0.6;
