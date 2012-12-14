@@ -10,6 +10,7 @@ Biggest difference to other responsive slider plugins is the file size (1kb mini
 #### Features:
  * Fully responsive
  * 1kb minified and gzipped
+ * CSS3 transitions with JavaScript fallback
  * Simple markup using unordered list
  * Settings for transition and timeout durations
  * Multiple slideshows supported
