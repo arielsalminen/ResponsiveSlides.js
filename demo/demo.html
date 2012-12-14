@@ -40,6 +40,11 @@
         }
       });
 
+      // Slideshow 4
+      $("#slider4").responsiveSlides({
+        pager: '#slider4-pager'
+      });
+
     });
   </script>
 </head>
@@ -63,6 +68,19 @@
     </ul>
 
     <!-- Slideshow 3 -->
+    <ul class="rslides" id="slider4">
+      <li><img src="1.jpg" alt="" /></li>
+      <li><img src="2.jpg" alt="" /></li>
+      <li><img src="3.jpg" alt="" /></li>
+    </ul>
+
+    <ul id="slider4-pager">
+      <li><a href="#"><img src="1_thumb.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="2_thumb.jpg" alt="" /></a></li>
+      <li><a href="#"><img src="3_thumb.jpg" alt="" /></a></li>
+    </ul>
+
+    <!-- Slideshow 4 -->
     <div class="callbacks_container">
       <ul class="rslides" id="slider3">
         <li>
@@ -82,7 +100,7 @@
 
     <!-- This is here just to demonstrate the callbacks -->
     <ul class="events">
-      <li><h3>Example 3 callback events</h3></li>
+      <li><h3>Example 4 callback events</h3></li>
     </ul>
 
     <a href="http://responsiveslides.com/" id="download">See the documentation</a>
