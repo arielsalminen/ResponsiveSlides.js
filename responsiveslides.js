@@ -20,7 +20,7 @@
       "nav": false,             // Boolean: Show navigation, true or false
       "random": false,          // Boolean: Randomize the order of the slides, true or false
       "pause": false,           // Boolean: Pause on hover, true or false
-      "pauseControls": true,   // Boolean: Pause when hovering controls, true or false
+      "pauseControls": true,    // Boolean: Pause when hovering controls, true or false
       "prevText": "Previous",   // String: Text for the "previous" button
       "nextText": "Next",       // String: Text for the "next" button
       "maxwidth": "",           // Integer: Max-width of the slideshow, in pixels
@@ -94,8 +94,7 @@
               .css(hidden)
               .eq(idx)
               .addClass(visibleClass)
-              .css(visible)
-              .delay(fadeTime);
+              .css(visible);
             setTimeout(function () {
               settings.after();
               index = idx;
