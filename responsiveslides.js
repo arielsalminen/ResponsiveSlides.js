@@ -127,7 +127,7 @@
         }
 
         // Pager
-        if (settings.pager) {
+        if (true === settings.pager) {
           var tabMarkup = [];
           $slide.each(function (i) {
             var n = i + 1;
@@ -138,14 +138,25 @@
           });
           $pager.append(tabMarkup);
 
-          $tabs = $pager.find("a");
-
           // Inject pager
           if (options.controls) {
             $(settings.controls).append($pager);
           } else {
             $this.after($pager);
           }
+        } else if(settings.pager) {
+          // If a selector has been given for the pager element
+          $pager = $(settings.pager);
+          $pager.addClass(namespace + "_tabs " + namespaceIdx + "_tabs");
+
+          $pager.find('li').each(function (i) {
+            $(this).addClass( slideClassPrefix + (i + 1) );
+          });
+        }
+
+        // If we have any pager, we need to set up the selectTab function
+        if (settings.pager) {
+          $tabs = $pager.find('a');
 
           // Select pager item
           selectTab = function (idx) {
