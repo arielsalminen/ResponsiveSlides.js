@@ -53,6 +53,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
+v1.51 (2012-12-15) - Fixes a bug where pictures would not display if next button was clicked too quickly 10 times.
+
 v1.5 (2012-12-14) - Adds CSS3 transition support with automatic jQuery fallback.
 
 v1.32 (2012-05-09) - Fixes a bug which caused the slideshow to break in Chrome when changing between active and inactive browser tabs.
