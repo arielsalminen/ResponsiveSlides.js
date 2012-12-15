@@ -88,6 +88,7 @@
         // Fading animation
         slideTo = function (idx) {
           settings.before();
+          // If CSS3 transitions are supported
           if (supportsTransitions) {
             $slide
               .removeClass(visibleClass)
@@ -99,6 +100,7 @@
             setTimeout(function () {
               settings.after();
             }, fadeTime);
+          // If not, use jQuery fallback
           } else {
             $slide
               .stop()
@@ -154,6 +156,7 @@
         $slide
           .show()
           .css({
+            // -ms prefix isn't needed as IE10 uses prefix free version
             "-webkit-transition": "opacity " + fadeTime + "ms ease-in-out",
             "-moz-transition": "opacity " + fadeTime + "ms ease-in-out",
             "-o-transition": "opacity " + fadeTime + "ms ease-in-out",
