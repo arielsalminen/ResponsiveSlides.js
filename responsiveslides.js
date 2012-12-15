@@ -38,7 +38,7 @@
       var $this = $(this),
 
         // Local variables
-        v, p, selectTab, startCycle, restartCycle, rotate, $tabs,
+        vendor, selectTab, startCycle, restartCycle, rotate, $tabs,
 
         // Helpers
         index = 0,
@@ -67,18 +67,18 @@
 
         // Detect transition support
         supportsTransitions = (function () {
-          var b = document.body || document.documentElement;
-          var s = b.style;
-          var p = "transition";
-          if (typeof s[p] === "string") {
+          var docBody = document.body || document.documentElement;
+          var styles = docBody.style;
+          var prop = "transition";
+          if (typeof styles[prop] === "string") {
             return true;
           }
           // Tests for vendor specific prop
-          v = ["Moz", "Webkit", "Khtml", "O", "ms"];
-          p = p.charAt(0).toUpperCase() + p.substr(1);
+          vendor = ["Moz", "Webkit", "Khtml", "O", "ms"];
+          prop = prop.charAt(0).toUpperCase() + prop.substr(1);
           var i;
-          for (i = 0; i < v.length; i++) {
-            if (typeof s[v[i] + p] === "string") {
+          for (i = 0; i < vendor.length; i++) {
+            if (typeof styles[vendor[i] + prop] === "string") {
               return true;
             }
           }
@@ -95,7 +95,7 @@
               .eq(idx)
               .addClass(visibleClass)
               .css(visible);
-              index = idx;
+            index = idx;
             setTimeout(function () {
               settings.after();
             }, fadeTime);
