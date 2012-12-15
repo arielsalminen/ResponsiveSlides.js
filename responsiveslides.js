@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.5
+/*! ResponsiveSlides.js v1.51
  * http://responsiveslides.com
  * http://viljamis.com
  *
@@ -95,9 +95,9 @@
               .eq(idx)
               .addClass(visibleClass)
               .css(visible);
+              index = idx;
             setTimeout(function () {
               settings.after();
-              index = idx;
             }, fadeTime);
           } else {
             $slide
