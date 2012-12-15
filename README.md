@@ -1,4 +1,4 @@
-# ResponsiveSlides.js v1.5
+# ResponsiveSlides.js v1.51
 ### Simple & lightweight responsive slider plugin (in 1kb)
 
 
