@@ -206,6 +206,19 @@ h3 {
   right: 0;
   }
 
+/* Thumbnail pager example */
+#slider4-pager {
+  max-width: 260px;
+}
+
+#slider4-pager a {
+  padding: 0;
+}
+
+#slider4-pager .rslides_here a {
+  background: transparent;
+}
+
 @media screen and (max-width: 600px) {
   h1 {
     font: 24px/50px "Helvetica Neue", Helvetica, Arial, sans-serif;
