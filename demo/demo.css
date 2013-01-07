@@ -4,7 +4,7 @@
 }
 
 html {
-  background: #222 url("bg.png") repeat;
+  background: #222 url("images/bg.png") repeat;
 }
 
 body {
@@ -43,7 +43,8 @@ p,h3,h4,pre {
   margin: 0 auto 40px;
   }
 
-#slider2 {
+#slider2,
+#slider3 {
   box-shadow: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
@@ -206,17 +207,21 @@ h3 {
   right: 0;
   }
 
-/* Thumbnail pager example */
-#slider4-pager {
-  max-width: 260px;
+#slider3-pager a {
+  display: inline-block;
 }
 
-#slider4-pager a {
-  padding: 0;
+#slider3-pager img {
+  float: left;
 }
 
-#slider4-pager .rslides_here a {
+#slider3-pager .rslides_here a {
   background: transparent;
+  box-shadow: 0 0 0 2px #666;
+}
+
+#slider3-pager a {
+  padding: 0;
 }
 
 @media screen and (max-width: 600px) {
