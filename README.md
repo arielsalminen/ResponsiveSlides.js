@@ -55,7 +55,7 @@ Changelog
 ======
 
 
-v1.52 (2013-01-07) - Adds option called "manualControls" which allows to write custom markup for pager navigation. "controls" option is renamed to "navContainer". Default speed of the transition is now to 500ms. Adds also webkit-backface-visibility: hidden; style for the slides to prevent some HD acceleration issues on mobile WebKit browsers.
+v1.52 (2013-01-07) - Adds option called "manualControls" which allows to write custom markup for pager navigation (thanks to [@andyadams](https://github.com/andyadams)). "controls" option is renamed to "navContainer". Default speed of the transition is now to 500ms. Adds also webkit-backface-visibility: hidden; style for the slides to prevent some HD acceleration issues on mobile WebKit browsers.
 
 v1.51 (2012-12-15) - Fixes a bug where pictures would not display if next button was clicked too quickly 10 times.
 
