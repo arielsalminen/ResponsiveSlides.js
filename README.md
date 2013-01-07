@@ -1,4 +1,4 @@
-# ResponsiveSlides.js v1.51
+# ResponsiveSlides.js v1.52
 ### Simple & lightweight responsive slider plugin (in 1kb)
 
 
@@ -20,6 +20,7 @@ Biggest difference to other responsive slider plugins is the file size (1kb mini
  * Separate pagination and next/prev controls
  * Possibility to choose where the controls append to
  * Possibility to randomize the order of the slides
+ * Possibility to use custom markup for pagination
  * Can be paused while hovering slideshow and/or controls
  * Images can be wrapped inside links
  * Optional 'before' and 'after' callbacks
@@ -52,6 +53,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Changelog
 ======
+
+
+v1.52 (2013-01-07) - Adds option called "manualControls" which allows to write custom markup for pager navigation. "controls" option is renamed to "navContainer". Default speed of the transition is now to 500ms. Adds also webkit-backface-visibility: hidden; style for the slides to prevent some HD acceleration issues on mobile WebKit browsers.
 
 v1.51 (2012-12-15) - Fixes a bug where pictures would not display if next button was clicked too quickly 10 times.
 
