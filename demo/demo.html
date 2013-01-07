@@ -28,6 +28,12 @@
 
       // Slideshow 3
       $("#slider3").responsiveSlides({
+        manualControls: '#slider3-pager',
+        maxwidth: 540
+      });
+
+      // Slideshow 4
+      $("#slider4").responsiveSlides({
         auto: false,
         pager: false,
         nav: true,
@@ -41,11 +47,6 @@
         }
       });
 
-      // Slideshow 4
-      $("#slider4").responsiveSlides({
-        pager: '#slider4-pager'
-      });
-
     });
   </script>
 </head>
@@ -54,46 +55,55 @@
     <h1>ResponsiveSlides.js</h1>
     <h2>Simple &amp; lightweight responsive slideshow plugin (in 1kb)</h2>
 
+
+
     <!-- Slideshow 1 -->
     <ul class="rslides" id="slider1">
-      <li><img src="1.jpg" alt=""></li>
-      <li><img src="2.jpg" alt=""></li>
-      <li><img src="3.jpg" alt=""></li>
+      <li><img src="images/1.jpg" alt=""></li>
+      <li><img src="images/2.jpg" alt=""></li>
+      <li><img src="images/3.jpg" alt=""></li>
     </ul>
+
+
 
     <!-- Slideshow 2 -->
     <ul class="rslides" id="slider2">
-      <li><a href="#"><img src="1.jpg" alt=""></a></li>
-      <li><a href="#"><img src="2.jpg" alt=""></a></li>
-      <li><a href="#"><img src="3.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/1.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/2.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/3.jpg" alt=""></a></li>
     </ul>
+
+
 
     <!-- Slideshow 3 -->
-    <ul class="rslides" id="slider4">
-      <li><img src="1.jpg" alt="" /></li>
-      <li><img src="2.jpg" alt="" /></li>
-      <li><img src="3.jpg" alt="" /></li>
+    <ul class="rslides" id="slider3">
+      <li><img src="images/1.jpg" alt=""></li>
+      <li><img src="images/2.jpg" alt=""></li>
+      <li><img src="images/3.jpg" alt=""></li>
     </ul>
 
-    <ul id="slider4-pager">
-      <li><a href="#"><img src="1_thumb.jpg" alt="" /></a></li>
-      <li><a href="#"><img src="2_thumb.jpg" alt="" /></a></li>
-      <li><a href="#"><img src="3_thumb.jpg" alt="" /></a></li>
+    <!-- Slideshow 3 Pager -->
+    <ul id="slider3-pager">
+      <li><a href="#"><img src="images/1_thumb.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/2_thumb.jpg" alt=""></a></li>
+      <li><a href="#"><img src="images/3_thumb.jpg" alt=""></a></li>
     </ul>
+
+
 
     <!-- Slideshow 4 -->
     <div class="callbacks_container">
-      <ul class="rslides" id="slider3">
+      <ul class="rslides" id="slider4">
         <li>
-          <img src="1.jpg" alt="">
+          <img src="images/1.jpg" alt="">
           <p class="caption">This is a caption</p>
         </li>
         <li>
-          <img src="2.jpg" alt="">
+          <img src="images/2.jpg" alt="">
           <p class="caption">This is another caption</p>
         </li>
         <li>
-          <img src="3.jpg" alt="">
+          <img src="images/3.jpg" alt="">
           <p class="caption">The third caption</p>
         </li>
       </ul>
@@ -103,6 +113,8 @@
     <ul class="events">
       <li><h3>Example 4 callback events</h3></li>
     </ul>
+
+
 
     <a href="http://responsiveslides.com/" id="download">See the documentation</a>
     <p class="footer">ResponsiveSlides.js is created by <a href="http://viljamis.com">@viljamis</a>. It's released under the MIT license. If you have any questions or feedback you can use the <a href="https://github.com/viljami/ResponsiveSlides.js">GitHub project page</a>.</p>
