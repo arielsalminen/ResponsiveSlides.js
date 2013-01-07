@@ -1,4 +1,4 @@
-/*! http://responsiveslides.com v1.51 by @viljamis */
+/*! http://responsiveslides.com v1.52 by @viljamis */
 
 .rslides {
   position: relative;
@@ -10,6 +10,7 @@
   }
 
 .rslides li {
+  -webkit-backface-visibility: hidden;
   position: absolute;
   display: none;
   width: 100%;
