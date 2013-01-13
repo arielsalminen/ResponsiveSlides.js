@@ -319,14 +319,16 @@
           }
 
           var $trigger = $("." + namespaceIdx + "_nav"),
-            $prev = $("." + namespaceIdx + "_nav.prev");
+            $prev = $trigger.filter(".prev");
 
           // Click event handler
           $trigger.bind("click", function (e) {
             e.preventDefault();
 
+            var $visibleClass = $("." + visibleClass);
+
             // Prevent clicking if currently animated
-            if ($("." + visibleClass).queue('fx').length) {
+            if ($visibleClass.queue('fx').length) {
               return;
             }
 
@@ -340,7 +342,7 @@
             //  });
 
             // Determine where to slide
-            var idx = $slide.index($("." + visibleClass)),
+            var idx = $slide.index($visibleClass),
               prevIdx = idx - 1,
               nextIdx = idx + 1 < length ? index + 1 : 0;
 
