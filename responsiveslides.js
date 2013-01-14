@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.52
+/*! ResponsiveSlides.js v1.53
  * http://responsiveslides.com
  * http://viljamis.com
  *
