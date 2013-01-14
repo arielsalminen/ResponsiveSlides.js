@@ -1,4 +1,4 @@
-# ResponsiveSlides.js v1.52
+# ResponsiveSlides.js v1.53
 ### Simple & lightweight responsive slider plugin (in 1kb)
 
 
@@ -54,6 +54,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
+
+v1.53 (2013-01-14) - Minor speed optimization (thanks [@bazineta](https://github.com/bazineta)!).
 
 v1.52 (2013-01-07) - Adds option called "manualControls" which allows to write custom markup for pager navigation (thanks to [@andyadams](https://github.com/andyadams)). "controls" option is renamed to "navContainer". Default speed of the transition is now to 500ms. Adds also webkit-backface-visibility: hidden; style for the slides to prevent some HD acceleration issues on mobile WebKit browsers.
 
