@@ -93,7 +93,7 @@
 
         // Fading animation
         slideTo = function (idx) {
-          settings.before();
+          settings.before.call($slide.eq(idx));
           // If CSS3 transitions are supported
           if (supportsTransitions) {
             $slide
@@ -104,7 +104,7 @@
               .css(visible);
             index = idx;
             setTimeout(function () {
-              settings.after();
+              settings.after.call($slide.eq(idx));
             }, fadeTime);
           // If not, use jQuery fallback
           } else {
@@ -121,7 +121,7 @@
                 $(this)
                   .addClass(visibleClass)
                   .css(visible);
-                settings.after();
+                settings.after.call($slide.eq(idx));
                 index = idx;
               });
           }
