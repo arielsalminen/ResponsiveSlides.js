@@ -1,3 +1,19 @@
+//http://stackoverflow.com/questions/14382857/what-to-use-instead-of-toggle-in-jquery-1-8
+$.fn.toggleClick = function(){
+    var methods = arguments, // store the passed arguments for future reference
+        count = methods.length; // cache the number of methods
+
+    //use return this to maintain jQuery chainability
+    return this.each(function(i, item){
+        // for each element you bind to
+        var index = 0; // create a local counter for that element
+        $(item).click(function(){ // bind a click handler to that element
+            return methods[index++ % count].apply(this,arguments); // that when called will apply the 'index'th method to that element
+            // the index % count means that we constrain our iterator between 0 and (count-1)
+        });
+    });
+};
+
 /*! ResponsiveSlides.js v1.53
  * http://responsiveslides.com
  * http://viljamis.com
@@ -24,7 +40,8 @@
             "pauseControls":true, // Boolean: Pause when hovering controls, true or false
             "prevText":"Previous", // String: Text for the "previous" button
             "nextText":"Next", // String: Text for the "next" button
-            "playText":"Play", // String: Text for the "play" button
+            "playText":"Play", // String: Text for the "play" button, when paused
+            "pauseText":"Pause", // String: Text for the "pause" button, when playing
             "maxwidth":"", // Integer: Max-width of the slideshow, in pixels
             "navContainer":"", // Selector: Where auto generated controls should be appended to, default is after the <ul>
             "manualControls":"", // Selector: Declare custom pager navigation
@@ -272,16 +289,6 @@
                     });
                 }
 
-                // Play/pause on click
-                $playButton = $("." + navClass + ".play");
-                if (settings.playButton) {
-                    $playButton.click(function () {
-                        clearInterval(rotate);
-                    }, function () {
-                        restartCycle();
-                    });
-                }
-
                 // Pager click event handler
                 if (settings.pager || settings.manualControls) {
                     $tabs.bind("click", function (e) {
@@ -325,12 +332,12 @@
                     if (settings.playButton) {
                         var navMarkup =
                             "<a href='#' class='" + navClass + " prev'>" + settings.prevText + "</a>" +
-                            "<a href='#' class='" + navClass + " play'>" + settings.playText + "</a>" +
-                            "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
+                                "<a href='#' class='" + navClass + " play'>" + settings.pauseText + "</a>" +
+                                "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
                     } else {
                         var navMarkup =
                             "<a href='#' class='" + navClass + " prev'>" + settings.prevText + "</a>" +
-                            "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
+                                "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
                     }
 
                     // Inject navigation
@@ -340,7 +347,8 @@
                         $this.after(navMarkup);
                     }
 
-                    var $trigger = $("." + namespaceIdx + "_nav"),
+                    var $trigger = $("." + namespaceIdx + "_nav").not('.play'),
+                        $play = $("." + namespaceIdx + "_nav").filter('.play'),
                         $prev = $trigger.filter(".prev");
 
                     // Click event handler
@@ -375,18 +383,36 @@
                         }
 
                         if (!settings.pauseControls) {
-                            restartCycle();
+                            if (!settings.playButton) {
+                                restartCycle();
+                            }
                         }
+
                     });
 
                     // Pause when hovering navigation
-                    if (settings.pauseControls) {
+                    if (settings.pauseControls && !settings.playButton) {
                         $trigger.hover(function () {
                             clearInterval(rotate);
                         }, function () {
                             restartCycle();
                         });
                     }
+
+                    // Play/pause on click
+
+                    if (settings.playButton) {
+                        $play.toggleClick(function () {
+                            clearInterval(rotate);
+                            $(this).addClass('paused').text(settings.playText);
+                            console.log('clearInterval');
+                        }, function () {
+                            restartCycle();
+                            $(this).removeClass('paused').text(settings.pauseText);
+                            console.log('restartCycle');
+                        });
+                    }
+
                 }
 
             }
