@@ -175,7 +175,7 @@
 
         // Make sure the timeout is at least 100ms longer than the fade
         if (waitTime < fadeTime + 100) {
-          return;
+			throw new Error("Make sure the timeout is at least 100ms longer than the fade");
         }
 
         // Pager
