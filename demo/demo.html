@@ -47,6 +47,22 @@
         }
       });
 
+      // Slideshow 5
+      $("#slider5").responsiveSlides({
+        maxwidth : 540,
+        auto : false,
+        pager : true,
+        thumb : "bg",
+        thumbSrc : "thumb"
+      });
+
+      // Slideshow 6
+      $("#slider6").responsiveSlides({
+        maxwidth : 540,
+        auto : true,
+        pager : true,
+        thumb : "img"
+      });
     });
   </script>
 </head>
@@ -114,6 +130,20 @@
       <li><h3>Example 4 callback events</h3></li>
     </ul>
 
+
+    <!-- Slideshow 5 -->
+    <ul id="slider5" class="rslides">
+      <li><img src="images/1.jpg" alt="" data-thumb="images/1_thumb.jpg"></li>
+      <li><img src="images/2.jpg" alt="" data-thumb="images/2_thumb.jpg"></li>
+      <li><img src="images/3.jpg" alt="" data-thumb="images/3_thumb.jpg"></li>
+    </ul>
+
+    <!-- Slideshow 6 -->
+    <ul id="slider6" class="rslides">
+      <li><img src="images/1.jpg" alt=""></li>
+      <li><img src="images/2.jpg" alt=""></li>
+      <li><img src="images/3.jpg" alt=""></li>
+    </ul>
 
 
     <a href="http://responsiveslides.com/" id="download">See the documentation</a>
