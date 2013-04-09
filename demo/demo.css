@@ -44,7 +44,9 @@ p,h3,h4,pre {
   }
 
 #slider2,
-#slider3 {
+#slider3,
+#slider5,
+#slider6{
   box-shadow: none;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
@@ -91,6 +93,39 @@ p,h3,h4,pre {
   color: #fff;
   font-weight: bold;
   }
+
+/* Thumbnail stuff */
+
+.rslides_thumbs li, 
+.rslides_thumbs a {
+    display : inline-block;
+    *display : block;
+    zoom : 1;
+}
+
+.rslides_thumbs a{
+    padding : 0;
+    border : 2px solid transparent;
+    margin-left : 2px;
+    margin-right : 2px;
+}
+.rslides_thumbs .rslides_here a{
+    border-color : #ccc;
+}
+
+.rslides_thumbs img{
+    max-width : 100%;
+    width : 50px;
+}
+
+.rslides_thumb {
+    display : block;
+    background-repeat : no-repeat;
+    background-position : 50% 50%;
+    height : 50px;
+    width : 50px;
+}
+
 
 a {
   color: #fff;
