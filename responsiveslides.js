@@ -27,8 +27,8 @@
       "navContainer": "",       // Selector: Where auto generated controls should be appended to, default is after the <ul>
       "manualControls": "",     // Selector: Declare custom pager navigation
       "namespace": "rslides",   // String: change the default namespace used
-      before: $.noop,           // Function: Before callback
-      after: $.noop             // Function: After callback
+      "before": $.noop,         // Function: Before callback. Passed the index of the new slide.
+      "after": $.noop           // Function: After callback. Passed the index of the new slide.
     }, options);
 
     return this.each(function () {
@@ -93,7 +93,7 @@
 
         // Fading animation
         slideTo = function (idx) {
-          settings.before();
+          settings.before(idx);
           // If CSS3 transitions are supported
           if (supportsTransitions) {
             $slide
@@ -104,7 +104,7 @@
               .css(visible);
             index = idx;
             setTimeout(function () {
-              settings.after();
+              settings.after(idx);
             }, fadeTime);
           // If not, use jQuery fallback
           } else {
@@ -121,7 +121,7 @@
                 $(this)
                   .addClass(visibleClass)
                   .css(visible);
-                settings.after();
+                settings.after(idx);
                 index = idx;
               });
           }
