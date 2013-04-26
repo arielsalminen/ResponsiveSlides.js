@@ -1,4 +1,4 @@
-# ResponsiveSlides.js v1.53
+# ResponsiveSlides.js v1.54
 ### Simple & lightweight responsive slider plugin (in 1kb)
 
 
@@ -54,6 +54,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
+
+v1.54 (2013-04-26) - Fixes few bugs with the before and after callbacks.
 
 v1.53 (2013-01-14) - Minor speed optimization (thanks [@bazineta](https://github.com/bazineta)!).
 
