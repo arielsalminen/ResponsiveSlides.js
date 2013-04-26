@@ -1,4 +1,4 @@
-/*! ResponsiveSlides.js v1.53
+/*! ResponsiveSlides.js v1.54
  * http://responsiveslides.com
  * http://viljamis.com
  *
@@ -27,8 +27,8 @@
       "navContainer": "",       // Selector: Where auto generated controls should be appended to, default is after the <ul>
       "manualControls": "",     // Selector: Declare custom pager navigation
       "namespace": "rslides",   // String: change the default namespace used
-      before: $.noop,           // Function: Before callback
-      after: $.noop             // Function: After callback
+      "before": $.noop,         // Function: Before callback
+      "after": $.noop           // Function: After callback
     }, options);
 
     return this.each(function () {
@@ -93,7 +93,7 @@
 
         // Fading animation
         slideTo = function (idx) {
-          settings.before.call($slide.eq(idx));
+          settings.before(idx);
           // If CSS3 transitions are supported
           if (supportsTransitions) {
             $slide
@@ -104,7 +104,7 @@
               .css(visible);
             index = idx;
             setTimeout(function () {
-              settings.after.call($slide.eq(idx));
+              settings.after(idx);
             }, fadeTime);
           // If not, use jQuery fallback
           } else {
@@ -121,7 +121,7 @@
                 $(this)
                   .addClass(visibleClass)
                   .css(visible);
-                settings.after.call($slide.eq(idx));
+                settings.after(idx);
                 index = idx;
               });
           }
