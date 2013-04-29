@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>ResponsiveSlides.js &middot; With captions</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="../responsiveslides.css?v=1.13" />
+  <link rel="stylesheet" href="themes.css?v=1.13" />
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="../responsiveslides.min.js?v=1.6"></script>
+  <script>
+    $(function () {
+
+      // Slideshow 1
+      $("#slides1").responsiveSlides({
+        auto: false,
+        pagination: true,
+        nav: true,
+        fade: 500,
+        maxwidth: 800
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+    <h1>With captions</h1>
+
+    <div class="rslides_container">
+      <ul id="slides1" class="rslides">
+        <li>
+          <img src="../1.jpg" alt="" />
+          <p class="caption">Donec id elit non mi porta gravida at eget metus.</p>
+        </li>
+        <li>
+          <img src="../2.jpg" alt="" />
+          <p class="caption">Donec ullamcorper nulla non metus auctor fringilla.</p>
+        </li>
+        <li>
+          <img src="../3.jpg" alt="" />
+          <p class="caption">Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+        </li>
+      </ul>
+    </div>
+    
+    <a href="http://responsive-slides.viljamis.com/">View ResponsiveSlides.js documentation</a>
+
+  </div>
+  <a href="https://github.com/viljamis/ResponsiveSlides.js" class="github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/4c7dc970b89fd04b81c8e221ba88ff99a06c6b61/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67" alt="Fork me on GitHub"></a>
+
+  <!-- Don't include the script below on your own page, it's used for viljamis.com analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-27143570-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+</body>
+</html>
