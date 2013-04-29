@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ResponsiveSlides.js &middot; Responsive jQuery Slider &amp; Slideshow</title>
+  <meta name="author" content="Viljami Salminen">
+  <meta name="description" content="ResponsiveSlides.js is a tiny jQuery plugin that automatically creates responsive slider using images inside a container">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="responsiveslides.css">
+  <link rel="stylesheet" href="example.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="http://viljamis.com/js/libs/jquery-1.8.2.min.js"><\/script>')</script>
+  <script src="responsiveslides.min.js"></script>
+  <script>
+    $(function() {
+
+      // Slideshow 1 
+      $(".rslides1").responsiveSlides({
+        speed: 1000,
+        maxwidth: 800
+      });
+
+      // Slideshow 2 
+      $(".rslides2").responsiveSlides({
+        auto: false,
+        pager: true,
+        speed: 500,
+        maxwidth: 540
+      });
+
+    });
+  </script>
+</head>
+<body>
+  <div id="wrapper">
+    <h1>ResponsiveSlides.js v1.54</h1>
+    <h2>Simple &amp; lightweight responsive slider plugin (in 1kb)</h2>
+    <ul class="rslides rslides1">
+      <li><img src="1.jpg" alt=""></li>
+      <li><img src="2.jpg" alt=""></li>
+      <li><img src="3.jpg" alt=""></li>
+    </ul>
+      
+    <p><a href="http://responsiveslides.com/">ResponsiveSlides.js</a> is a tiny jQuery plugin that creates a responsive slider using elements inside a container. It has been used on sites like <a href="http://www.buildwindows.com/launch" rel="external">Microsoft's Build 2012</a> and <a href="https://gridsetapp.com" rel="external">Gridset App</a>. ResponsiveSLides.js works with wide range of browsers including all IE versions from IE6 and up. It also adds css max-width support for IE6 and other browsers that don't natively support it. Only dependency is <a href="http://jquery.com/" rel="external">jQuery</a> (1.6 and up supported) and that all the images are same&nbsp;size.</p>
+    <p>Biggest difference to other responsive slider plugins is the file size (1.4kb minified and gzipped) + that this one doesn't try to do everything. Responsive Slides has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.</p>
+    <h3>Features</h3>
+    <ul class="list">
+      <li>Fully responsive</li>
+      <li>1kb minified and gzipped</li>
+      <li>CSS3 transitions with JavaScript fallback</li>
+      <li>Simple markup using unordered list</li>
+      <li>Settings for transition and timeout durations</li>
+      <li>Multiple slideshows supported</li>
+      <li>Automatic and manual fade</li>
+      <li>Works in all major desktop and mobile browsers</li>
+      <li>Captions and other html-elements supported inside slides</li>
+      <li>Separate pagination and next/prev controls</li>
+      <li>Possibility to choose where the controls append to</li>
+      <li>Possibility to randomize the order of the slides</li>
+      <li>Possibility to use custom markup for pagination</li>
+      <li>Can be paused while hovering slideshow and/or controls</li>
+      <li>Images can be wrapped inside links</li>
+      <li>Optional 'before' and 'after' callbacks</li>
+    </ul>
+    <br><br>
+    <h3>Usage:</h3>
+    <h4>1. Link files</h4>
+    <pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js">&lt;/script>
+&lt;script src="responsiveslides.min.js">&lt;/script></code></pre>
+    <h4>2. Add Markup</h4>
+    <pre><code>&lt;ul class="rslides">
+  &lt;li>&lt;img src="1.jpg" alt="">&lt;/li>
+  &lt;li>&lt;img src="2.jpg" alt="">&lt;/li>
+  &lt;li>&lt;img src="3.jpg" alt="">&lt;/li>
+&lt;/ul></code></pre>
+    <h4>3. Add CSS</h4>
+    <pre><code>.rslides {
+  position: relative;
+  list-style: none;
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  }
+
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+  }
+
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+  }
+
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+  }</code></pre>
+    <h4>4. Hook up the slideshow</h4>
+    <pre><code>&lt;script>
+  $(function() {
+    $(".rslides").responsiveSlides();
+  });
+&lt;/script></code></pre>
+    <h4>5. Options you can customize</h4>
+    <pre><code>$(".rslides").responsiveSlides({
+  auto: true,             // Boolean: Animate automatically, true or false
+  speed: 500,            // Integer: Speed of the transition, in milliseconds
+  timeout: 4000,          // Integer: Time between slide transitions, in milliseconds
+  pager: false,           // Boolean: Show pager, true or false
+  nav: false,             // Boolean: Show navigation, true or false
+  random: false,          // Boolean: Randomize the order of the slides, true or false
+  pause: false,           // Boolean: Pause on hover, true or false
+  pauseControls: true,    // Boolean: Pause when hovering controls, true or false
+  prevText: "Previous",   // String: Text for the "previous" button
+  nextText: "Next",       // String: Text for the "next" button
+  maxwidth: "",           // Integer: Max-width of the slideshow, in pixels
+  navContainer: "",       // Selector: Where controls should be appended to, default is after the 'ul'
+  manualControls: "",     // Selector: Declare custom pager navigation
+  namespace: "rslides",   // String: Change the default namespace used
+  before: function(){},   // Function: Before callback
+  after: function(){}     // Function: After callback
+});</code></pre>
+    <p>That's all! Download the latest version, this demo and changelog from <a href="https://github.com/viljamis/ResponsiveSlides.js">Github</a>. For more examples about the usage <a href="http://viljamis.com/responsive-slides/themes/">go here</a>.</p>
+    <br><br><br><br>
+    <h3>Example with options "auto:false" and "pager: true"</h3>
+    <ul class="rslides rslides2">
+      <li><img src="1.jpg" alt=""></li>
+      <li><img src="2.jpg" alt=""></li>
+      <li><img src="3.jpg" alt=""></li>
+    </ul>
+    <br><br>
+    <h3>ResponsiveSlides.js is tested with the following browser</h3>
+    <ul class="list">
+      <li>Internet Explorer 6,7,8,9</li>
+      <li>Firefox 3,6,8,11</li>
+      <li>Safari 5,5.1</li>
+      <li>Chrome 15,20</li>
+      <li>Opera 11,11.6</li>
+      <li>iOS Safari</li>
+      <li>Symbian 3 Webkit</li>
+      <li>Opera Mobile 10.1</li>
+      <li>Opera Mini for iOS</li>
+      <li>IE7, IE9 Mobile</li>
+      <li>Firefox Mobile</li>
+      <li>Android 2.3+</li>
+      <li>Kindle browser</li>
+    </ul>
+    <br><br>
+    <h3>Support</h3>
+    <p>Please post your bug reports to <a href="https://github.com/viljamis/ResponsiveSlides.js/issues">GitHub issues</a>. For support requests, use <a href="http://stackoverflow.com">Stackoverflow</a>.</p>
+    <a href="https://github.com/viljamis/ResponsiveSlides.js" id="download">Download the latest version from GitHub</a>
+    <p class="footer">ResponsiveSlides.js is created by <a href="http://viljamis.com">@viljamis</a>. Special thanks to <a href="https://github.com/bgutschke">Bastian Gutschke</a>.</p>
+  </div>
+
+  <!-- Don't include the script below on your own page, it's used for viljamis.com analytics -->
+  <script>
+    var _gaq=[['_setAccount','UA-27143570-1'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';s.parentNode.insertBefore(g,s)}(document,'script'));
+  </script>
+
+  <a href="http://github.com/viljamis/ResponsiveSlides.js" class="github"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://viljamis.com/img/forkme.png" alt="Fork me on GitHub"></a>
+</body>
+</html>
