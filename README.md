@@ -30,7 +30,10 @@ Biggest difference to other responsive slider plugins is the file size (1.4kb mi
 Usage Instructions and demo
 ======
 
-For instructions and demo go to [http://responsiveslides.com/](http://responsiveslides.com/), or [download this repository as a zip file](https://github.com/viljamis/ResponsiveSlides.js/zipball/master) and and open "index.html" from the "example" folder. There's also a file called "themes.html" inside the "themes" folder which has [more examples about the usage](http://viljamis.com/responsive-slides/themes/).
+For instructions and demo go to [http://responsiveslides.com/](http://responsiveslides.com/), or [download this repository as a zip file](https://github.com/viljamis/ResponsiveSlides.js/zipball/master) and and open "index.html" from the "example" folder. 
+
+* View [additional usage examples online](http://responsiveslides.com/themes/themes.html). 
+* View [a demo with captions](http://responsiveslides.com/with-captions/themes.html). 
 
 Currently jQuery 1.6 and up is supported.
 
