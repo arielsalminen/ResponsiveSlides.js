@@ -84,7 +84,7 @@ v1.22 (2012-03-27) - Adds callback events which are similar as in [@Wilto](https
 
 v1.21 (2012-03-23) - Added two new options: 'nextText' and 'prevText'.
 
-v1.20 (2012-03-21) - New option called 'nav', which enables next and previous buttons. Can be used with 'pagination' and 'auto' options. Adds also new [themes folder](http://viljamis.com/responsive-slides/themes/) with three different ways to use the new next and previous buttons.
+v1.20 (2012-03-21) - New option called 'nav', which enables next and previous buttons. Can be used with 'pagination' and 'auto' options. Adds also new [themes folder](http://responsiveslides.com/themes/themes.html) with three different ways to use the new next and previous buttons.
 
 v1.10 (2012-03-12) - Refactoring, New markup style, CSS is now separated from the plugin, you can have links around images and other elements inside slides (not just images, but also captions etc.) + New option called "pagination", which enables to choose both "pagination" and "auto" at the same time. Shout outs for the help to [@bgutschke](https://github.com/bgutschke)
 
