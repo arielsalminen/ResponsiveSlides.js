@@ -55,6 +55,7 @@ a {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   top: 50%;
   left: 0;
+  z-index: 99;
   opacity: 0.7;
   text-indent: -9999px;
   overflow: hidden;
