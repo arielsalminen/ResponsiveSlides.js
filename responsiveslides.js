@@ -6,7 +6,7 @@
  * Available under the MIT license
  */
 
-/*jslint browser: true, sloppy: true, vars: true, plusplus: true, indent: 2 */
+/*jslint browser: true, vars: true, plusplus: true, indent: 2 */
 
 (function ($, window, i) {
   $.fn.responsiveSlides = function (options) {
@@ -17,6 +17,8 @@
       "speed": 500,             // Integer: Speed of the transition, in milliseconds
       "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
       "pager": false,           // Boolean: Show pager, true or false
+      "thumb" : false,          // String: Show a thumbnail in pager. Options: false, img = as image, bg = as background-image
+      "thumbSrc" : false,       // String: Define a thumb src as a dataset (data-thumb="src" is called thumbSrc : 'thumb' ). Defaults to false (not set)
       "nav": false,             // Boolean: Show navigation, true or false
       "random": false,          // Boolean: Randomize the order of the slides, true or false
       "pause": false,           // Boolean: Pause on hover, true or false
@@ -63,9 +65,12 @@
         activeClass = namespace + "_here",
         visibleClass = namespaceIdx + "_on",
         slideClassPrefix = namespaceIdx + "_s",
+        pagerThumbsClass = namespace + "_thumbs",
+        thumbClass = namespace + "_thumb",
 
         // Pager
         $pager = $("<ul class='" + namespace + "_tabs " + namespaceIdx + "_tabs' />"),
+
 
         // Styles for visible and hidden slides
         visible = {"float": "left", "position": "relative", "opacity": 1, "zIndex": 2},
@@ -127,6 +132,11 @@
           }
         };
 
+      // If has thumbs add thumbclass
+      if (settings.thumb) {
+        $pager.addClass(pagerThumbsClass);
+      }
+
       // Random order
       if (settings.random) {
         $slide.sort(function () {
@@ -182,11 +192,37 @@
         if (settings.pager && !settings.manualControls) {
           var tabMarkup = [];
           $slide.each(function (i) {
-            var n = i + 1;
+            var n = i + 1,
+                u,
+                e;
+
+            // Get the thumb src
+            if (settings.thumb) {
+              if (settings.thumbSrc) {
+                u = $(this).find('[data-'+ settings.thumbSrc+ ']').filter(':first').data(settings.thumbSrc);
+              }
+
+              // If we misspell dataset default to img src
+              if (!settings.thumbSrc || u === null) {
+                u = $(this).find('img').filter(':first').attr('src');
+              }
+            }
+
+            // If thumb is defined insert image as requested
+            // else insert number. Fallback to number
+            if (settings.thumb === 'img') {
+              e = '<img src="'+ u +'">';
+            } else if (settings.thumb === 'bg') {
+              e = '<span class='+ thumbClass  +' style="background-image : url('+ u +')" />';
+            } else {
+              e = n ;
+            }
+
             tabMarkup +=
               "<li>" +
-              "<a href='#' class='" + slideClassPrefix + n + "'>" + n + "</a>" +
+              "<a href='#' class='" + slideClassPrefix + n + "'>" + e +"</a>" +
               "</li>";
+
           });
           $pager.append(tabMarkup);
 
