@@ -21,6 +21,8 @@
       "random": false,          // Boolean: Randomize the order of the slides, true or false
       "pause": false,           // Boolean: Pause on hover, true or false
       "pauseControls": true,    // Boolean: Pause when hovering controls, true or false
+      "touch": true,            // Boolean: Enable touch trigger to change slides, true or false
+      "touchThreshold": 200,    // Integer: Amount of swipe distance to trigger a slide change, in pixels
       "prevText": "Previous",   // String: Text for the "previous" button
       "nextText": "Next",       // String: Text for the "next" button
       "maxwidth": "",           // Integer: Max-width of the slideshow, in pixels
@@ -367,6 +369,85 @@
           }
         }
 
+      }
+
+      //Touch
+      if (settings.touch) {
+
+        //Borrowed heavily from localpcguy https://gist.github.com/localpcguy/1373518
+        var rsTouch = {
+          touches : {
+            "touchstart": {"x": -1, "y": -1},
+            "touchmove" : {"x": -1, "y": -1},
+            "touchend"  : false,
+            "direction" : "undetermined"
+          },
+          touchHandler: function(e) {
+            var touch;
+
+            //Do not execute if no event
+            if (typeof e !== "undefined") {
+              e.preventDefault();
+
+              //Do not execute if touch values are not returned
+              if (typeof e.originalEvent.touches !== "undefined") {
+                touch = e.originalEvent.touches[0];
+
+                //Filter through for each touch event
+                switch (e.type) {
+                case "touchstart":
+                  //On first touch, pause the scroll so new slide doesn't appear
+                  clearInterval(rotate);
+                case "touchmove":
+                  //Store current touch location
+                  rsTouch.touches[e.type].x = touch.pageX;
+                case "touchend":
+                  //Continue if touch was actually executed
+                  if (rsTouch.touches.touchstart.x > -1 && rsTouch.touches.touchmove.x > -1) {
+                    //Set direction
+                    rsTouch.touches.direction = rsTouch.touches.touchstart.x < rsTouch.touches.touchmove.x ? "right" : "left";
+
+                    //Determine where to slide (duplicated from line 347)
+                    var $visibleClass = $("." + visibleClass);
+                    var idx = $slide.index($visibleClass),
+                      prevIdx = idx - 1,
+                      nextIdx = idx + 1 < length ? index + 1 : 0;
+
+                    //Round up to positive integer, continue if swipe is significant enough (over threshold)
+                    if (Math.abs(rsTouch.touches.touchstart.x - rsTouch.touches.touchmove.x) > settings.touchThreshold) {
+
+                      //The actuall sliding execution
+                      if (rsTouch.touches.direction === "left") {
+                        slideTo(nextIdx);
+                      } else {
+                        slideTo(prevIdx);
+                      }
+
+                      //Reset vars back to normal
+                      rsTouch.touches.touchstart = {"x": -1, "y": -1};
+                      rsTouch.touches.touchmove = {"x": -1, "y": -1};
+                      rsTouch.touches.direction = "undetermined";
+                      restartCycle();
+                    }
+                  }
+                  break;
+                default:
+                  break;
+                }
+              }
+            }
+          },
+
+          //Bind all listeners to the slideshow
+          init: function() {
+            $slide.bind('touchstart', rsTouch.touchHandler);
+            $slide.bind('touchmove', rsTouch.touchHandler);
+            $slide.bind('touchend', rsTouch.touchHandler);
+          }
+        };
+
+        //Activate touch
+        rsTouch.init();
       }
 
       // Max-width fallback
