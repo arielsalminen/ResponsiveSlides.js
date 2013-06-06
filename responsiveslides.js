@@ -347,9 +347,10 @@
               nextIdx = idx + 1 < length ? index + 1 : 0;
 
             // Go to slide
-            slideTo($(this)[0] === $prev[0] ? prevIdx : nextIdx);
+            slideTo($(this)[0] === $prev[idx] ? prevIdx : nextIdx);
+            
             if (settings.pager || settings.manualControls) {
-              selectTab($(this)[0] === $prev[0] ? prevIdx : nextIdx);
+              selectTab($(this)[0] === $prev[idx] ? prevIdx : nextIdx);
             }
 
             if (!settings.pauseControls) {
