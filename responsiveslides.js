@@ -142,8 +142,10 @@
         this.id = slideClassPrefix + i;
       });
 
-      // Add max-width and classes
-      $this.addClass(namespace + " " + namespaceIdx);
+      // Add max-width, id and classes
+      $this
+        .addClass(namespace + " " + namespaceIdx)[0]
+        .id = namespaceIdx;
       if (options && options.maxwidth) {
         $this.css("max-width", maxw);
       }
