@@ -343,7 +343,7 @@
 
             // Determine where to slide
             var idx = $slide.index($visibleClass),
-              prevIdx = idx - 1 < 0 ? idx : idx - 1,
+              prevIdx = idx - 1 < 0 ? length - 1 : idx - 1,
               nextIdx = idx + 1 < length ? index + 1 : 0;
 
             // Go to slide
