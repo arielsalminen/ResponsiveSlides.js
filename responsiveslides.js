@@ -26,6 +26,7 @@
       "maxwidth": "",           // Integer: Max-width of the slideshow, in pixels
       "navContainer": "",       // Selector: Where auto generated controls should be appended to, default is after the <ul>
       "manualControls": "",     // Selector: Declare custom pager navigation
+      "tabSelector": "a",       // Selector: Element within the pager to target for each item
       "namespace": "rslides",   // String: change the default namespace used
       "before": $.noop,         // Function: Before callback
       "after": $.noop           // Function: After callback
@@ -213,7 +214,7 @@
 
         // If we have a pager, we need to set up the selectTab function
         if (settings.pager || settings.manualControls) {
-          $tabs = $pager.find('a');
+          $tabs = $pager.find(settings.tabSelector);
 
           // Select pager item
           selectTab = function (idx) {
