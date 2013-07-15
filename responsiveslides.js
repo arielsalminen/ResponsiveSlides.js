@@ -140,6 +140,7 @@
       // Add ID's to each slide
       $slide.each(function (i) {
         this.id = slideClassPrefix + i;
+        $(this).has('p').addClass('with-caption');
       });
 
       // Add max-width and classes
