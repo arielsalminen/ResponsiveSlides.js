@@ -185,7 +185,7 @@
             var n = i + 1;
             tabMarkup +=
               "<li>" +
-              "<a href='#' class='" + slideClassPrefix + n + "'>" + n + "</a>" +
+              "<button type='button' class='" + slideClassPrefix + n + "'>" + n + "</button>" +
               "</li>";
           });
           $pager.append(tabMarkup);
@@ -213,7 +213,7 @@
 
         // If we have a pager, we need to set up the selectTab function
         if (settings.pager || settings.manualControls) {
-          $tabs = $pager.find('a');
+          $tabs = $pager.find('button');
 
           // Select pager item
           selectTab = function (idx) {
@@ -271,7 +271,6 @@
         // Pager click event handler
         if (settings.pager || settings.manualControls) {
           $tabs.bind("click", function (e) {
-            e.preventDefault();
 
             if (!settings.pauseControls) {
               restartCycle();
@@ -308,8 +307,8 @@
         // Navigation
         if (settings.nav) {
           var navMarkup =
-            "<a href='#' class='" + navClass + " prev'>" + settings.prevText + "</a>" +
-            "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
+            "<button type='button' class='" + navClass + " prev'>" + settings.prevText + "</button>" +
+            "<button type='button' class='" + navClass + " next'>" + settings.nextText + "</button>";
 
           // Inject navigation
           if (options.navContainer) {
@@ -323,7 +322,6 @@
 
           // Click event handler
           $trigger.bind("click", function (e) {
-            e.preventDefault();
 
             var $visibleClass = $("." + visibleClass);
 

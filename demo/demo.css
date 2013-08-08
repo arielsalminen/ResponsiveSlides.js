@@ -29,6 +29,19 @@ h2 {
   margin-bottom: 40px;
   }
 
+button {
+  border: 0;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  background: transparent;
+  }
+
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
 #wrapper {
   padding: 20px;
   }
@@ -62,7 +75,6 @@ p,h3,h4,pre {
   list-style: none;
   margin: 0 auto 50px;
   max-width: 540px;
-  padding: 10px 0;
   text-align: center;
   width: 100%;
   }
@@ -73,22 +85,18 @@ p,h3,h4,pre {
   margin-right: 1px;
   }
 
-.rslides_tabs a {
-  width: auto;
-  line-height: 20px;
+.rslides_tabs button {
   padding: 9px 20px;
-  height: auto;
-  background: transparent;
-  display: inline;
+  line-height: 20px;
+  color: #fff;
   }
 
 .rslides_tabs li:first-child {
   margin-left: 0;
   }
 
-.rslides_tabs .rslides_here a {
+.rslides_tabs .rslides_here button {
   background: rgba(255,255,255,.1);
-  color: #fff;
   font-weight: bold;
   }
 
@@ -207,21 +215,26 @@ h3 {
   right: 0;
   }
 
-#slider3-pager a {
-  display: inline-block;
+#slider3-pager {
+  padding: 9px;
 }
 
-#slider3-pager img {
-  float: left;
+#slider3-pager li {
+  display: inline;
+  padding: 0 6px;
 }
 
-#slider3-pager .rslides_here a {
+#slider3-pager button {
+  padding: 0;
+}
+
+#slider3-pager .rslides_here button {
   background: transparent;
   box-shadow: 0 0 0 2px #666;
 }
 
-#slider3-pager a {
-  padding: 0;
+#slider3-pager img {
+  vertical-align: bottom;
 }
 
 @media screen and (max-width: 600px) {
