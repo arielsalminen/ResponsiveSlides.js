@@ -20,12 +20,10 @@
 
 .rslides li:first-child {
   position: relative;
-  display: block;
   float: left;
   }
 
 .rslides img {
-  display: block;
   height: auto;
   float: left;
   width: 100%;
