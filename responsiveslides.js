@@ -129,12 +129,12 @@
 
       // Random order
       if (settings.random) {
-        $slide.sort(function () {
-          return (Math.round(Math.random()) - 0.5);
-        });
-        $this
-          .empty()
-          .append($slide);
+        // Shuffle all slides
+        while ($slide.length) {
+          $this.append($slide.splice(Math.floor(Math.random() * $slide.length), 1));
+        }
+        // Get new children object
+        $slide = $this.children();
       }
 
       // Add ID's to each slide
