@@ -28,7 +28,7 @@
       "manualControls": "",     // Selector: Declare custom pager navigation
       "namespace": "rslides",   // String: change the default namespace used
       "before": $.noop,         // Function: Before callback
-      "after": $.noop           // Function: After callback
+      "after": $.noop,          // Function: After callback
       "callback": $.noop        // Function: callback
     }, options);
 
