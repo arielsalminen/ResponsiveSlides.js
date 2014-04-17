@@ -2,7 +2,6 @@
 ### Simple & lightweight responsive slider plugin (in 1kb)
 
 
-
 [ResponsiveSlides.js](http://responsiveslides.com/) is a tiny jQuery plugin that creates a responsive slider using elements inside a container. It has been used on sites like [Microsoft's Build 2012](http://www.buildwindows.com/launch) and [Gridset App](https://gridsetapp.com). ResponsiveSlides.js works with wide range of browsers including all IE versions from IE6 and up. It also adds CSS max-width support for IE6 and other browsers that don't natively support it. Only dependency is [jQuery](http://jquery.com/) (1.6 and up supported, tested up to 1.8.3) and that all the images are the same size.
 
 Biggest difference to other responsive slider plugins is the file size (1.4kb minified and gzipped) + that this one doesn't try to do everything. ResponsiveSlides.js has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
@@ -57,6 +56,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 Changelog
 ======
 
+v1.54 (2014-04-17) - Adding callback to min version and comma between parameters
 
 v1.54 (2013-04-26) - Fixes few bugs with the before and after callbacks.
 
