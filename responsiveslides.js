@@ -191,7 +191,7 @@
           $pager.append(tabMarkup);
 
           // Inject pager
-          if (options.navContainer) {
+          if (options && options.navContainer) {
             $(settings.navContainer).append($pager);
           } else {
             $this.after($pager);
@@ -312,7 +312,7 @@
             "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
 
           // Inject navigation
-          if (options.navContainer) {
+          if (options && options.navContainer) {
             $(settings.navContainer).append(navMarkup);
           } else {
             $this.after(navMarkup);
@@ -370,7 +370,7 @@
       }
 
       // Max-width fallback
-      if (typeof document.body.style.maxWidth === "undefined" && options.maxwidth) {
+      if (typeof document.body.style.maxWidth === "undefined" && options && options.maxwidth) {
         var widthSupport = function () {
           $this.css("width", "100%");
           if ($this.width() > maxw) {
