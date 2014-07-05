@@ -29,7 +29,8 @@
       "namespace": "rslides",   // String: change the default namespace used
       "before": $.noop,         // Function: Before callback
       "after": $.noop,          // Function: After callback
-      "callback": $.noop        // Function: callback
+      "callback": $.noop,        // Function: callback
+      "pausePlay" : false       // Boolean: Add play/pause button when auto is on
     }, options);
 
     return this.each(function () {
@@ -231,18 +232,17 @@
 
           startCycle = function () {
             rotate = setInterval(function () {
+                
+                // Clear the event queue
+                $slide.stop(true, true);
 
-              // Clear the event queue
-              $slide.stop(true, true);
+                var idx = index + 1 < length ? index + 1 : 0;
 
-              var idx = index + 1 < length ? index + 1 : 0;
-
-              // Remove active state and set new if pager is set
-              if (settings.pager || settings.manualControls) {
-                selectTab(idx);
-              }
-
-              slideTo(idx);
+                // Remove active state and set new if pager is set
+                if (settings.pager || settings.manualControls) {
+                  selectTab(idx);
+                }
+                slideTo(idx);
             }, waitTime);
           };
 
@@ -258,6 +258,23 @@
             // Restart
             startCycle();
           }
+        };
+
+        if(settings.pausePlay && settings.auto){
+          var classPausePlay = namespace + "-pause-play"; 
+          $pager.before("<div class = '" + classPausePlay+
+              "'><div id= 'button-pause-play'></div></div>");
+
+          $("#button-pause-play").on("click",function(){
+              var $this = $(this);
+              if(!($this.hasClass("paused"))){
+                clearInterval(rotate);
+                $this.addClass("paused");
+              }else{
+                restartCycle();
+                $this.removeClass("paused");
+              }
+          });
         };
 
         // Pause on hover
@@ -332,15 +349,6 @@
             if ($visibleClass.queue('fx').length) {
               return;
             }
-
-            //  Adds active class during slide animation
-            //  $(this)
-            //    .addClass(namespace + "_active")
-            //    .delay(fadeTime)
-            //    .queue(function (next) {
-            //      $(this).removeClass(namespace + "_active");
-            //      next();
-            //  });
 
             // Determine where to slide
             var idx = $slide.index($visibleClass),

@@ -31,3 +31,15 @@
   width: 100%;
   border: 0;
   }
+
+#button-pause-play.paused{
+  background: #fff url("pix/play.png");
+}
+
+#button-pause-play{
+  background: #fff url("pix/pause.png");
+  width: 16px;
+  height:16px;
+  margin: 0 auto;
+  cursor: pointer;
+}
