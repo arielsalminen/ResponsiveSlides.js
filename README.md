@@ -7,6 +7,13 @@
 
 Biggest difference to other responsive slider plugins is the file size (1.4kb minified and gzipped) + that this one doesn't try to do everything. ResponsiveSlides.js has basically only two different modes: Either it just automatically fades the images, or operates as a responsive image container with pagination and/or navigation to fade between slides.
 
+### Install
+
+~~~
+bower install --save ResponsiveSlides.js
+~~~
+
+
 #### Features:
  * Fully responsive
  * 1kb minified and gzipped
