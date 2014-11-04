@@ -29,7 +29,7 @@
       "namespace": "rslides",   // String: change the default namespace used
       "before": $.noop,         // Function: Before callback
       "after": $.noop           // Function: After callback
-    }, options);
+    }, options || {});
 
     return this.each(function () {
 
@@ -68,8 +68,8 @@
         $pager = $("<ul class='" + namespace + "_tabs " + namespaceIdx + "_tabs' />"),
 
         // Styles for visible and hidden slides
-        visible = {"float": "left", "position": "relative", "opacity": 1, "zIndex": 2},
-        hidden = {"float": "none", "position": "absolute", "opacity": 0, "zIndex": 1},
+        visible = {"float": "left", "position": "relative", "opacity": 1, "zIndex": 1},
+        hidden = {"float": "none", "position": "absolute", "opacity": 0, "zIndex": ""},
 
         // Detect transition support
         supportsTransitions = (function () {
@@ -144,7 +144,7 @@
 
       // Add max-width and classes
       $this.addClass(namespace + " " + namespaceIdx);
-      if (options && options.maxwidth) {
+      if (settings.maxwidth) {
         $this.css("max-width", maxw);
       }
 
@@ -191,7 +191,7 @@
           $pager.append(tabMarkup);
 
           // Inject pager
-          if (options.navContainer) {
+          if (settings.navContainer) {
             $(settings.navContainer).append($pager);
           } else {
             $this.after($pager);
@@ -206,14 +206,14 @@
 
         // Add pager slide class prefixes
         if (settings.pager || settings.manualControls) {
-          $pager.find('li').each(function (i) {
+          $pager.find("li").each(function(i) {
             $(this).addClass(slideClassPrefix + (i + 1));
           });
         }
 
         // If we have a pager, we need to set up the selectTab function
         if (settings.pager || settings.manualControls) {
-          $tabs = $pager.find('a');
+          $tabs = $pager.find("a");
 
           // Select pager item
           selectTab = function (idx) {
@@ -281,7 +281,7 @@
             var idx = $tabs.index(this);
 
             // Break if element is already active or currently animated
-            if (index === idx || $("." + visibleClass).queue('fx').length) {
+            if (index === idx || $("." + visibleClass).queue("fx").length) {
               return;
             }
 
@@ -312,7 +312,7 @@
             "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
 
           // Inject navigation
-          if (options.navContainer) {
+          if (settings.navContainer) {
             $(settings.navContainer).append(navMarkup);
           } else {
             $this.after(navMarkup);
@@ -328,7 +328,7 @@
             var $visibleClass = $("." + visibleClass);
 
             // Prevent clicking if currently animated
-            if ($visibleClass.queue('fx').length) {
+            if ($visibleClass.queue("fx").length) {
               return;
             }
 
@@ -370,8 +370,8 @@
       }
 
       // Max-width fallback
-      if (typeof document.body.style.maxWidth === "undefined" && options.maxwidth) {
-        var widthSupport = function () {
+      if (typeof document.body.style.maxWidth === "undefined" && settings.maxwidth) {
+        var widthSupport = function() {
           $this.css("width", "100%");
           if ($this.width() > maxw) {
             $this.css("width", maxw);
