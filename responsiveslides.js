@@ -28,7 +28,9 @@
       "manualControls": "",     // Selector: Declare custom pager navigation
       "namespace": "rslides",   // String: change the default namespace used
       "before": $.noop,         // Function: Before callback
-      "after": $.noop           // Function: After callback
+      "after": $.noop,          // Function: After callback
+      "visibleStyle": {"float": "left", "position": "relative", "opacity": 1, "zIndex": 2},	// Object: jQuery CSS
+      "hiddenStyle": {"float": "none", "position": "absolute", "opacity": 0, "zIndex": 1} // Object: jQuery CSS
     }, options);
 
     return this.each(function () {
@@ -68,8 +70,8 @@
         $pager = $("<ul class='" + namespace + "_tabs " + namespaceIdx + "_tabs' />"),
 
         // Styles for visible and hidden slides
-        visible = {"float": "left", "position": "relative", "opacity": 1, "zIndex": 2},
-        hidden = {"float": "none", "position": "absolute", "opacity": 0, "zIndex": 1},
+        visible = settings.visibleStyle,
+        hidden = settings.hiddenStyle,
 
         // Detect transition support
         supportsTransitions = (function () {
