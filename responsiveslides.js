@@ -162,8 +162,6 @@
         waitTime += 100;
       }
 
-      console.log(waitTime, fadeTime);
-
       // CSS transitions
       if (supportsTransitions) {
         $slide
