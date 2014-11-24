@@ -157,6 +157,13 @@
         .css(visible)
         .show();
 
+      // Make sure the timeout is at least 100ms longer than the fade
+      if (waitTime < fadeTime + 100) {
+        waitTime += 100;
+      }
+
+      console.log(waitTime, fadeTime);
+
       // CSS transitions
       if (supportsTransitions) {
         $slide
@@ -172,11 +179,6 @@
 
       // Only run if there's more than one slide
       if ($slide.size() > 1) {
-
-        // Make sure the timeout is at least 100ms longer than the fade
-        if (waitTime < fadeTime + 100) {
-          return;
-        }
 
         // Pager
         if (settings.pager && !settings.manualControls) {
