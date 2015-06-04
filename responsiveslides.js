@@ -17,6 +17,7 @@
       "speed": 500,             // Integer: Speed of the transition, in milliseconds
       "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
       "pager": false,           // Boolean: Show pager, true or false
+      "forcePager": false,      // Boolean: Show pager even for a single slide
       "nav": false,             // Boolean: Show navigation, true or false
       "random": false,          // Boolean: Randomize the order of the slides, true or false
       "pause": false,           // Boolean: Pause on hover, true or false
@@ -171,7 +172,7 @@
       }
 
       // Only run if there's more than one slide
-      if ($slide.size() > 1) {
+      if ($slide.size() > 1 || settings.forcePager) {
 
         // Make sure the timeout is at least 100ms longer than the fade
         if (waitTime < fadeTime + 100) {
