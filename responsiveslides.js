@@ -191,7 +191,7 @@
           $pager.append(tabMarkup);
 
           // Inject pager
-          if (options.navContainer) {
+          if (settings.navContainer) {
             $(settings.navContainer).append($pager);
           } else {
             $this.after($pager);
