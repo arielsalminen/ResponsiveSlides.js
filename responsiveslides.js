@@ -49,7 +49,7 @@
         // Helpers
         index = 0,
         $slide = $this.children(),
-        length = $slide.size(),
+        length = $slide.length,
         fadeTime = parseFloat(settings.speed),
         waitTime = parseFloat(settings.timeout),
         maxw = parseFloat(settings.maxwidth),
@@ -171,7 +171,7 @@
       }
 
       // Only run if there's more than one slide
-      if ($slide.size() > 1) {
+      if ($slide.length > 1) {
 
         // Make sure the timeout is at least 100ms longer than the fade
         if (waitTime < fadeTime + 100) {
