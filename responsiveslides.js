@@ -13,20 +13,20 @@
 
     // Default settings
     var settings = $.extend({
-      "auto": true,             // Boolean: Animate automatically, true or false
+      "auto": true,             // Boolean: Animate automatically, true OR false
       "speed": 500,             // Integer: Speed of the transition, in milliseconds
       "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
-      "pager": false,           // Boolean: Show pager, true or false
-      "nav": false,             // Boolean: Show navigation, true or false
-      "random": false,          // Boolean: Randomize the order of the slides, true or false
-      "pause": false,           // Boolean: Pause on hover, true or false
-      "pauseControls": true,    // Boolean: Pause when hovering controls, true or false
+      "pager": false,           // Boolean: Show pager, true OR false
+      "nav": false,             // Boolean: Show navigation, true OR false
+      "random": false,          // Boolean: Randomize the order of the slides, true OR false
+      "pause": false,           // Boolean: Pause on hover, true OR false
+      "pauseControls": true,    // Boolean: Pause when hovering controls, true OR false
       "prevText": "Previous",   // String: Text for the "previous" button
       "nextText": "Next",       // String: Text for the "next" button
       "maxwidth": "",           // Integer: Max-width of the slideshow, in pixels
       "navContainer": "",       // Selector: Where auto generated controls should be appended to, default is after the <ul>
       "manualControls": "",     // Selector: Declare custom pager navigation
-      "namespace": "rslides",   // String: change the default namespace used
+      "namespace": "rslides",   // String: Change the default namespace used
       "before": $.noop,         // Function: Before callback
       "after": $.noop           // Function: After callback
     }, options);
@@ -148,7 +148,7 @@
         $this.css("max-width", maxw);
       }
 
-      // Hide all slides, then show first one
+      // Hide all the slides, then show the first one
       $slide
         .hide()
         .css(hidden)
@@ -170,7 +170,7 @@
           });
       }
 
-      // Only run if there's more than one slide
+      // Only run if there are more than one slide
       if ($slide.size() > 1) {
 
         // Make sure the timeout is at least 100ms longer than the fade
@@ -236,7 +236,7 @@
 
               var idx = index + 1 < length ? index + 1 : 0;
 
-              // Remove active state and set new if pager is set
+              // Remove the active state and set new if pager is set
               if (settings.pager || settings.manualControls) {
                 selectTab(idx);
               }
