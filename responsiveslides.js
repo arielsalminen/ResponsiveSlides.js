@@ -9,6 +9,27 @@
 /*jslint browser: true, sloppy: true, vars: true, plusplus: true, indent: 2 */
 
 (function ($, window, i) {
+
+  // Detect transition support
+  var supportsTransitions = (function () {
+    var docBody = document.body || document.documentElement;
+    var styles = docBody.style;
+    var prop = "transition";
+    if (typeof styles[prop] === "string") {
+      return true;
+    }
+    // Tests for vendor specific prop
+    vendor = ["Moz", "Webkit", "Khtml", "O", "ms"];
+    prop = prop.charAt(0).toUpperCase() + prop.substr(1);
+    var i;
+    for (i = 0; i < vendor.length; i++) {
+      if (typeof styles[vendor[i] + prop] === "string") {
+        return true;
+      }
+    }
+    return false;
+  })();
+  
   $.fn.responsiveSlides = function (options) {
 
     // Default settings
@@ -70,26 +91,6 @@
         // Styles for visible and hidden slides
         visible = {"float": "left", "position": "relative", "opacity": 1, "zIndex": 2},
         hidden = {"float": "none", "position": "absolute", "opacity": 0, "zIndex": 1},
-
-        // Detect transition support
-        supportsTransitions = (function () {
-          var docBody = document.body || document.documentElement;
-          var styles = docBody.style;
-          var prop = "transition";
-          if (typeof styles[prop] === "string") {
-            return true;
-          }
-          // Tests for vendor specific prop
-          vendor = ["Moz", "Webkit", "Khtml", "O", "ms"];
-          prop = prop.charAt(0).toUpperCase() + prop.substr(1);
-          var i;
-          for (i = 0; i < vendor.length; i++) {
-            if (typeof styles[vendor[i] + prop] === "string") {
-              return true;
-            }
-          }
-          return false;
-        })(),
 
         // Fading animation
         slideTo = function (idx) {
