@@ -1,8 +1,8 @@
 /*! ResponsiveSlides.js v1.54
  * http://responsiveslides.com
- * http://viljamis.com
+ * https://arie.ls
  *
- * Copyright (c) 2011-2012 @viljamis
+ * Copyright (c) 2011-2023 @arielsalminen
  * Available under the MIT license
  */
 
