@@ -29,7 +29,7 @@ Biggest difference to other responsive slider plugins is the file size (1.4kb mi
 Usage Instructions and demo
 ======
 
-For instructions and demo go to [http://responsiveslides.com/](http://responsiveslides.com/), or [download this repository as a zip file](https://github.com/viljamis/ResponsiveSlides.js/zipball/master) and and open "index.html" from the "example" folder.
+For instructions and demo go to [http://responsiveslides.com/](http://responsiveslides.com/), or [download this repository as a zip file](https://github.com/arielsalminen/ResponsiveSlides.js/zipball/master) and and open "index.html" from the "example" folder.
 
 * View [additional usage examples online](http://responsiveslides.com/themes/themes.html).
 * View [a demo with captions](http://responsiveslides.com/with-captions/themes.html).
@@ -43,7 +43,7 @@ License
 
 Licensed under the MIT license.
 
-Copyright (c) 2011-2012 Viljami Salminen, http://viljamis.com/
+Copyright (c) 2011-2023 Ariel Salminen, https://arie.ls/
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -103,4 +103,4 @@ v1.00 (2011-12-04) - Release
 Want to do a pull request?
 ======
 
-Great! New ideas are more than welcome, but please check the [Pull Request Guidelines](https://github.com/viljamis/ResponsiveSlides.js/wiki/Pull-Request-Guidelines) first before doing so.
+Great! New ideas are more than welcome, but please check the [Pull Request Guidelines](https://github.com/arielsalminen/ResponsiveSlides.js/wiki/Pull-Request-Guidelines) first before doing so.
