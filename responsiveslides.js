@@ -8,11 +8,23 @@
 
 /*jslint browser: true, sloppy: true, vars: true, plusplus: true, indent: 2 */
 
-(function ($, window, i) {
+(function (factory) {
+  if (typeof require === "function" && typeof exports === 'object' && module.exports) {
+    module.exports = factory(require('jQuery'), require('hammerjs'));
+  } else if (typeof define === 'function' && define.amd) {
+    define(['jquery',  'hammerjs'], factory);
+  } else {
+    factory($, Hammer)
+  }
+}(function ($, Hammer) {
+
+  var i = 0;
   $.fn.responsiveSlides = function (options) {
+    var parent = this;
 
     // Default settings
     var settings = $.extend({
+      "mobileswipe": true,      // Boolean: Support mobile swipe using Hammer, true or false
       "auto": true,             // Boolean: Animate automatically, true or false
       "speed": 500,             // Integer: Speed of the transition, in milliseconds
       "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
@@ -126,6 +138,10 @@
               });
           }
         };
+
+      parent.slideTo = function (idx) {
+        slideTo(idx);
+      }
 
       // Random order
       if (settings.random) {
@@ -319,6 +335,7 @@
           }
 
           var $trigger = $("." + namespaceIdx + "_nav"),
+            $next = $trigger.filter(".next"),
             $prev = $trigger.filter(".prev");
 
           // Click event handler
@@ -357,6 +374,21 @@
             }
           });
 
+          // create a swipe event handler for that element
+          if (settings.mobileswipe) {
+            var stage = $this[0];
+            var mc = new Hammer(stage);
+
+            // subscribe to swipe  events
+            mc.on('swipeleft', function () {
+                $next.trigger('click');
+            });
+
+            mc.on('swiperight', function () {
+                $prev.trigger('click');
+            });
+          }
+
           // Pause when hovering navigation
           if (settings.pauseControls) {
             $trigger.hover(function () {
@@ -388,4 +420,4 @@
     });
 
   };
-})(jQuery, this, 0);
+}));
