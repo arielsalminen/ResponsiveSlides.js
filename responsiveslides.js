@@ -27,6 +27,7 @@
       "navContainer": "",       // Selector: Where auto generated controls should be appended to, default is after the <ul>
       "manualControls": "",     // Selector: Declare custom pager navigation
       "namespace": "rslides",   // String: change the default namespace used
+      "lazy": false             // Boolean: Lazy Load Mode
       "before": $.noop,         // Function: Before callback
       "after": $.noop           // Function: After callback
     }, options);
@@ -92,8 +93,7 @@
         })(),
 
         // Fading animation
-        slideTo = function (idx) {
-          settings.before(idx);
+        slideToHelper = function(idx) {
           // If CSS3 transitions are supported
           if (supportsTransitions) {
             $slide
@@ -125,6 +125,20 @@
                 index = idx;
               });
           }
+        }
+      
+        slideTo = function (idx) {
+          settings.before(idx);
+          if (settings.lazy) {
+            var imgSlide = $($($slide).find('img')[idx]);
+            var dataSrc = imgSlide.data('src');
+            imgSlide.attr('src', dataSrc);
+            imgSlide.on('load', function() {
+               slideToHelper(idx);
+            })
+            } else {
+               slideToHelper(idx);
+            }
         };
 
       // Random order
