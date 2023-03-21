@@ -22,6 +22,8 @@
       "pause": false,           // Boolean: Pause on hover, true or false
       "pauseControls": true,    // Boolean: Pause when hovering controls, true or false
       "prevText": "Previous",   // String: Text for the "previous" button
+      "nameClassNext":"next",   // String: Name for the class of button "next" 
+      "nameClassPrev":"prev",   // String: Name for the class of button "prev" 
       "nextText": "Next",       // String: Text for the "next" button
       "maxwidth": "",           // Integer: Max-width of the slideshow, in pixels
       "navContainer": "",       // Selector: Where auto generated controls should be appended to, default is after the <ul>
@@ -308,8 +310,8 @@
         // Navigation
         if (settings.nav) {
           var navMarkup =
-            "<a href='#' class='" + navClass + " prev'>" + settings.prevText + "</a>" +
-            "<a href='#' class='" + navClass + " next'>" + settings.nextText + "</a>";
+            "<a href='#' class='" + navClass +" "+settings.nameClassPrev +"' >" + settings.prevText + "</a>" +
+            "<a href='#' class='" + navClass +" "+settings.nameClassNext +"' >" + settings.nextText + "</a>";
 
           // Inject navigation
           if (options.navContainer) {
