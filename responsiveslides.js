@@ -35,6 +35,9 @@
 
       // Index for namespacing
       i++;
+      
+      // To make namespaceIdx available in before/after function
+      settings.namespaceIdx = settings.namespace + i;
 
       var $this = $(this),
 
