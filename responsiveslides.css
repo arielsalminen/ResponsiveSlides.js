@@ -28,6 +28,6 @@
   display: block;
   height: auto;
   float: left;
-  width: 100%;
+  max-width: 100%;
   border: 0;
   }
