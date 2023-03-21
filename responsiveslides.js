@@ -53,6 +53,7 @@
         fadeTime = parseFloat(settings.speed),
         waitTime = parseFloat(settings.timeout),
         maxw = parseFloat(settings.maxwidth),
+        forcePause = false,
 
         // Namespacing
         namespace = settings.namespace,
@@ -92,7 +93,7 @@
         })(),
 
         // Fading animation
-        slideTo = function (idx) {
+         slideTo = function (idx) {
           settings.before(idx);
           // If CSS3 transitions are supported
           if (supportsTransitions) {
@@ -102,7 +103,7 @@
               .eq(idx)
               .addClass(visibleClass)
               .css(visible);
-            index = idx;
+              index = idx;
             setTimeout(function () {
               settings.after(idx);
             }, fadeTime);
@@ -213,7 +214,7 @@
 
         // If we have a pager, we need to set up the selectTab function
         if (settings.pager || settings.manualControls) {
-          $tabs = $pager.find('a');
+          $tabs = $pager.find("a");
 
           // Select pager item
           selectTab = function (idx) {
@@ -254,8 +255,10 @@
           if (settings.auto) {
             // Stop
             clearInterval(rotate);
-            // Restart
-            startCycle();
+            if ( !forcePause ) {
+              // Restart
+              startCycle();
+            }
           }
         };
 
@@ -281,7 +284,7 @@
             var idx = $tabs.index(this);
 
             // Break if element is already active or currently animated
-            if (index === idx || $("." + visibleClass).queue('fx').length) {
+            if (index === idx || $("." + visibleClass).queue("fx").length) {
               return;
             }
 
@@ -294,6 +297,22 @@
             .eq(0)
             .closest("li")
             .addClass(activeClass);
+
+          $( ".pause_slider" ).click( function( e ){
+            e.preventDefault();
+            forcePause = true;
+            $( this ).hide();
+            $( ".play_slider" ).show();
+            clearInterval(rotate);
+          });
+
+          $( ".play_slider" ).click( function( e ) {
+            e.preventDefault();
+            forcePause = false;
+            $( this ).hide();
+            $( ".pause_slider" ).show();
+            restartCycle();
+          });
 
           // Pause when hovering pager
           if (settings.pauseControls) {
@@ -328,7 +347,7 @@
             var $visibleClass = $("." + visibleClass);
 
             // Prevent clicking if currently animated
-            if ($visibleClass.queue('fx').length) {
+            if ($visibleClass.queue("fx").length) {
               return;
             }
 
