@@ -17,6 +17,7 @@
       "speed": 500,             // Integer: Speed of the transition, in milliseconds
       "timeout": 4000,          // Integer: Time between slide transitions, in milliseconds
       "pager": false,           // Boolean: Show pager, true or false
+      "namedPager": false,      // Boolean: Show named pager (by img alt), true or false
       "nav": false,             // Boolean: Show navigation, true or false
       "random": false,          // Boolean: Randomize the order of the slides, true or false
       "pause": false,           // Boolean: Pause on hover, true or false
@@ -186,6 +187,27 @@
             tabMarkup +=
               "<li>" +
               "<a href='#' class='" + slideClassPrefix + n + "'>" + n + "</a>" +
+              "</li>";
+          });
+          $pager.append(tabMarkup);
+
+          // Inject pager
+          if (options.navContainer) {
+            $(settings.navContainer).append($pager);
+          } else {
+            $this.after($pager);
+          }
+        }
+
+        // namedPager
+        if (settings.namedPager && !settings.manualControls) {
+          var tabMarkup = [];
+          $slide.each(function (i) {
+            var n = i + 1;
+            var currentSlideClass = slideClassPrefix + i;
+            tabMarkup +=
+              "<li>" +
+              "<a href='#' class='" + currentSlideClass + "'>" + $('#' + currentSlideClass + ' img').attr('alt') + "</a>" +
               "</li>";
           });
           $pager.append(tabMarkup);
