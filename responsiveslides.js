@@ -137,9 +137,26 @@
           .append($slide);
       }
 
-      // Add ID's to each slide
+      // Add ID's to each slide and search max height
+      var maxHeigth = -1;
       $slide.each(function (i) {
         this.id = slideClassPrefix + i;
+        $(this).has('p').addClass('with-caption');
+        var itemHeight = $(this).outerHeight();
+        if( itemHeight > maxHeigth ) maxHeigth = itemHeight;
+      });
+
+      // Add padding to smaller slides
+      $slide.each(function () {
+        var item     = $(this),
+            distance = maxHeigth - item.outerHeight();
+        if(distance > 0){
+            var paddingValue = distance / 2;
+            item.css({
+                "padding-top": paddingValue,
+                "padding-bottom": paddingValue
+            });
+        }
       });
 
       // Add max-width and classes
