@@ -29,6 +29,7 @@
       "namespace": "rslides",   // String: change the default namespace used
       "before": $.noop,         // Function: Before callback
       "after": $.noop           // Function: After callback
+      "callback": $.noop        // Function: callback
     }, options);
 
     return this.each(function () {
@@ -385,6 +386,10 @@
         });
       }
 
+      // callback if exist
+      if (settings.callback){
+        settings.callback();
+      }
     });
 
   };
